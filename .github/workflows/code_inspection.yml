@@ -2,7 +2,7 @@ name: Run Detekt code inspection
 
 on:
   push:
-    branches: ["/feature/config/add_detekt_to_project"]
+    branches: ["feature/config/add_detekt_to_project"]
 
 jobs:
   inspect:
@@ -25,3 +25,4 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: build/reports/detekt/detekt.sarif
+
