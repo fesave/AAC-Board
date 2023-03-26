@@ -1,8 +1,8 @@
 name: Run Detekt code inspection
 
 on:
-  pull_request:
-    branches: ["develop"]
+  push:
+    branches: ["/feature/config/add_detekt_to_project"]
 
 jobs:
   inspect:
