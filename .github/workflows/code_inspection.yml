@@ -1,0 +1,27 @@
+name: Run Detekt code inspection
+
+on:
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  inspect:
+    name: Inspect code with Detekt and submit report
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout branch
+      uses: actions/checkout@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Run detekt
+      run: ./gradlew detekt
+
+    - name: Upload detekt report
+      uses: github/codeql-action/upload-sarif@v2
+      if: success() || failure()
+      with:
+        sarif_file: build/reports/detekt/detekt.sarif
