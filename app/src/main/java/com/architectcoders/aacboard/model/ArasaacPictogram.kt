@@ -9,9 +9,8 @@ data class ArasaacPictogram(
     val sex: Boolean,
     val violence: Boolean
 ) {
-    fun getUrl(): String {
-        return "https://static.arasaac.org/pictograms/${id}/${id}_300.png"
-    }
+    val url: String
+        get()="https://static.arasaac.org/pictograms/${id}/${id}_300.png"
 }
 
 data class Keyword(
