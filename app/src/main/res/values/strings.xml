@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AAC Board</string>
+    <string name="action_dashboards">Dashboards</string>
+    <string name="main_dashboard">Main Dashboard</string>
 </resources>
