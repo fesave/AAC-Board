@@ -7,12 +7,12 @@ data class ArasaacPictogram(
     val id: Int,
     val keywords: List<Keyword>,
     val sex: Boolean,
-    val violence: Boolean
+    val violence: Boolean,
 ) {
     val url: String
-        get()="https://static.arasaac.org/pictograms/${id}/${id}_300.png"
+        get() = "https://static.arasaac.org/pictograms/$id/${id}_300.png"
 }
 
 data class Keyword(
-    val keyword: String
+    val keyword: String,
 )
