@@ -8,6 +8,6 @@ interface ArasaacService {
     @GET("pictograms/{locale}/search/{searchString}")
     suspend fun searchPictos(
         @Path("locale")locale: String,
-        @Path("searchString") searchString: String
+        @Path("searchString") searchString: String,
     ): List<ArasaacPictogram>
 }
