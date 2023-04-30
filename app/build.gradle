@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'io.gitlab.arturbosch.detekt'
+    id 'org.jmailen.kotlinter'
 }
 
 android {
@@ -37,6 +38,10 @@ android {
     }
 }
 
+tasks.check {
+    dependsOn("installKotlinterPrePushHook")
+}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.10.0'
@@ -57,4 +62,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // SplashScreen
+    implementation "androidx.core:core-splashscreen:1.0.0"
 }

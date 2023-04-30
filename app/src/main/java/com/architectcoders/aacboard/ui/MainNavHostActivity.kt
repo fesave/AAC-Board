@@ -1,7 +1,7 @@
 package com.architectcoders.aacboard.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.architectcoders.aacboard.R
 
 class MainNavHostActivity : AppCompatActivity() {
