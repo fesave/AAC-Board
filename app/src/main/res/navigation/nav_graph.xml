@@ -1,55 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/main_dashboard_dest">
 
     <fragment
         android:id="@+id/main_dashboard_dest"
         android:name="com.architectcoders.aacboard.ui.mainDashboard.MainDashboardFragment"
-        android:label="MainDashboardFragment" >
+        android:label="MainDashboardFragment"
+        tools:layout="@layout/fragment_main_dashboard">
         <action
             android:id="@+id/action_mainDashboard_to_listDashboards"
-            app:destination="@id/list_dashboards_dest" />
+            app:destination="@id/list_dashboards_dest"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/list_dashboards_dest"
         android:name="com.architectcoders.aacboard.ui.listDashboards.ListDashboardsFragment"
-        android:label="ListDashboardsFragment" >
+        android:label="ListDashboardsFragment"
+        tools:layout="@layout/fragment_list_dashboards">
         <action
             android:id="@+id/action_listDashboards_to_newDashboard"
-            app:destination="@id/new_dashboard_dest" />
+            app:destination="@id/new_dashboard_dest"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_listDashboards_to_editDashboard"
             app:destination="@id/edit_dashboard_dest"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/list_dashboards_dest" />
     </fragment>
     <fragment
         android:id="@+id/new_dashboard_dest"
         android:name="com.architectcoders.aacboard.ui.newDashboard.NewDashboardFragment"
-        android:label="NewDashboardFragment" >
+        android:label="NewDashboardFragment"
+        tools:layout="@layout/fragment_new_dashboard">
         <action
             android:id="@+id/action_newDashboard_to_editDashboard"
-            app:destination="@id/edit_dashboard_dest" />
+            app:destination="@id/edit_dashboard_dest"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/edit_dashboard_dest"
         android:name="com.architectcoders.aacboard.ui.editDashboard.EditDashboardFragment"
-        android:label="EditDashboardFragment" >
+        android:label="EditDashboardFragment"
+        tools:layout="@layout/fragment_edit_dashboard">
         <action
             android:id="@+id/action_editDashboard_to_editBoardCell"
-            app:destination="@id/edit_board_cell_dest" />
+            app:destination="@id/edit_board_cell_dest"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/edit_board_cell_dest"
         android:name="com.architectcoders.aacboard.ui.editBoardCell.EditBoardCellFragment"
-        android:label="EditBoardCellFragment" >
+        android:label="EditBoardCellFragment"
+        tools:layout="@layout/fragment_edit_board_cell">
         <action
             android:id="@+id/action_editBoardCell_to_newPictogram"
-            app:destination="@id/new_pictogram_dest" />
+            app:destination="@id/new_pictogram_dest"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/new_pictogram_dest"
         android:name="com.architectcoders.aacboard.ui.newPictogram.NewPictogramFragment"
-        android:label="NewPictogramFragment" />
+        android:label="NewPictogramFragment"
+        tools:layout="@layout/fragment_new_pictogram" />
 </navigation>
