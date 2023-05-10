@@ -15,5 +15,6 @@ data class CellEntity(
     val dashboardId: Int,
     val row: Int,
     val column: Int,
-    val url: String
+    val url: String,
+    val text: String
 )

@@ -13,8 +13,8 @@ interface DashboardDao {
     fun getDashboard(id: Int): Flow<DashboardEntityWithCellEntities>
 
     @Query("SELECT * FROM CellEntity where " +
-            "dashboardId = :dahboardId AND row = :row AND column = :column LIMIT 1")
-    suspend fun getCell(dahboardId: Int, row: Int, column: Int): CellEntity
+            "dashboardId = :dashboardId AND row = :row AND column = :column LIMIT 1")
+    suspend fun getCell(dashboardId: Int, row: Int, column: Int): CellEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDashboard(dashboard: DashboardEntity)
