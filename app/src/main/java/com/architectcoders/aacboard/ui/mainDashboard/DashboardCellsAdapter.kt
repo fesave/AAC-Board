@@ -5,22 +5,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.architectcoders.aacboard.databinding.ItemDashboardCellBinding
-import com.architectcoders.aacboard.domain.DashboardCell
+import com.architectcoders.aacboard.domain.Cell
 import com.architectcoders.aacboard.domain.Pictogram
 import com.architectcoders.aacboard.ui.utils.basicDiffUtil
-import com.architectcoders.aacboard.ui.utils.getScreenWidth
+import com.architectcoders.aacboard.ui.utils.getScreenSize
 import com.architectcoders.aacboard.ui.utils.loadUrl
 
 class DashboardCellsAdapter(
     private val onPictogramClicked: (Pictogram?) -> Unit,
 ) : RecyclerView.Adapter<DashboardCellsAdapter.ViewHolder>() {
 
-    private var cells: List<DashboardCell> by basicDiffUtil(
+    private var cells: List<Cell> by basicDiffUtil(
         emptyList(),
         areItemsTheSame = { old, new -> old.pictogram == new.pictogram }
     )
 
-    private var spanCount: Int = 1
+    private var columns: Int = 1
+    private var rows: Int = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -36,33 +37,35 @@ class DashboardCellsAdapter(
         holder.bind(cells[position])
     }
 
-    fun updateItems(newItems: List<DashboardCell>) {
+    fun updateItems(newItems: List<Cell>) {
         cells = newItems
     }
 
-    fun updateSpanCount(count: Int) {
-        spanCount = count
+    fun updateDashboardDimens(columns: Int, rows: Int) {
+        this.columns = columns
+        this.rows = rows
     }
 
     inner class ViewHolder(private val binding: ItemDashboardCellBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: DashboardCell) {
+        fun bind(item: Cell) {
 
-            val windowWidth = binding.root.getScreenWidth()
+            val (windowWidth, windowHeight) = binding.root.getScreenSize()
             val layoutParams = binding.root.layoutParams as GridLayoutManager.LayoutParams
             val marginStart = layoutParams.marginStart
             val marginEnd = layoutParams.marginEnd
 
-            val finalWidth = (windowWidth / spanCount) - marginStart - marginEnd
+            val finalWidth = (windowWidth / columns) - marginStart - marginEnd - 20
+            val finalHeight = (windowHeight / rows) - 20
 
-            with(binding.cellPictogram) {
-                item.pictogram?.url?.let { url -> loadUrl(url) }
-                setOnClickListener { onPictogramClicked(item.pictogram) }
+            with(binding) {
+                item.pictogram?.url?.let { url -> cellPictogram.loadUrl(url) }
+                item.pictogram?.keyword?.let { cellPictogramKeyword.text = it }
+                root.setOnClickListener { onPictogramClicked(item.pictogram) }
             }
-
-            binding.cellPictogram.layoutParams.width = finalWidth
-            binding.cellPictogram.layoutParams.height = finalWidth
+            binding.cellPictogram.layoutParams.width = minOf(finalWidth, finalHeight)
+            binding.cellPictogram.layoutParams.height = minOf(finalWidth, finalHeight)
             binding.cellPictogram.requestLayout()
         }
     }

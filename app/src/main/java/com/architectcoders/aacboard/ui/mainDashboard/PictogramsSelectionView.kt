@@ -16,6 +16,7 @@ class PictogramsSelectionView @JvmOverloads constructor(
 
     private val binding: ViewPictogramsSelectionBinding
     private val adapter: PictogramsSelectionAdapter = PictogramsSelectionAdapter()
+    private var selection: List<Pictogram> = emptyList()
 
     init {
         binding = ViewPictogramsSelectionBinding.inflate(LayoutInflater.from(context), this, true)
@@ -25,8 +26,9 @@ class PictogramsSelectionView @JvmOverloads constructor(
     }
 
     fun onNewSelection(newSelection: List<Pictogram>) {
-        adapter.updatePictograms(newSelection)
-        updateViewsForNewSelection(newSelection)
+        selection = newSelection
+        adapter.updatePictograms(selection)
+        updateViewsForNewSelection(selection)
     }
 
     private fun updateViewsForNewSelection(newSelection: List<Pictogram>) {
@@ -43,6 +45,12 @@ class PictogramsSelectionView @JvmOverloads constructor(
             speakSelection.setViewEnabled(allowedInteractions)
             clearAllSelection.setViewEnabled(allowedInteractions)
             clearLastSelection.setViewEnabled(allowedInteractions)
+        }
+    }
+
+    fun setOnSpeakClickListener(action: (List<String>) -> Unit) {
+        binding.speakSelection.setOnClickListener {
+            action(selection.map { it.keyword })
         }
     }
 

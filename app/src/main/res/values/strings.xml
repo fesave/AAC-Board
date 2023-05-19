@@ -2,5 +2,6 @@
     <string name="app_name">AAC Board</string>
     <string name="action_dashboards">Dashboards</string>
     <string name="main_dashboard">Main Dashboard</string>
-    <string name="select_dashboard">Select your prefered Dashboard</string>
+    <string name="select_dashboard">Select your preferred dashboard from the list</string>
+    <string name="new_dashboard">New dashboard</string>
 </resources>

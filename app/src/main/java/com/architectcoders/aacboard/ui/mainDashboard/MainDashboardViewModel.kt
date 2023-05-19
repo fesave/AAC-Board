@@ -4,12 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.architectcoders.aacboard.domain.Pictogram
-import com.architectcoders.aacboard.usecases.GetDashboardUseCase
-import com.architectcoders.aacboard.usecases.GetPreferredDashboardIdUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import com.architectcoders.aacboard.usecases.*
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainDashboardViewModel(
@@ -24,8 +20,8 @@ class MainDashboardViewModel(
 
     init {
         viewModelScope.launch {
-            getPreferredDashboardIdUseCase().collect {
-                val dashboard = getDashboardUseCase(it)
+            getPreferredDashboardIdUseCase().collect { id ->
+                val dashboard = getDashboardUseCase(id)
                 updateUiState(_state.value.copy(dashboard = dashboard, loading = false))
             }
         }
@@ -44,7 +40,6 @@ class MainDashboardViewModel(
 
     private fun updateUiState(newUiState: MainDashboardUiState) {
         _state.update { newUiState }
-        //_state.value = newUiState
     }
 
     fun onClearLastSelectionClicked() {
@@ -59,6 +54,9 @@ class MainDashboardViewModelFactory(
     private val getDashboardUseCase: GetDashboardUseCase
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainDashboardViewModel(getPreferredDashboardIdUseCase, getDashboardUseCase) as T
+        return MainDashboardViewModel(
+            getPreferredDashboardIdUseCase,
+            getDashboardUseCase
+        ) as T
     }
 }

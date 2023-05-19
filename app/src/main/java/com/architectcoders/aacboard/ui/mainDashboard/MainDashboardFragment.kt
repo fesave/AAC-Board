@@ -1,6 +1,8 @@
 package com.architectcoders.aacboard.ui.mainDashboard
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import android.speech.tts.TextToSpeech.OnInitListener
 import android.util.Log
 import android.view.*
 import androidx.core.view.MenuProvider
@@ -11,15 +13,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.App
 import com.architectcoders.aacboard.R
-import com.architectcoders.aacboard.data.datasource.PreferencesDataStore
 import com.architectcoders.aacboard.databinding.FragmentMainDashboardBinding
-import com.architectcoders.aacboard.domain.Dashboard
+import com.architectcoders.aacboard.domain.DashboardWithCells
 import com.architectcoders.aacboard.domain.Pictogram
 import com.architectcoders.aacboard.model.PictogramsRepository
 import com.architectcoders.aacboard.ui.utils.launchAndCollect
 import com.architectcoders.aacboard.ui.utils.showView
 import com.architectcoders.aacboard.usecases.GetDashboardUseCase
 import com.architectcoders.aacboard.usecases.GetPreferredDashboardIdUseCase
+import java.util.*
 
 class MainDashboardFragment : Fragment() {
 
@@ -37,11 +39,13 @@ class MainDashboardFragment : Fragment() {
     private val viewModel: MainDashboardViewModel by viewModels {
         MainDashboardViewModelFactory(
             GetPreferredDashboardIdUseCase(repository),
-            GetDashboardUseCase()
+            GetDashboardUseCase(repository)
         )
     }
 
     private val dashboardCellsAdapter = DashboardCellsAdapter { viewModel.onPictogramClicked(it) }
+
+    private lateinit var textToSpeech: TextToSpeech
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +60,12 @@ class MainDashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
         initViews()
+        initTextToSpeech()
         collectState()
+    }
+
+    private fun initTextToSpeech() {
+        textToSpeech = TextToSpeech(context) { textToSpeech.language = Locale.getDefault() }
     }
 
     private fun setupMenu() {
@@ -74,17 +83,24 @@ class MainDashboardFragment : Fragment() {
 
     private fun initViews() {
         binding.apply {
-            selectDashboardButton.setOnClickListener {
+            dashboardCellsList.adapter = dashboardCellsAdapter
+            dashboardListIcon.setOnClickListener {
                 navigateToDashboardList()
             }
-            dashboardCellsList.adapter = dashboardCellsAdapter
             pictogramSelection.setOnClearLastSelectionClickListener {
                 viewModel.onClearLastSelectionClicked()
             }
             pictogramSelection.setOnClearSelectionClickListener {
                 viewModel.onClearSelectionClicked()
             }
+            pictogramSelection.setOnSpeakClickListener { selection ->
+                launchSpeechForSelection(selection)
+            }
         }
+    }
+
+    private fun launchSpeechForSelection(selection: List<String>) {
+        textToSpeech.speak(selection.toString(), TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     private fun collectState() {
@@ -113,12 +129,12 @@ class MainDashboardFragment : Fragment() {
         with(binding) { showView(progressBarContainer) }
     }
 
-    private fun showDashboard(dashboard: Dashboard) {
+    private fun showDashboard(dashboard: DashboardWithCells) {
         with(binding) {
             dashboardCellsList.layoutManager =
                 GridLayoutManager(requireContext(), dashboard.columns)
             dashboardCellsAdapter.apply {
-                updateSpanCount(dashboard.columns)
+                updateDashboardDimens(dashboard.columns, dashboard.rows)
                 updateItems(dashboard.cells)
             }
             showView(dashboardContainer)
@@ -140,5 +156,6 @@ class MainDashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        textToSpeech.stop()
     }
 }

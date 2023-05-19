@@ -10,7 +10,7 @@ interface DashboardDao {
     fun getDashboards(): Flow<List<DashboardEntity>>
 
     @Query("SELECT * FROM DashboardEntity where id = :id")
-    fun getDashboard(id: Int): Flow<DashboardEntityWithCellEntities>
+    suspend fun getDashboard(id: Int): DashboardEntityWithCellEntities?
 
     @Query("SELECT * FROM CellEntity where " +
             "dashboardId = :dashboardId AND row = :row AND column = :column LIMIT 1")
