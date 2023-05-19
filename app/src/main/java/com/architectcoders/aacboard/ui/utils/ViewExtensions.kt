@@ -41,8 +41,11 @@ fun ImageView.loadUrl(url: String) {
         .into(this)
 }
 
+const val ALPHA_0_PERCENT = 1.0F
+const val ALPHA_50_PERCENT = 0.5F
+
 fun View.setViewEnabled(allowedInteractions: Boolean) {
-    this.alpha = if (allowedInteractions) 1.0F else 0.5F
+    this.alpha = if (allowedInteractions) ALPHA_0_PERCENT  else ALPHA_50_PERCENT
     this.isEnabled = allowedInteractions
 }
 

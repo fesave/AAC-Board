@@ -4,9 +4,11 @@ import com.architectcoders.aacboard.domain.Cell
 import com.architectcoders.aacboard.domain.DashboardWithCells
 import com.architectcoders.aacboard.domain.Pictogram
 
-
+@Suppress("MagicNumber")
 val dashboardOne = generateDashboard(1, "Dashboard 1 4x4", 4, 4, 2517)
+@Suppress("MagicNumber")
 val dashboardTwo = generateDashboard(2, "Dashboard 2 5x5", 5, 5, 2540)
+@Suppress("MagicNumber")
 val dashboardThree = generateDashboard(3, "Dashboard 3 3x4", 3, 4, 2560)
 
 private fun generateDashboard(

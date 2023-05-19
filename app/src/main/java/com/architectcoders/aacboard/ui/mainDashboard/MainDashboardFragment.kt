@@ -23,6 +23,7 @@ import com.architectcoders.aacboard.usecases.GetDashboardUseCase
 import com.architectcoders.aacboard.usecases.GetPreferredDashboardIdUseCase
 import java.util.*
 
+@Suppress("TooManyFunctions")
 class MainDashboardFragment : Fragment() {
 
     companion object {

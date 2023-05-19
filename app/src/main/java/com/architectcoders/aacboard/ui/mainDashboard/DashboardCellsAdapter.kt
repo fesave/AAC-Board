@@ -15,6 +15,10 @@ class DashboardCellsAdapter(
     private val onPictogramClicked: (Pictogram?) -> Unit,
 ) : RecyclerView.Adapter<DashboardCellsAdapter.ViewHolder>() {
 
+    companion object {
+        const val SAFE_MARGIN = 20
+    }
+
     private var cells: List<Cell> by basicDiffUtil(
         emptyList(),
         areItemsTheSame = { old, new -> old.pictogram == new.pictogram }
@@ -56,8 +60,8 @@ class DashboardCellsAdapter(
             val marginStart = layoutParams.marginStart
             val marginEnd = layoutParams.marginEnd
 
-            val finalWidth = (windowWidth / columns) - marginStart - marginEnd - 20
-            val finalHeight = (windowHeight / rows) - 20
+            val finalWidth = (windowWidth / columns) - marginStart - marginEnd - SAFE_MARGIN
+            val finalHeight = (windowHeight / rows) - SAFE_MARGIN
 
             with(binding) {
                 item.pictogram?.url?.let { url -> cellPictogram.loadUrl(url) }
