@@ -5,7 +5,7 @@ import androidx.room.Relation
 
 data class DashboardEntityWithCellEntities(
     @Embedded
-    val dahsboard: DashboardEntity,
+    val dashboard: DashboardEntity,
     @Relation(
         parentColumn = "id",
         entityColumn = "dashboardId"
