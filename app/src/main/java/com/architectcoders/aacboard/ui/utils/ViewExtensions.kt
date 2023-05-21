@@ -18,7 +18,7 @@ import kotlin.properties.Delegates
 inline fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.basicDiffUtil(
     initialValue: List<T>,
     crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
-    crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }
+    crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new },
 ) =
     Delegates.observable(initialValue) { _, old, new ->
         DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -45,7 +45,7 @@ const val ALPHA_0_PERCENT = 1.0F
 const val ALPHA_50_PERCENT = 0.5F
 
 fun View.setViewEnabled(allowedInteractions: Boolean) {
-    this.alpha = if (allowedInteractions) ALPHA_0_PERCENT  else ALPHA_50_PERCENT
+    this.alpha = if (allowedInteractions) ALPHA_0_PERCENT else ALPHA_50_PERCENT
     this.isEnabled = allowedInteractions
 }
 
@@ -57,10 +57,8 @@ fun FragmentMainDashboardBinding.showView(view: View) {
     viewAnimator.show(view)
 }
 
-
 @Suppress("DEPRECATION")
 fun View.getScreenSize(): Pair<Int, Int> {
-
     val screenWidth: Int
     val screenHeight: Int
 

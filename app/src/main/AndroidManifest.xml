@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AACBoard">
         <activity
-            android:name=".ui.RoutingActivity"
+            android:name=".ui.activities.RoutingActivity"
             android:exported="true"
             android:theme="@style/Theme.AppSplash">
             <intent-filter>
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.MainNavHostActivity"
+            android:name=".ui.activities.MainNavHostActivity"
             android:exported="false" />
     </application>
 

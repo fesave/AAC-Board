@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/main_dashboard_dest"
-        android:name="com.architectcoders.aacboard.ui.mainDashboard.MainDashboardFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.MainDashboardFragment"
         android:label="MainDashboardFragment"
         tools:layout="@layout/fragment_main_dashboard">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/list_dashboards_dest"
-        android:name="com.architectcoders.aacboard.ui.listDashboards.ListDashboardsFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.ListDashboardsFragment"
         android:label="ListDashboardsFragment"
         tools:layout="@layout/fragment_list_dashboards">
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/new_dashboard_dest"
-        android:name="com.architectcoders.aacboard.ui.newDashboard.NewDashboardFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.NewDashboardFragment"
         android:label="NewDashboardFragment"
         tools:layout="@layout/fragment_new_dashboard">
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/edit_dashboard_dest"
-        android:name="com.architectcoders.aacboard.ui.editDashboard.EditDashboardFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.EditDashboardFragment"
         android:label="EditDashboardFragment"
         tools:layout="@layout/fragment_edit_dashboard">
         <action
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/edit_board_cell_dest"
-        android:name="com.architectcoders.aacboard.ui.editBoardCell.EditBoardCellFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.EditBoardCellFragment"
         android:label="EditBoardCellFragment"
         tools:layout="@layout/fragment_edit_board_cell">
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/new_pictogram_dest"
-        android:name="com.architectcoders.aacboard.ui.newPictogram.NewPictogramFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.NewPictogramFragment"
         android:label="NewPictogramFragment"
         tools:layout="@layout/fragment_new_pictogram" />
 </navigation>
