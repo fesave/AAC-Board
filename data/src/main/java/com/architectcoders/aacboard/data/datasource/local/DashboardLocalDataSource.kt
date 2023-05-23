@@ -1,0 +1,21 @@
+package com.architectcoders.aacboard.data.datasource.local
+
+import com.architectcoders.aacboard.domain.data.cell.Cell
+import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
+import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
+import kotlinx.coroutines.flow.Flow
+
+interface DashboardLocalDataSource {
+
+    suspend fun getDashboards(): Flow<List<Dashboard>>
+
+    suspend fun getDashBoardWithCells(id: Int): DashboardWithCells?
+
+    suspend fun saveDashboard(dashboard: DashboardWithCells)
+
+    suspend fun deleteDashboard(id: Int)
+
+    suspend fun deleteCells(dashboardId: Int, cells: List<Cell>)
+
+    suspend fun deleteCellsContent(dashboardId: Int, cells: List<Cell>)
+}
