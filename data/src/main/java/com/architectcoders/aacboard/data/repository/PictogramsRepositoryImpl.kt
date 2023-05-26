@@ -19,7 +19,7 @@ class PictogramsRepositoryImpl(
 
     override suspend fun getDashboards(): Flow<List<Dashboard>> = localDataSource.getDashboards()
 
-    override suspend fun getDashBoardWithCells(id: Int): DashboardWithCells? =
+    override fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?> =
         localDataSource.getDashBoardWithCells(id)
 
     override suspend fun saveDashboard(dashboard: DashboardWithCells) {

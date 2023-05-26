@@ -10,7 +10,7 @@ interface PictogramsRepository {
 
     suspend fun getDashboards(): Flow<List<Dashboard>>
 
-    suspend fun getDashBoardWithCells(id: Int): DashboardWithCells?
+    fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?>
 
     suspend fun saveDashboard(dashboard: DashboardWithCells)
 

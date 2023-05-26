@@ -15,15 +15,15 @@ import kotlinx.coroutines.flow.map
 class DashboardLocalDataSourceImpl(private val dashboardDao: DashboardDao) :
     DashboardLocalDataSource {
 
-    override suspend fun getDashboards(): Flow<List<Dashboard>> =
+    override fun getDashboards(): Flow<List<Dashboard>> =
         dashboardDao.getDashboards().map { list ->
             list.map { dashboard ->
                 dashboard.toDashboard()
             }
         }
 
-    override suspend fun getDashBoardWithCells(id: Int): DashboardWithCells? =
-        dashboardDao.getDashboard(id)?.toDashboardWithCells()
+    override fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?> =
+        dashboardDao.getDashboard(id).map { it?.toDashboardWithCells() }
 
     override suspend fun saveDashboard(dashboard: DashboardWithCells) {
         dashboardDao.insertDashboard(dashboard.toDashboardEntity())
