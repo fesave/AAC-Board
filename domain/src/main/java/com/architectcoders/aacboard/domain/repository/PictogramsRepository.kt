@@ -25,4 +25,6 @@ interface PictogramsRepository {
     suspend fun searchPictograms(searchString: String): List<CellPictogram>
 
     fun getPreferredDashboardId(): Flow<Int>
+
+    fun getMainDashboard(): Flow<DashboardWithCells?>
 }
