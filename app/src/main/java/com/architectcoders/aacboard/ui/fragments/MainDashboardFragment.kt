@@ -15,8 +15,9 @@ import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.ui.fragments.adapter.DashboardCellsAdapter
 import com.architectcoders.aacboard.ui.fragments.viewmodel.MainDashboardViewModel
-import com.architectcoders.aacboard.ui.utils.launchAndCollect
+import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.showView
+import com.architectcoders.aacboard.ui.utils.toggleVisibility
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -47,10 +48,6 @@ class MainDashboardFragment : Fragment() {
         initViews()
         initTextToSpeech()
         collectState()
-    }
-
-    private fun initTextToSpeech() {
-        textToSpeech = TextToSpeech(context) { textToSpeech.language = Locale.getDefault() }
     }
 
     private fun setupMenu() {
@@ -88,25 +85,19 @@ class MainDashboardFragment : Fragment() {
         }
     }
 
+    private fun initTextToSpeech() {
+        textToSpeech = TextToSpeech(context) { textToSpeech.language = Locale.getDefault() }
+    }
     private fun launchSpeechForSelection(selection: List<String>) {
         textToSpeech.speak(selection.toString(), TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     private fun collectState() {
-        viewLifecycleOwner.launchAndCollect(viewModel.state) { uiState ->
-            updateUiState(uiState)
-        }
-    }
-
-    private fun updateUiState(newUiState: MainDashboardViewModel.MainDashboardUiState) {
-        with(newUiState) {
-            if (loading) {
-                showLoading()
-            } else {
-                dashboard?.let { showDashboard(it) } ?: showNoDashboardSelected()
-                error?.let { showError(it) }
-                updateSelectedPictograms(selectedCellPictograms)
-            }
+        viewModel.state.let { uiStateFlow ->
+            diff(uiStateFlow, { it.loading }, ::onLoadingChanged)
+            diff(uiStateFlow, { it.dashboard }, ::onSelectedDashboardChanged)
+            diff(uiStateFlow, { it.error }, { error -> error?.let(::showError) })
+            diff(uiStateFlow, { it.selectedCellPictograms }, ::updateSelectedPictograms)
         }
     }
 
@@ -114,8 +105,15 @@ class MainDashboardFragment : Fragment() {
         binding.pictogramSelection.onNewSelection(selectedCellPictograms)
     }
 
-    private fun showLoading() {
-        with(binding) { showView(progressBarContainer) }
+    private fun onLoadingChanged(visible: Boolean) {
+        with(binding) {
+            progressBarContainer.toggleVisibility(visible)
+            viewAnimator.toggleVisibility(!visible)
+        }
+    }
+
+    private fun onSelectedDashboardChanged(dashboard: DashboardWithCells?) {
+        dashboard?.let { showDashboard(it) } ?: showNoDashboardSelected()
     }
 
     private fun showDashboard(dashboard: DashboardWithCells) {

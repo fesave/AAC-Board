@@ -36,13 +36,13 @@ class MainDashboardViewModel(
         updateUiState(_state.value.copy(selectedCellPictograms = emptyList()))
     }
 
-    private fun updateUiState(newUiState: MainDashboardUiState) {
-        _state.update { newUiState }
-    }
-
     fun onClearLastSelectionClicked() {
         val selection = _state.value.selectedCellPictograms.dropLast(1)
         updateUiState(_state.value.copy(selectedCellPictograms = selection))
+    }
+
+    private fun updateUiState(newUiState: MainDashboardUiState) {
+        _state.update { newUiState }
     }
 
     data class MainDashboardUiState(
