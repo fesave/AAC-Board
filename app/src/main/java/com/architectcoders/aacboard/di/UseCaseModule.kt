@@ -13,7 +13,7 @@ import org.koin.dsl.module
 val useCaseModule = module {
     factory { DeleteDashboardUseCase(get()) }
     factory { GetAllDashboardsUseCase(get()) }
-    factory { GetMainDashboardUseCase(get(), get()) }
+    factory { GetMainDashboardUseCase(get()) }
     factory { GetDashboardUseCase(get()) }
     factory { GetPreferredDashboardIdUseCase(get()) }
     factory { SaveDashboardUseCase(get()) }
