@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/main_dashboard_dest">
+    app:startDestination="@id/searchPictogramsFragment">
 
     <fragment
         android:id="@+id/main_dashboard_dest"
@@ -83,4 +83,9 @@
         android:name="com.architectcoders.aacboard.ui.fragments.NewPictogramFragment"
         android:label="NewPictogramFragment"
         tools:layout="@layout/fragment_new_pictogram" />
+    <fragment
+        android:id="@+id/searchPictogramsFragment"
+        android:name="com.architectcoders.aacboard.ui.fragments.SearchPictogramsFragment"
+        android:label="fragment_search_pictograms"
+        tools:layout="@layout/fragment_search_pictograms" />
 </navigation>

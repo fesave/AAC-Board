@@ -7,6 +7,7 @@ import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetMainDashboa
 import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetPreferredDashboardIdUseCase
 import com.architectcoders.aacboard.domain.use_case.dashboard.save.SaveDashboardUseCase
 import com.architectcoders.aacboard.domain.use_case.dashboard.save.SetPreferredDashboardIdUseCase
+import com.architectcoders.aacboard.domain.use_case.search.SearchPictogramsUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -17,4 +18,5 @@ val useCaseModule = module {
     factory { GetPreferredDashboardIdUseCase(get()) }
     factory { SaveDashboardUseCase(get()) }
     factory { SetPreferredDashboardIdUseCase(get()) }
+    factory { SearchPictogramsUseCase(get()) }
 }

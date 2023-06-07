@@ -12,7 +12,7 @@ data class ArasaacPictogram(
     val url: String
         get() = "$CONST_ARASAAC_PICTOGRAM_BASE_URL$id/${id}_300.png"
 
-    fun toPictogram() = CellPictogram(
+    fun toCellPictogram() = CellPictogram(
         this.arasaacKeywords.first().keyword,
         this.url
     )

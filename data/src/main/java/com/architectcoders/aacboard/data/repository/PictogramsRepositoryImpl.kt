@@ -47,7 +47,7 @@ class PictogramsRepositoryImpl(
         val locale = Locale.getDefault().language
         val arasaacPictograms = remoteDataSource.searchPictos(locale, searchString)
         return arasaacPictograms.map {
-            it.toPictogram()
+            it.toCellPictogram()
         }
     }
 }
