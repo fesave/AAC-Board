@@ -13,7 +13,7 @@ import com.architectcoders.aacboard.databinding.FragmentSearchPictogramsBinding
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.fragments.adapter.PictogramsSearchAdapter
 import com.architectcoders.aacboard.ui.fragments.viewmodel.SearchPictogramsViewModel
-import com.architectcoders.aacboard.ui.utils.launchAndCollect
+import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.showView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -57,35 +57,37 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
     }
 
     private fun collectState() {
-        viewLifecycleOwner.launchAndCollect(viewModel.state) { uiState ->
-            updateUiState(uiState)
+        viewModel.state.let { uiStateFlow ->
+            diff(uiStateFlow, { it.loading }, ::onLoadingChanged)
+            diff(uiStateFlow, { it.foundPictograms }, ::onFoundPictogramsChanged)
+            diff(uiStateFlow, { it.error }, ::onShowError)
+            diff(uiStateFlow, { it.searchString }, ::onQueryStringChanged)
+            diff(uiStateFlow, { it.selectedPictogram }, ::onSelectedPictogramChanged)
         }
     }
 
-    private fun updateUiState(newUiState: SearchPictogramsViewModel.SearchPictogramUiState) {
-        with(newUiState) {
-            if (loading) {
-                showLoading()
-            } else {
-                showFoundPictograms()
-                searchString.let { updateQueryString(it)}
-                error?.let { showError(it) }
-                selectedPictogram?.let {
-                    showSelection(it)
-                }
-                foundPictograms.let { updatePictograms(it) }
-
-            }
+    private fun onLoadingChanged(loading: Boolean) {
+        if (loading) {
+            showLoading()
+        } else {
+            showFoundPictograms()
         }
     }
 
-    private fun updateQueryString (query:String) {
+    private fun onFoundPictogramsChanged(foundPictograms: List<CellPictogram>) {
+        adapter.updateItems(foundPictograms)
+    }
+
+    private fun onQueryStringChanged (query:String) {
         binding.queryText.setText (query)
     }
 
-    private fun updatePictograms (list: List<CellPictogram>) {
-        adapter.updateItems(list)
+    private fun onSelectedPictogramChanged (selectedPictogram: CellPictogram?) {
+        selectedPictogram?.let {
+            Toast.makeText(requireContext(),"Selected Cell: ${it.url}", Toast.LENGTH_SHORT).show()
+        }
     }
+
 
     private fun showLoading() {
         with(binding) { showView(progressBarContainer) }
@@ -95,12 +97,11 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         with(binding) { showView(foundPictogramsContainer) }
     }
 
-    private fun showSelection(selectedCell: CellPictogram) {
-        Toast.makeText(requireContext(),"Selected Cell: ${selectedCell.url}", Toast.LENGTH_SHORT).show()
-    }
 
-    private fun showError(error: String) {
-        Toast.makeText(requireContext(),"showError: $error", Toast.LENGTH_SHORT).show()
+    private fun onShowError(error: String?) {
+        error?.let {
+            Toast.makeText(requireContext(), "showError: $it", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
