@@ -2,9 +2,15 @@ package com.architectcoders.aacboard.ui.fragments.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.architectcoders.aacboard.domain.data.Error
+import com.architectcoders.aacboard.domain.data.Response
+import com.architectcoders.aacboard.domain.data.Response.Success
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.use_case.search.SearchPictogramsUseCase
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchPictogramsViewModel(
@@ -23,9 +29,17 @@ class SearchPictogramsViewModel(
             loading=true,
             foundPictograms = emptyList()))
         viewModelScope.launch {
-            updateUiState(_state.value.copy(
-                foundPictograms = searchPictogramsUseCase(searchString),
-                loading = false))
+
+            val response = searchPictogramsUseCase(searchString)
+            when (response) {
+                is Success -> updateUiState(_state.value.copy(
+                    foundPictograms = response.result,
+                    error=null,
+                    loading = false))
+                is Response.Failure -> updateUiState(_state.value.copy(
+                    error = response.error,
+                    loading = false))
+            }
         }
     }
 
@@ -39,10 +53,14 @@ class SearchPictogramsViewModel(
         _state.update { newUiState }
     }
 
+    fun resetError() {
+        updateUiState(_state.value.copy(error = null))
+    }
+
     data class SearchPictogramUiState(
         val searchString: String = String(),
         val loading: Boolean = false,
-        val error: String? = null,
+        val error: Error? = null,
         val foundPictograms: List<CellPictogram> = emptyList(),
         val selectedPictogram: CellPictogram?= null
     )

@@ -3,17 +3,19 @@ package com.architectcoders.aacboard.data.repository
 import com.architectcoders.aacboard.data.datasource.local.DashboardLocalDataSource
 import com.architectcoders.aacboard.data.datasource.local.DeviceDataSource
 import com.architectcoders.aacboard.data.datasource.remote.RemoteDataSource
+import com.architectcoders.aacboard.domain.data.Response
+import com.architectcoders.aacboard.domain.data.Response.Failure
+import com.architectcoders.aacboard.domain.data.Response.Success
 import com.architectcoders.aacboard.domain.data.cell.Cell
+import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
-import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.repository.PictogramsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.mapLatest
-import java.util.Locale
+import java.util.*
 
 class PictogramsRepositoryImpl(
     private val deviceDataSource: DeviceDataSource,
@@ -55,11 +57,12 @@ class PictogramsRepositoryImpl(
     override suspend fun setPreferredDashboardId(id: Int) =
         deviceDataSource.setPreferredDashboardId(id)
 
-    override suspend fun searchPictograms(searchString: String): List<CellPictogram> {
+    override suspend fun searchPictograms(searchString: String): Response<List<CellPictogram>> {
         val locale = Locale.getDefault().language
-        val arasaacPictograms = remoteDataSource.searchPictos(locale, searchString)
-        return arasaacPictograms.map {
-            it.toCellPictogram()
+        val response = remoteDataSource.searchPictos(locale, searchString)
+        when(response) {
+            is Success -> return Success(response.result.map { it.toCellPictogram() })
+            is Failure -> return response
         }
     }
 }

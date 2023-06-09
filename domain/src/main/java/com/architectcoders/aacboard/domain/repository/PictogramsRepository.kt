@@ -1,5 +1,6 @@
 package com.architectcoders.aacboard.domain.repository
 
+import com.architectcoders.aacboard.domain.data.Response
 import com.architectcoders.aacboard.domain.data.cell.Cell
 import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
@@ -22,7 +23,7 @@ interface PictogramsRepository {
 
     suspend fun setPreferredDashboardId(id: Int)
 
-    suspend fun searchPictograms(searchString: String): List<CellPictogram>
+    suspend fun searchPictograms(searchString: String): Response<List<CellPictogram>>
 
     fun getPreferredDashboardId(): Flow<Int>
 

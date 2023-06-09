@@ -10,6 +10,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentSearchPictogramsBinding
+import com.architectcoders.aacboard.datasource.getMessage
+import com.architectcoders.aacboard.domain.data.Error
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.fragments.adapter.PictogramsSearchAdapter
 import com.architectcoders.aacboard.ui.fragments.viewmodel.SearchPictogramsViewModel
@@ -98,9 +100,10 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
     }
 
 
-    private fun onShowError(error: String?) {
+    private fun onShowError(error: Error?) {
         error?.let {
-            Toast.makeText(requireContext(), "showError: $it", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), it.getMessage(requireContext()), Toast.LENGTH_SHORT).show()
+            viewModel.resetError()
         }
     }
 

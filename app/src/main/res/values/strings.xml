@@ -7,4 +7,8 @@
     <string name="query_string">Query string:</string>
     <string name="search">Search</string>
     <string name="cancel">Cancel</string>
+    <string name="serverError">Server error: %d</string>
+    <string name="connectivityError">Connectivity error</string>
+    <string name="unknownError">Unknown error</string>
+    <string name="noMatchFoundError">No pictogram found for the requested search</string>
 </resources>
