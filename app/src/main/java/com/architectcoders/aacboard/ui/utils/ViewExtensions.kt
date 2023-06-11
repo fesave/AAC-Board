@@ -53,6 +53,10 @@ fun ViewAnimator.show(view: View) {
     displayedChild = indexOfChild(view)
 }
 
+fun View.toggleVisibility(visible: Boolean) {
+    this.visibility = if (visible) View.VISIBLE else View.GONE
+}
+
 fun FragmentMainDashboardBinding.showView(view: View) {
     viewAnimator.show(view)
 }

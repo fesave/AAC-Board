@@ -10,7 +10,7 @@ interface PictogramsRepository {
 
     suspend fun getDashboards(): Flow<List<Dashboard>>
 
-    suspend fun getDashBoardWithCells(id: Int): DashboardWithCells?
+    fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?>
 
     suspend fun saveDashboard(dashboard: DashboardWithCells)
 
@@ -25,4 +25,6 @@ interface PictogramsRepository {
     suspend fun searchPictograms(searchString: String): List<CellPictogram>
 
     fun getPreferredDashboardId(): Flow<Int>
+
+    fun getMainDashboard(): Flow<DashboardWithCells?>
 }
