@@ -14,6 +14,7 @@ import com.architectcoders.aacboard.domain.repository.RegionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
+import java.util.Locale
 
 class PictogramsRepositoryImpl(
     private val deviceDataSource: DeviceDataSource,
