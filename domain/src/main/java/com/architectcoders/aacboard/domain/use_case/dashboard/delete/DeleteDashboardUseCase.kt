@@ -8,6 +8,4 @@ class DeleteDashboardUseCase(private val repository: PictogramsRepository): susp
     override suspend fun invoke(id: Int) {
         repository.deleteDashboard(id)
     }
-
-
 }

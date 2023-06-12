@@ -4,14 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
-import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetDashboardUseCase
-import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetPreferredDashboardIdUseCase
+import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetMainDashboardUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainDashboardViewModel(
-    getPreferredDashboardIdUseCase: GetPreferredDashboardIdUseCase,
-    getDashboardUseCase: GetDashboardUseCase,
+    getMainDashboardUseCase: GetMainDashboardUseCase
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MainDashboardUiState> = MutableStateFlow(
@@ -21,8 +19,7 @@ class MainDashboardViewModel(
 
     init {
         viewModelScope.launch {
-            getPreferredDashboardIdUseCase().collect { id ->
-                val dashboard = getDashboardUseCase(id)
+            getMainDashboardUseCase().collect { dashboard ->
                 updateUiState(_state.value.copy(dashboard = dashboard, loading = false))
             }
         }
@@ -39,13 +36,13 @@ class MainDashboardViewModel(
         updateUiState(_state.value.copy(selectedCellPictograms = emptyList()))
     }
 
-    private fun updateUiState(newUiState: MainDashboardUiState) {
-        _state.update { newUiState }
-    }
-
     fun onClearLastSelectionClicked() {
         val selection = _state.value.selectedCellPictograms.dropLast(1)
         updateUiState(_state.value.copy(selectedCellPictograms = selection))
+    }
+
+    private fun updateUiState(newUiState: MainDashboardUiState) {
+        _state.update { newUiState }
     }
 
     data class MainDashboardUiState(

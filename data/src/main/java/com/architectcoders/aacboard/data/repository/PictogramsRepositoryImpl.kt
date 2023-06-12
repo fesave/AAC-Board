@@ -8,9 +8,11 @@ import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.repository.PictogramsRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import com.architectcoders.aacboard.domain.repository.RegionRepository
 import kotlinx.coroutines.flow.Flow
-import java.util.Locale
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flatMapLatest
 
 class PictogramsRepositoryImpl(
     private val deviceDataSource: DeviceDataSource,
@@ -21,8 +23,16 @@ class PictogramsRepositoryImpl(
 
     override suspend fun getDashboards(): Flow<List<Dashboard>> = localDataSource.getDashboards()
 
-    override suspend fun getDashBoardWithCells(id: Int): DashboardWithCells? =
+    override fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?> =
         localDataSource.getDashBoardWithCells(id)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override fun getMainDashboard(): Flow<DashboardWithCells?> =
+        deviceDataSource.getPreferredDashboardId()
+            .distinctUntilChanged()
+            .flatMapLatest {
+                localDataSource.getDashBoardWithCells(it)
+            }
 
     override suspend fun saveDashboard(dashboard: DashboardWithCells) {
         localDataSource.saveDashboard(dashboard)
