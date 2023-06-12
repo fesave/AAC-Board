@@ -4,8 +4,6 @@ import com.architectcoders.aacboard.data.datasource.local.DashboardLocalDataSour
 import com.architectcoders.aacboard.data.datasource.local.DeviceDataSource
 import com.architectcoders.aacboard.data.datasource.remote.RemoteDataSource
 import com.architectcoders.aacboard.domain.data.Response
-import com.architectcoders.aacboard.domain.data.Response.Failure
-import com.architectcoders.aacboard.domain.data.Response.Success
 import com.architectcoders.aacboard.domain.data.cell.Cell
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
@@ -59,10 +57,6 @@ class PictogramsRepositoryImpl(
 
     override suspend fun searchPictograms(searchString: String): Response<List<CellPictogram>> {
         val locale = Locale.getDefault().language
-        val response = remoteDataSource.searchPictos(locale, searchString)
-        when(response) {
-            is Success -> return Success(response.result.map { it.toCellPictogram() })
-            is Failure -> return response
-        }
+        return remoteDataSource.searchPictos(locale, searchString)
     }
 }

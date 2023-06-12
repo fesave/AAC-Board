@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.R
+import com.architectcoders.aacboard.data.PictogramUI
 import com.architectcoders.aacboard.databinding.FragmentSearchPictogramsBinding
 import com.architectcoders.aacboard.datasource.getMessage
 import com.architectcoders.aacboard.domain.data.Error
-import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.fragments.adapter.PictogramsSearchAdapter
 import com.architectcoders.aacboard.ui.fragments.viewmodel.SearchPictogramsViewModel
 import com.architectcoders.aacboard.ui.utils.diff
+import com.architectcoders.aacboard.ui.utils.returnNavigationResult
 import com.architectcoders.aacboard.ui.utils.showView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,10 +50,10 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
             pictogramList.layoutManager = GridLayoutManager(requireContext(),NBR_ITEMS_PER_ROW)
             pictogramList.adapter = adapter
             searchButton.setOnClickListener {
-                viewModel.onSearchClicked(binding.queryText.text.toString())
+                viewModel.onSearchClicked(queryText.text.toString())
             }
             cancelButton.setOnClickListener {
-                Navigation.findNavController(it).popBackStack()
+                returnNavigationResult(null)
             }
         }
     }
@@ -76,7 +76,7 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         }
     }
 
-    private fun onFoundPictogramsChanged(foundPictograms: List<CellPictogram>) {
+    private fun onFoundPictogramsChanged(foundPictograms: List<PictogramUI>) {
         adapter.updateItems(foundPictograms)
     }
 
@@ -84,9 +84,10 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         binding.queryText.setText (query)
     }
 
-    private fun onSelectedPictogramChanged (selectedPictogram: CellPictogram?) {
+    private fun onSelectedPictogramChanged (selectedPictogram: PictogramUI?) {
         selectedPictogram?.let {
             Toast.makeText(requireContext(),"Selected Cell: ${it.url}", Toast.LENGTH_SHORT).show()
+            returnNavigationResult(selectedPictogram)
         }
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/searchPictogramsFragment">
+    app:startDestination="@id/main_dashboard_dest">
 
     <fragment
         android:id="@+id/main_dashboard_dest"
@@ -77,6 +77,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_editBoardCell_to_searchPictograms"
+            app:destination="@id/searchPictogramsFragment" />
     </fragment>
     <fragment
         android:id="@+id/new_pictogram_dest"

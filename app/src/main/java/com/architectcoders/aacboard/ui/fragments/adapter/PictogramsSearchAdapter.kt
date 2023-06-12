@@ -4,18 +4,18 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.architectcoders.aacboard.data.PictogramUI
 import com.architectcoders.aacboard.databinding.ItemSearchPictogramBinding
-import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.utils.loadUrl
 
 class PictogramsSearchAdapter(
-    private val onPictogramClicked: (CellPictogram?) -> Unit,
+    private val onPictogramClicked: (PictogramUI?) -> Unit,
 ) : RecyclerView.Adapter<PictogramsSearchAdapter.ViewHolder>() {
 
-    private var cells = emptyList<CellPictogram>()
+    private var cells = emptyList<PictogramUI>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(newItems: List<CellPictogram>) {
+    fun updateItems(newItems: List<PictogramUI>) {
         cells = newItems
         notifyDataSetChanged()
     }
@@ -38,7 +38,7 @@ class PictogramsSearchAdapter(
     inner class ViewHolder(private val binding: ItemSearchPictogramBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CellPictogram) {
+        fun bind(item: PictogramUI) {
             with(binding) {
                 item.url.let { url -> cellPictogram.loadUrl(url) }
                 root.setOnClickListener { onPictogramClicked(item) }

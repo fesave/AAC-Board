@@ -2,10 +2,7 @@ package com.architectcoders.aacboard.datasource.local
 
 import com.architectcoders.aacboard.data.datasource.local.DashboardLocalDataSource
 import com.architectcoders.aacboard.database.dao.DashboardDao
-import com.architectcoders.aacboard.database.entity.toCellEntity
-import com.architectcoders.aacboard.database.entity.toDashboard
-import com.architectcoders.aacboard.database.entity.toDashboardEntity
-import com.architectcoders.aacboard.database.entity.toDashboardWithCells
+import com.architectcoders.aacboard.database.entity.*
 import com.architectcoders.aacboard.domain.data.cell.Cell
 import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
