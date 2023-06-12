@@ -23,7 +23,7 @@ interface PictogramsRepository {
 
     suspend fun setPreferredDashboardId(id: Int)
 
-    suspend fun searchPictograms(searchString: String): Response<List<CellPictogram>>
+    suspend fun searchPictograms(language: String, searchString: String): Response<List<CellPictogram>>
 
     fun getPreferredDashboardId(): Flow<Int>
 

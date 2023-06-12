@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { ListDashboardsViewModel(get(), get(), get(), get(), get()) }
     viewModel { MainDashboardViewModel(get()) }
-    viewModel { SearchPictogramsViewModel(get()) }
+    viewModel { SearchPictogramsViewModel(get(), get()) }
 }

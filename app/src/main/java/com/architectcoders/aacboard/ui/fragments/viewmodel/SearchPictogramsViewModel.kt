@@ -7,6 +7,7 @@ import com.architectcoders.aacboard.data.toUIPictogram
 import com.architectcoders.aacboard.domain.data.Error
 import com.architectcoders.aacboard.domain.data.Response.Failure
 import com.architectcoders.aacboard.domain.data.Response.Success
+import com.architectcoders.aacboard.domain.use_case.location.GetLastUserRegionUseCase
 import com.architectcoders.aacboard.domain.use_case.search.SearchPictogramsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchPictogramsViewModel(
-    val searchPictogramsUseCase: SearchPictogramsUseCase
+    val searchPictogramsUseCase: SearchPictogramsUseCase,
+    val getLastUserRegionUseCase: GetLastUserRegionUseCase
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<SearchPictogramUiState> = MutableStateFlow(
@@ -30,7 +32,8 @@ class SearchPictogramsViewModel(
             loading=true,
             foundPictograms = emptyList()))
         viewModelScope.launch {
-            val response = searchPictogramsUseCase(searchString)
+            val region= getLastUserRegionUseCase()
+            val response = searchPictogramsUseCase(region, searchString)
             when (response) {
                 is Success -> updateUiState(_state.value.copy(
                     foundPictograms = response.result.map {it.toUIPictogram()},

@@ -7,9 +7,9 @@ import com.architectcoders.aacboard.domain.repository.PictogramsRepository
 
 class SearchPictogramsUseCase(
     private val repository: PictogramsRepository
-): suspend (String) -> Response<List<CellPictogram>> {
+): suspend (String, String) -> Response<List<CellPictogram>> {
 
-    override suspend fun invoke(searchString: String): Response<List<CellPictogram>> {
-        return repository.searchPictograms(searchString)
+    override suspend fun invoke(language: String, searchString: String): Response<List<CellPictogram>> {
+        return repository.searchPictograms(language, searchString)
     }
 }
