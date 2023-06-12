@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainDashboardViewModel(
-    getMainDashboardUseCase: GetMainDashboardUseCase
+    getMainDashboardUseCase: GetMainDashboardUseCase,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<MainDashboardUiState> = MutableStateFlow(

@@ -9,16 +9,16 @@ import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.repository.PictogramsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.architectcoders.aacboard.domain.repository.RegionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.mapLatest
-import java.util.Locale
 
 class PictogramsRepositoryImpl(
     private val deviceDataSource: DeviceDataSource,
     private val localDataSource: DashboardLocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val regionRepository: RegionRepository
 ) : PictogramsRepository {
 
     override suspend fun getDashboards(): Flow<List<Dashboard>> = localDataSource.getDashboards()
@@ -56,7 +56,7 @@ class PictogramsRepositoryImpl(
         deviceDataSource.setPreferredDashboardId(id)
 
     override suspend fun searchPictograms(searchString: String): List<CellPictogram> {
-        val locale = Locale.getDefault().language
+        val locale = regionRepository.getLastUserRegion()
         val arasaacPictograms = remoteDataSource.searchPictos(locale, searchString)
         return arasaacPictograms.map {
             it.toPictogram()
