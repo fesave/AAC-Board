@@ -14,10 +14,6 @@ val Context.userPreferences: DataStore<Preferences> by preferencesDataStore(name
 
 class DeviceDataSourceImpl(private val context: Context) : DeviceDataSource {
 
-    companion object {
-        val DASHBOARD_ID = intPreferencesKey("dashboard_id")
-    }
-
     override fun getPreferredDashboardId(): Flow<Int> {
         return context.userPreferences.data.map { preferences -> preferences[DASHBOARD_ID] ?: -1 }
     }
@@ -26,5 +22,9 @@ class DeviceDataSourceImpl(private val context: Context) : DeviceDataSource {
         context.userPreferences.edit { preferences ->
             preferences[DASHBOARD_ID] = id
         }
+    }
+
+    companion object {
+        val DASHBOARD_ID = intPreferencesKey("dashboard_id")
     }
 }

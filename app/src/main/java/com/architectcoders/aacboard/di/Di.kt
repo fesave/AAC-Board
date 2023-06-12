@@ -10,6 +10,13 @@ fun Application.initDi() {
     startKoin {
         androidLogger(Level.ERROR)
         androidContext(this@initDi)
-        modules(remoteModule, localModule, repositoryModule, useCaseModule, viewModelModule)
+        modules(
+            remoteModule,
+            localModule,
+            repositoryModule,
+            useCaseModule,
+            viewModelModule,
+            commonModule,
+        )
     }
 }

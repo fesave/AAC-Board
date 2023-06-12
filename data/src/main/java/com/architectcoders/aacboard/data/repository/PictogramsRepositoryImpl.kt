@@ -10,15 +10,16 @@ import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.domain.repository.PictogramsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.architectcoders.aacboard.domain.repository.RegionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
-import java.util.*
 
 class PictogramsRepositoryImpl(
     private val deviceDataSource: DeviceDataSource,
     private val localDataSource: DashboardLocalDataSource,
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
+    private val regionRepository: RegionRepository
 ) : PictogramsRepository {
 
     override suspend fun getDashboards(): Flow<List<Dashboard>> = localDataSource.getDashboards()

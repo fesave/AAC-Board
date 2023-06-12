@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 fun <T, U> Fragment.diff(
     forParentFlow: Flow<T>,
     mapToChildFlow: (T) -> U,
-    body: (U) -> Unit
+    body: (U) -> Unit,
 ) {
     forParentFlow.diff(viewLifecycleOwner, mapToChildFlow, body)
 }
@@ -21,11 +21,11 @@ fun <T, U> Fragment.diff(
 fun <T, U> Flow<T>.diff(
     lifecycleOwner: LifecycleOwner,
     mapF: (T) -> U,
-    body: (U) -> Unit
+    body: (U) -> Unit,
 ) {
     lifecycleOwner.launchAndCollect(
         flow = map(mapF).distinctUntilChanged(),
-        body = body
+        body = body,
     )
 }
 
