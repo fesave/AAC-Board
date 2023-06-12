@@ -29,6 +29,7 @@ fun Throwable.toError(): Error = when (this) {
     else -> Unknown(message ?: "")
 }
 
+@Suppress("TooGenericExceptionCaught")
 inline fun <T> tryCall(action:  () -> T): Response<T> = try {
     Success(action())
 } catch (e: Exception) {
