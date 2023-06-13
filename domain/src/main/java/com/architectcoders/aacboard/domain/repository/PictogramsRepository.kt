@@ -7,6 +7,7 @@ import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import kotlinx.coroutines.flow.Flow
 
+@Suppress("TooManyFunctions")
 interface PictogramsRepository {
 
     suspend fun getDashboards(): Flow<List<Dashboard>>

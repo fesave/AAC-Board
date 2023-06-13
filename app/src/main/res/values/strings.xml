@@ -15,4 +15,6 @@
     <string name="text">Text:</string>
     <string name="column_label">Column: %d\</string>
     <string name="row_label">Row: %d\</string>
+    <string name="editCell">Edit Cell</string>
+    <string name="search_arasaac">Search Arasaac</string>
 </resources>

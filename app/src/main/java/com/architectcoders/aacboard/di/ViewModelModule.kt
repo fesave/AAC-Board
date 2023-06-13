@@ -11,5 +11,9 @@ val viewModelModule = module {
     viewModel { ListDashboardsViewModel(get(), get(), get(), get(), get()) }
     viewModel { MainDashboardViewModel(get()) }
     viewModel { SearchPictogramsViewModel(get(), get()) }
-    viewModel { EditBoardCellViewModel(get(),get()) }
+    viewModel { parameters -> EditBoardCellViewModel(
+                                parameters.get(0),
+                                parameters.get(1),
+                                parameters.get(2),
+                                get(),get()) }
 }

@@ -16,13 +16,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class EditBoardCellViewModel(
+    private val dashboardId: Int,
+    private val row: Int,
+    private val column: Int,
     private val saveCellUseCase: SaveCellUseCase,
-    private val getCellUseCase: GetCellUseCase
+    private val getCellUseCase: GetCellUseCase,
 ) : ViewModel() {
 
-    private val dashboardId: Int
-    private val row: Int
-    private val column: Int
 
     private val _state: MutableStateFlow<EditBoardCellUiState> = MutableStateFlow(
         EditBoardCellUiState(),
@@ -30,12 +30,9 @@ class EditBoardCellViewModel(
     val state: StateFlow<EditBoardCellUiState> get() = _state.asStateFlow()
 
     init {
-        dashboardId=1
-        row=1
-        column=2
         viewModelScope.launch {
-            val cell: Cell? = getCellUseCase(dashboardId, row, column) ?: Cell(row, column, null)
-            updateUiState(_state.value.copy(pictogram = cell?.cellPictogram?.toUIPictogram()))
+            val cell: Cell = getCellUseCase(dashboardId, row, column) ?: Cell(row, column, null)
+            updateUiState(_state.value.copy(pictogram = cell.cellPictogram?.toUIPictogram()))
         }
     }
 

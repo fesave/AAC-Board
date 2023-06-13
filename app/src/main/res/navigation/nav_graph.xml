@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/edit_board_cell_dest"
         android:name="com.architectcoders.aacboard.ui.fragments.EditBoardCellFragment"
-        android:label="EditBoardCellFragment"
+        android:label="@string/editCell"
         tools:layout="@layout/fragment_edit_board_cell">
         <action
             android:id="@+id/action_editBoardCell_to_mainDashboard"
@@ -82,6 +82,18 @@
         <action
             android:id="@+id/action_editBoardCell_to_searchPictograms"
             app:destination="@id/searchPictogramsFragment" />
+        <argument
+            android:name="dashboardId"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <argument
+            android:name="row"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="column"
+            app:argType="integer"
+            android:defaultValue="3" />
     </fragment>
     <fragment
         android:id="@+id/new_pictogram_dest"
@@ -91,6 +103,6 @@
     <fragment
         android:id="@+id/searchPictogramsFragment"
         android:name="com.architectcoders.aacboard.ui.fragments.SearchPictogramsFragment"
-        android:label="fragment_search_pictograms"
+        android:label="@string/search_arasaac"
         tools:layout="@layout/fragment_search_pictograms" />
 </navigation>
