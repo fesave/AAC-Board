@@ -15,6 +15,12 @@ interface DashboardLocalDataSource {
 
     suspend fun deleteDashboard(id: Int)
 
+    suspend fun getDashboardCell(dashboardId: Int, row: Int, column: Int): Cell?
+
+    suspend fun saveDashboardCell(dashboardId: Int, cell: Cell)
+
+    suspend fun deleteDashboardCell(dashboardId: Int, cell: Cell)
+
     suspend fun deleteCells(dashboardId: Int, cells: List<Cell>)
 
     suspend fun deleteCellsContent(dashboardId: Int, cells: List<Cell>)

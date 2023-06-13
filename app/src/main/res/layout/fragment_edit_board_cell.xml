@@ -2,12 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
     android:background="@drawable/cell_background"
     android:orientation="vertical"
     android:padding="2dp">
+
+    <TextView
+        android:id="@+id/rowLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Row: x"/>
+
+    <TextView
+        android:id="@+id/columnLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Column: y" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/pictogram"
@@ -17,6 +29,12 @@
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/ic_no_image"
         android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/keywordLabel"
+        android:labelFor="@+id/keyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text" />
     <EditText
         android:id="@+id/keyword"
         android:layout_width="match_parent"
@@ -27,5 +45,27 @@
         tools:text="animal"
         android:gravity="center"
         android:importantForAutofill="no"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/cancel"
+            android:layout_weight="6"/>
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="@string/save"
+            android:layout_weight="6"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.architectcoders.aacboard.di
 
+import com.architectcoders.aacboard.ui.fragments.viewmodel.EditBoardCellViewModel
 import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel
 import com.architectcoders.aacboard.ui.fragments.viewmodel.MainDashboardViewModel
 import com.architectcoders.aacboard.ui.fragments.viewmodel.SearchPictogramsViewModel
@@ -10,4 +11,5 @@ val viewModelModule = module {
     viewModel { ListDashboardsViewModel(get(), get(), get(), get(), get()) }
     viewModel { MainDashboardViewModel(get()) }
     viewModel { SearchPictogramsViewModel(get(), get()) }
+    viewModel { EditBoardCellViewModel(get(),get()) }
 }

@@ -1,5 +1,8 @@
 package com.architectcoders.aacboard.di
 
+import com.architectcoders.aacboard.domain.use_case.cell.delete.DeleteCellUseCase
+import com.architectcoders.aacboard.domain.use_case.cell.get.GetCellUseCase
+import com.architectcoders.aacboard.domain.use_case.cell.save.SaveCellUseCase
 import com.architectcoders.aacboard.domain.use_case.dashboard.delete.DeleteDashboardUseCase
 import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetAllDashboardsUseCase
 import com.architectcoders.aacboard.domain.use_case.dashboard.get.GetDashboardUseCase
@@ -19,6 +22,9 @@ val useCaseModule = module {
     factory { GetPreferredDashboardIdUseCase(get()) }
     factory { SaveDashboardUseCase(get()) }
     factory { SetPreferredDashboardIdUseCase(get()) }
+    factory { GetCellUseCase(get()) }
+    factory { SaveCellUseCase(get()) }
+    factory { DeleteCellUseCase(get()) }
     factory { SearchPictogramsUseCase(get()) }
     factory { GetLastUserRegionUseCase(get()) }
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/main_dashboard_dest">
+    app:startDestination="@id/edit_board_cell_dest">
 
     <fragment
         android:id="@+id/main_dashboard_dest"
@@ -71,8 +71,10 @@
         android:label="EditBoardCellFragment"
         tools:layout="@layout/fragment_edit_board_cell">
         <action
-            android:id="@+id/action_editBoardCell_to_newPictogram"
-            app:destination="@id/new_pictogram_dest"
+            android:id="@+id/action_editBoardCell_to_mainDashboard"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/edit_board_cell_dest"
+            app:destination="@id/main_dashboard_dest"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"

@@ -17,6 +17,12 @@ interface PictogramsRepository {
 
     suspend fun deleteDashboard(id: Int)
 
+    suspend fun getDashboardCell(dashboardId: Int, row: Int, column:Int): Cell?
+
+    suspend fun saveDashboardCell(dashboardId: Int, cell: Cell)
+
+    suspend fun deleteDashboardCell(dashboardId: Int, cell: Cell)
+
     suspend fun deleteDashboardCells(dashboardId: Int, cells: List<Cell>)
 
     suspend fun deleteDashboardCellContent(dashboardId: Int, cells: List<Cell>)

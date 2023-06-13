@@ -41,6 +41,18 @@ class PictogramsRepositoryImpl(
         localDataSource.deleteDashboard(id)
     }
 
+    override suspend fun getDashboardCell(dashboardId: Int, row: Int, column: Int): Cell? {
+        return localDataSource.getDashboardCell(dashboardId, row, column)
+    }
+
+    override suspend fun saveDashboardCell(dashboardId: Int, cell: Cell) {
+        localDataSource.saveDashboardCell(dashboardId, cell)
+    }
+
+    override suspend fun deleteDashboardCell(dashboardId: Int, cell: Cell) {
+        localDataSource.deleteDashboardCell(dashboardId, cell)
+    }
+
     override suspend fun deleteDashboardCells(dashboardId: Int, cells: List<Cell>) {
         localDataSource.deleteCells(dashboardId, cells)
     }
