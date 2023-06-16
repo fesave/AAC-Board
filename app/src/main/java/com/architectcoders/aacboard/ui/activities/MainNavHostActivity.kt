@@ -1,5 +1,6 @@
 package com.architectcoders.aacboard.ui.activities
 
+import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -7,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.ActivityMainNavHostBinding
+import com.architectcoders.aacboard.ui.common.PermissionRequester
 
 class MainNavHostActivity : AppCompatActivity() {
 
@@ -14,10 +16,15 @@ class MainNavHostActivity : AppCompatActivity() {
         ActivityMainNavHostBinding.inflate(layoutInflater)
     }
 
+    private val coarsePermissionRequester =
+        PermissionRequester(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        initView()
+        coarsePermissionRequester.request {
+            initView()
+        }
     }
 
     private fun initView() {

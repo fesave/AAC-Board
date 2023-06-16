@@ -56,8 +56,8 @@ class PictogramsRepositoryImpl(
         deviceDataSource.setPreferredDashboardId(id)
 
     override suspend fun searchPictograms(searchString: String): List<CellPictogram> {
-        val locale = regionRepository.getLastUserRegion()
-        val arasaacPictograms = remoteDataSource.searchPictos(locale, searchString)
+        val userLanguage = regionRepository.getUserLanguage()
+        val arasaacPictograms = remoteDataSource.searchPictos(userLanguage, searchString)
         return arasaacPictograms.map {
             it.toPictogram()
         }
