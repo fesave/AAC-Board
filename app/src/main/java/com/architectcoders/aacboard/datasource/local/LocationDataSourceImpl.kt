@@ -38,6 +38,6 @@ class LocationDataSourceImpl(private val context: Context) : LocationDataSource 
 
         return Locale.getAvailableLocales().firstOrNull { locale ->
             locale.country == countryCode
-        }?.language
+        }?.language ?: Locale.getDefault().language
     }
 }

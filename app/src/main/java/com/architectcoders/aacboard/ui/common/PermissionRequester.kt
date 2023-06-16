@@ -8,18 +8,18 @@ import com.karumi.dexter.listener.single.BasePermissionListener
 
 class PermissionRequester(private val activity: Activity, private val permission: String) {
 
-    fun request(continuation: (Boolean) -> Unit) {
+    fun request(continuation: () -> Unit) {
         Dexter
             .withContext(activity)
             .withPermission(permission)
             .withListener(
                 object : BasePermissionListener() {
                     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                        continuation(true)
+                        continuation()
                     }
 
                     override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                        continuation(false)
+                        continuation()
                     }
                 },
             ).check()

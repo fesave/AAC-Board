@@ -11,13 +11,13 @@ class RegionRepositoryImpl(
 
     override suspend fun getUserLanguage(): String {
         return if (appPermissionChecker.check(AppPermissionChecker.Permission.COARSE_LOCATION)) {
-            locationDataSource.getUserLanguage()?.lowercase() ?: DEFAULT_USER_REGION
+            locationDataSource.getUserLanguage()?.lowercase() ?: DEFAULT_USER_LANGUAGE
         } else {
-            DEFAULT_USER_REGION
+            DEFAULT_USER_LANGUAGE
         }
     }
 
     companion object {
-        private const val DEFAULT_USER_REGION = "en"
+        private const val DEFAULT_USER_LANGUAGE = "en"
     }
 }
