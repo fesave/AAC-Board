@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.R
-import com.architectcoders.aacboard.data.PictogramUI
+import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.databinding.FragmentSearchPictogramsBinding
 import com.architectcoders.aacboard.datasource.getMessage
 import com.architectcoders.aacboard.domain.data.Error
@@ -24,6 +25,7 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
     companion object {
         const val NBR_ITEMS_PER_ROW = 4
     }
+
     private var _binding: FragmentSearchPictogramsBinding? = null
     private val binding get() = _binding!!
 
@@ -47,13 +49,13 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
 
     private fun initViews() {
         binding.apply {
-            pictogramList.layoutManager = GridLayoutManager(requireContext(),NBR_ITEMS_PER_ROW)
+            pictogramList.layoutManager = GridLayoutManager(requireContext(), NBR_ITEMS_PER_ROW)
             pictogramList.adapter = adapter
             searchButton.setOnClickListener {
                 viewModel.onSearchClicked(queryText.text.toString())
             }
             cancelButton.setOnClickListener {
-                returnNavigationResult(null)
+                findNavController().returnNavigationResult(null)
             }
         }
     }
@@ -80,14 +82,14 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         adapter.updateItems(foundPictograms)
     }
 
-    private fun onQueryStringChanged (query:String) {
-        binding.queryText.setText (query)
+    private fun onQueryStringChanged(query: String) {
+        binding.queryText.setText(query)
     }
 
-    private fun onSelectedPictogramChanged (selectedPictogram: PictogramUI?) {
+    private fun onSelectedPictogramChanged(selectedPictogram: PictogramUI?) {
         selectedPictogram?.let {
-            Toast.makeText(requireContext(),"Selected Cell: ${it.url}", Toast.LENGTH_SHORT).show()
-            returnNavigationResult(selectedPictogram)
+            Toast.makeText(requireContext(), "Selected Cell: ${it.url}", Toast.LENGTH_SHORT).show()
+            findNavController().returnNavigationResult(selectedPictogram)
         }
     }
 
@@ -103,7 +105,8 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
 
     private fun onShowError(error: Error?) {
         error?.let {
-            Toast.makeText(requireContext(), it.getMessage(requireContext()), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), it.getMessage(requireContext()), Toast.LENGTH_SHORT)
+                .show()
             viewModel.resetError()
         }
     }

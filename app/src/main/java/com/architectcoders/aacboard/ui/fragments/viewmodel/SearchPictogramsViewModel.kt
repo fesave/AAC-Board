@@ -2,8 +2,8 @@ package com.architectcoders.aacboard.ui.fragments.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.architectcoders.aacboard.data.PictogramUI
-import com.architectcoders.aacboard.data.toUIPictogram
+import com.architectcoders.aacboard.ui.model.PictogramUI
+import com.architectcoders.aacboard.ui.model.toUIPictogram
 import com.architectcoders.aacboard.domain.data.Error
 import com.architectcoders.aacboard.domain.data.Response.Failure
 import com.architectcoders.aacboard.domain.data.Response.Success

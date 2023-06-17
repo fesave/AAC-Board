@@ -1,4 +1,4 @@
-package com.architectcoders.aacboard.data
+package com.architectcoders.aacboard.ui.model
 
 import android.os.Parcelable
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 data class PictogramUI(
     val keyword: String,
     val url: String,
-): Parcelable
+) : Parcelable
 
-fun CellPictogram.toUIPictogram():PictogramUI= PictogramUI(keyword, url)
+fun CellPictogram.toUIPictogram(): PictogramUI = PictogramUI(keyword, url)
