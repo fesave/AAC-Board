@@ -8,6 +8,6 @@ class GetLastUserRegionUseCase(
 ): suspend () -> String {
 
     override suspend fun invoke(): String {
-        return regionRepository.getLastUserRegion()
+        return regionRepository.getUserLanguage()
     }
 }
