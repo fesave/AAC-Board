@@ -8,6 +8,7 @@ import com.architectcoders.aacboard.data.datasource.local.LocationDataSource
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.util.Locale
 import kotlin.coroutines.resume
 
 class LocationDataSourceImpl(private val context: Context) : LocationDataSource {
@@ -21,18 +22,22 @@ class LocationDataSourceImpl(private val context: Context) : LocationDataSource 
     }
 
     @SuppressLint("MissingPermission")
-    override suspend fun getLastUserRegion(): String? =
+    override suspend fun getUserLanguage(): String? =
         suspendCancellableCoroutine { cancellableContinuation ->
             fusedLocationClient.lastLocation
                 .addOnCompleteListener {
-                    cancellableContinuation.resume(it.result.toRegion())
+                    cancellableContinuation.resume(it.result.toLanguage())
                 }
         }
 
-    private fun Location?.toRegion(): String? {
+    private fun Location?.toLanguage(): String? {
         val addresses = this?.let {
             geocoder.getFromLocation(latitude, longitude, 1)
         }
-        return addresses?.firstOrNull()?.countryCode
+        val countryCode = addresses?.firstOrNull()?.countryCode
+
+        return Locale.getAvailableLocales().firstOrNull { locale ->
+            locale.country == countryCode
+        }?.language ?: Locale.getDefault().language
     }
 }
