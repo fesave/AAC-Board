@@ -3,9 +3,9 @@ package com.architectcoders.aacboard.domain.use_case.location
 import com.architectcoders.aacboard.domain.repository.RegionRepository
 
 
-class GetLastUserRegionUseCase(
+class GetUserLanguageUseCase(
     private val regionRepository: RegionRepository
-): suspend () -> String {
+) : suspend () -> String {
 
     override suspend fun invoke(): String {
         return regionRepository.getUserLanguage()

@@ -72,28 +72,28 @@
         tools:layout="@layout/fragment_edit_board_cell">
         <action
             android:id="@+id/action_editBoardCell_to_mainDashboard"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/edit_board_cell_dest"
             app:destination="@id/main_dashboard_dest"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/edit_board_cell_dest"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_editBoardCell_to_searchPictograms"
             app:destination="@id/searchPictogramsFragment" />
         <argument
             android:name="dashboardId"
-            app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="1"
+            app:argType="integer" />
         <argument
             android:name="row"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="column"
-            app:argType="integer"
-            android:defaultValue="3" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/new_pictogram_dest"

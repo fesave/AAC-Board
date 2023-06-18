@@ -4,15 +4,19 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.databinding.ItemSearchPictogramBinding
+import com.architectcoders.aacboard.ui.model.PictogramUI
+import com.architectcoders.aacboard.ui.utils.basicDiffUtil
 import com.architectcoders.aacboard.ui.utils.loadUrl
 
 class PictogramsSearchAdapter(
     private val onPictogramClicked: (PictogramUI?) -> Unit,
 ) : RecyclerView.Adapter<PictogramsSearchAdapter.ViewHolder>() {
 
-    private var cells = emptyList<PictogramUI>()
+    private var cells: List<PictogramUI> by basicDiffUtil(
+        emptyList(),
+        areItemsTheSame = { old, new -> old.url == new.url },
+    )
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateItems(newItems: List<PictogramUI>) {
