@@ -25,6 +25,7 @@ class SearchPictogramsViewModel(
     )
     val state: StateFlow<SearchPictogramUiState> get() = _state.asStateFlow()
 
+    @Suppress("UnusedPrivateMember")
     fun onSearchClicked(searchString: String) {
         if (searchString.isEmpty()) return
         updateUiState(
