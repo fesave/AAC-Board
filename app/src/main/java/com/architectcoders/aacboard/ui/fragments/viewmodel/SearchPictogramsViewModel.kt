@@ -25,7 +25,6 @@ class SearchPictogramsViewModel(
     )
     val state: StateFlow<SearchPictogramUiState> get() = _state.asStateFlow()
 
-    @Suppress("UnusedPrivateMember")
     fun onSearchClicked(searchString: String) {
         if (searchString.isEmpty()) return
         updateUiState(
@@ -36,8 +35,7 @@ class SearchPictogramsViewModel(
             )
         )
         viewModelScope.launch {
-            val region = getUserLanguageUseCase()
-            val response = searchPictogramsUseCase("es", searchString)
+            val response = searchPictogramsUseCase(getUserLanguageUseCase(), searchString)
             when (response) {
                 is Success -> updateUiState(
                     _state.value.copy(

@@ -17,8 +17,8 @@ class EditBoardCellState(
     }
 
     fun onCancel() {
-        //Destination.BACK -> findNavController().popBackStack()
-        navController.navigate(R.id.action_editBoardCell_to_mainDashboard)
+        navController.popBackStack()
+        //navController.navigate(R.id.action_editBoardCell_to_mainDashboard)
     }
 
     fun onSearchPictogram() {
