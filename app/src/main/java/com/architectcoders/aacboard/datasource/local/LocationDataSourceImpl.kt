@@ -8,7 +8,6 @@ import com.architectcoders.aacboard.data.datasource.local.LocationDataSource
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.suspendCancellableCoroutine
-import java.util.Locale
 import kotlin.coroutines.resume
 
 class LocationDataSourceImpl(private val context: Context) : LocationDataSource {
@@ -34,10 +33,6 @@ class LocationDataSourceImpl(private val context: Context) : LocationDataSource 
         val addresses = this?.let {
             geocoder.getFromLocation(latitude, longitude, 1)
         }
-        val countryCode = addresses?.firstOrNull()?.countryCode
-
-        return Locale.getAvailableLocales().firstOrNull { locale ->
-            locale.country == countryCode
-        }?.language ?: Locale.getDefault().language
+        return addresses?.firstOrNull()?.countryCode
     }
 }
