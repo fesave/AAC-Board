@@ -7,6 +7,6 @@ import com.architectcoders.aacboard.domain.repository.RegionRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    factory<PictogramsRepository> { PictogramsRepositoryImpl(get(), get(), get(), get()) }
+    factory<PictogramsRepository> { PictogramsRepositoryImpl(get(), get(), get()) }
     factory<RegionRepository> { RegionRepositoryImpl(get(), get()) }
 }

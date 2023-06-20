@@ -1,18 +1,23 @@
 package com.architectcoders.aacboard.network.response
 
-import com.architectcoders.aacboard.domain.data.arasaac.ArasaacKeyword
-import com.architectcoders.aacboard.domain.data.arasaac.ArasaacPictogram
+import com.architectcoders.aacboard.domain.data.cell.CellPictogram
+import com.google.gson.annotations.SerializedName
 
 data class ArasaacPictogramDTO(
+    @SerializedName("_id")
     val id: Int,
-    val arasaacKeywords: List<ArasaacKeyword>,
-    val sex: Boolean,
-    val violence: Boolean,
+    val keywords: List<ArasaacKeywordDTO>
 ) {
-    fun toArasaacPictogram() = ArasaacPictogram(
-        id = this.id,
-        arasaacKeywords = this.arasaacKeywords,
-        sex = this.sex,
-        violence = this.violence,
+    companion object {
+        private const val CONST_ARASAAC_PICTOGRAM_BASE_URL =
+            "https://static.arasaac.org/pictograms/"
+    }
+
+    val url: String
+        get() = "${CONST_ARASAAC_PICTOGRAM_BASE_URL}$id/${id}_300.png"
+
+    fun toCellPictogram() = CellPictogram(
+        keywords.first().keyword,
+        url
     )
 }
