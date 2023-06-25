@@ -77,6 +77,7 @@ class RemoteDataSourceImplTest {
     fun `successful search`(): Unit = runTest {
         val remoteDataSource = RemoteDataSourceImpl(arasaacService)
         // https://stackoverflow.com/a/61538784
+        // https://medium.com/@yair.kukielka/android-unit-tests-explained-part-2-a0f1e1413569
         val json =
             File("src\\test\\assets\\arasaac_response.json").bufferedReader().use { it.readText() }
         val expectedResponse = MockResponse().setBody(json)

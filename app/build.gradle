@@ -38,6 +38,8 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets.test.resources.srcDirs += ["src/test/assets"]
+
 }
 
 tasks.check {
