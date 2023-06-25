@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class SearchPictogramsViewModel(
     private val searchPictogramsUseCase: SearchPictogramsUseCase,
-    private val getUserLanguageUseCase: GetUserLanguageUseCase
+    private val getUserLanguageUseCase: GetUserLanguageUseCase,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<SearchPictogramUiState> = MutableStateFlow(
@@ -31,8 +31,8 @@ class SearchPictogramsViewModel(
             _state.value.copy(
                 searchString = searchString,
                 loading = true,
-                foundPictograms = emptyList()
-            )
+                foundPictograms = emptyList(),
+            ),
         )
         viewModelScope.launch {
             val response = searchPictogramsUseCase(getUserLanguageUseCase(), searchString)
@@ -40,14 +40,14 @@ class SearchPictogramsViewModel(
                 is Success -> updateUiState(
                     _state.value.copy(
                         foundPictograms = response.result.map { it.toUIPictogram() },
-                        loading = false
-                    )
+                        loading = false,
+                    ),
                 )
                 is Failure -> updateUiState(
                     _state.value.copy(
                         error = response.error,
-                        loading = false
-                    )
+                        loading = false,
+                    ),
                 )
             }
         }
@@ -57,8 +57,8 @@ class SearchPictogramsViewModel(
         uiPictogram?.let {
             updateUiState(
                 _state.value.copy(
-                    selectedPictogram = uiPictogram.copy(keyword = _state.value.searchString)
-                )
+                    selectedPictogram = uiPictogram.copy(keyword = _state.value.searchString),
+                ),
             )
         }
     }
@@ -76,6 +76,6 @@ class SearchPictogramsViewModel(
         val loading: Boolean = false,
         val error: Error? = null,
         val foundPictograms: List<PictogramUI> = emptyList(),
-        val selectedPictogram: PictogramUI? = null
+        val selectedPictogram: PictogramUI? = null,
     )
 }

@@ -34,7 +34,6 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
     private val adapter: PictogramsSearchAdapter =
         PictogramsSearchAdapter { viewModel.onPictogramClicked(it) }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,7 +45,6 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         collectState()
         return binding.root
     }
-
 
     private fun initViews() {
         binding.apply {
@@ -95,7 +93,6 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         searchPictogramsState.onPictogramSelected(selectedPictogram)
     }
 
-
     private fun showLoading() {
         with(binding) { showView(progressBarContainer) }
     }
@@ -103,5 +100,4 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
     private fun showFoundPictograms() {
         with(binding) { showView(foundPictogramsContainer) }
     }
-
 }

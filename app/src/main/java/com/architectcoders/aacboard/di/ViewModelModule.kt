@@ -15,7 +15,8 @@ val viewModelModule = module {
     viewModel { (handle: SavedStateHandle) ->
         EditBoardCellViewModel(
             handle,
-            get(), get()
+            get(),
+            get(),
         )
     }
 }

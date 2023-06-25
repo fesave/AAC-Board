@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class ArasaacPictogramDTO(
     @SerializedName("_id")
     val id: Int,
-    val keywords: List<ArasaacKeywordDTO>
+    val keywords: List<ArasaacKeywordDTO>,
 ) {
     companion object {
         private const val CONST_ARASAAC_PICTOGRAM_BASE_URL =
@@ -18,6 +18,6 @@ data class ArasaacPictogramDTO(
 
     fun toCellPictogram() = CellPictogram(
         keywords.first().keyword,
-        url
+        url,
     )
 }

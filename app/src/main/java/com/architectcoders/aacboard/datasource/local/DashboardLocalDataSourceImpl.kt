@@ -30,9 +30,8 @@ class DashboardLocalDataSourceImpl(private val dashboardDao: DashboardDao) :
     override suspend fun deleteDashboard(id: Int) =
         dashboardDao.deleteDashboardEntity(id)
 
-
     override suspend fun getDashboardCell(dashboardId: Int, row: Int, column: Int): Cell? =
-         dashboardDao.getCell(dashboardId, row, column)?.toCell()
+        dashboardDao.getCell(dashboardId, row, column)?.toCell()
 
     override suspend fun saveDashboardCell(dashboardId: Int, cell: Cell) =
         dashboardDao.insertCell(cell.toCellEntity(dashboardId))
