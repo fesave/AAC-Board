@@ -75,6 +75,8 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
 
+    testImplementation "app.cash.turbine:turbine:0.12.1"
+
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
@@ -92,7 +94,7 @@ dependencies {
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.1'
 
     // Koin
     implementation 'io.insert-koin:koin-android:3.1.5'
