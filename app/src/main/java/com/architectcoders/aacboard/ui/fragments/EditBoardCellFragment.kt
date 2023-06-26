@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.architectcoders.aacboard.R
-import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.databinding.FragmentEditBoardCellBinding
 import com.architectcoders.aacboard.ui.fragments.stateholder.EditBoardCellState
 import com.architectcoders.aacboard.ui.fragments.stateholder.buildEditBoardCellState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.EditBoardCellViewModel
+import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.loadUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,7 +22,6 @@ class EditBoardCellFragment : Fragment(R.layout.fragment_edit_board_cell) {
     private val viewModel: EditBoardCellViewModel by viewModel()
 
     private lateinit var editBoardCellState: EditBoardCellState
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,5 +85,4 @@ class EditBoardCellFragment : Fragment(R.layout.fragment_edit_board_cell) {
             viewModel.onUpdatePictogram(it)
         }
     }
-
 }

@@ -23,8 +23,11 @@ fun Error.getMessage(context: Context): String {
 
 fun Throwable.toError(): Error = when (this) {
     is IOException -> Connectivity
-    is HttpException -> if (code() == HTTP_NOT_FOUND) NoMatchFound
-    else Server(code())
+    is HttpException -> if (code() == HTTP_NOT_FOUND) {
+        NoMatchFound
+    } else {
+        Server(code())
+    }
     else -> Unknown(message ?: "")
 }
 

@@ -8,7 +8,7 @@ import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.ui.utils.getNavigationResult
 
 class EditBoardCellState(
-    private val navController: NavController
+    private val navController: NavController,
 ) {
 
     fun checkSearchResponse(onSearchResponse: (PictogramUI?) -> Unit) {
@@ -18,15 +18,14 @@ class EditBoardCellState(
 
     fun onCancel() {
         navController.popBackStack()
-        //navController.navigate(R.id.action_editBoardCell_to_mainDashboard)
+        // navController.navigate(R.id.action_editBoardCell_to_mainDashboard)
     }
 
     fun onSearchPictogram() {
         navController.navigate(R.id.action_editBoardCell_to_searchPictograms)
     }
-
 }
 
 fun Fragment.buildEditBoardCellState(
-    navController: NavController = findNavController()
+    navController: NavController = findNavController(),
 ) = EditBoardCellState(navController)

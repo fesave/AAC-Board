@@ -2,7 +2,6 @@ package com.architectcoders.aacboard.ui.utils
 
 import androidx.navigation.NavController
 
-
 fun <T> NavController.getNavigationResult(key: String = "result") =
     currentBackStackEntry?.savedStateHandle?.get<T?>(key)
 

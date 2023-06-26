@@ -19,11 +19,11 @@ import kotlinx.coroutines.launch
 class EditBoardCellViewModel(
     savedStateHandle: SavedStateHandle,
     private val saveCellUseCase: SaveCellUseCase,
-    private val getCellUseCase: GetCellUseCase
+    private val getCellUseCase: GetCellUseCase,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<EditBoardCellUiState> = MutableStateFlow(
-        EditBoardCellUiState()
+        EditBoardCellUiState(),
     )
     val state: StateFlow<EditBoardCellUiState> get() = _state.asStateFlow()
     private val dashboardId: Int
@@ -43,7 +43,6 @@ class EditBoardCellViewModel(
             }
         }
     }
-
 
     fun onSaveClicked(keyword: String) {
         _state.value.apply {
@@ -73,7 +72,6 @@ class EditBoardCellViewModel(
         val row: Int = 1,
         val column: Int = 1,
         val pictogram: PictogramUI? = null,
-        val exit: Boolean = false
+        val exit: Boolean = false,
     )
-
 }

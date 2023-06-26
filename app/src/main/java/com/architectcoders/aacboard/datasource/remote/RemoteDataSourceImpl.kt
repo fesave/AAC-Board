@@ -11,8 +11,8 @@ class RemoteDataSourceImpl(private val arasaacService: ArasaacService) : RemoteD
     override suspend fun searchPictos(
         locale: String,
         searchString: String,
-    ): Response<List<CellPictogram>>  = tryCall {
-        val list= arasaacService.searchPictos(locale, searchString)
+    ): Response<List<CellPictogram>> = tryCall {
+        val list = arasaacService.searchPictos(locale, searchString)
         return Success(list.map { it.toCellPictogram() })
     }
 }

@@ -24,7 +24,6 @@ class PictogramsSearchAdapter(
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemSearchPictogramBinding.inflate(LayoutInflater.from(parent.context), parent, false)

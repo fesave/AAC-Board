@@ -11,7 +11,7 @@ import com.architectcoders.aacboard.ui.utils.returnNavigationResult
 
 class SearchPictogramsState(
     private val context: Context,
-    private val navController: NavController
+    private val navController: NavController,
 ) {
 
     fun onPictogramSelected(selectedPictogram: PictogramUI?) {
@@ -26,7 +26,7 @@ class SearchPictogramsState(
 
     fun onError(
         error: com.architectcoders.aacboard.domain.data.Error?,
-        onErrorProcessed: () -> Unit
+        onErrorProcessed: () -> Unit,
     ) {
         error?.let {
             Toast.makeText(context, it.getMessage(context), Toast.LENGTH_SHORT)
@@ -34,10 +34,9 @@ class SearchPictogramsState(
             onErrorProcessed()
         }
     }
-
 }
 
 fun Fragment.buildSearchPictogramsState(
     context: Context = requireContext(),
-    navController: NavController = findNavController()
+    navController: NavController = findNavController(),
 ) = SearchPictogramsState(context, navController)
