@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/new_dashboard_dest"
         android:name="com.architectcoders.aacboard.ui.fragments.NewDashboardFragment"
-        android:label="NewDashboardFragment"
+        android:label="@string/new_dashboard_toolbar"
         tools:layout="@layout/fragment_new_dashboard">
         <action
             android:id="@+id/action_newDashboard_to_editDashboard"
@@ -51,6 +51,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_new_dashboard_dest_to_searchPictogramsFragment"
+            app:destination="@id/searchPictogramsFragment" />
     </fragment>
     <fragment
         android:id="@+id/edit_dashboard_dest"
