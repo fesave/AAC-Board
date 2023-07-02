@@ -22,4 +22,5 @@
     <string name="new_dashboard_number_of_columns">Columns</string>
     <string name="new_dashboard_number_of_rows">Rows</string>
     <string name="new_dashboard_save">Edit</string>
+    <string name="new_dashboard_error">Some fields are empty, please fill in all fields</string>
 </resources>

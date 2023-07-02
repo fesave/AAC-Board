@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentNewDashboardBinding
+import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.ui.fragments.stateholder.NewDashBoardState
 import com.architectcoders.aacboard.ui.fragments.stateholder.buildNewDashBoardCellState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel
@@ -59,6 +62,29 @@ class NewDashboardFragment : Fragment() {
         binding.ivNewDashboardImage.setOnClickListener {
             newDashBoardState.onSearchPictogram()
         }
+
+        binding.buttonNewDashboardSave.setOnClickListener {
+            val name = binding.textInputDashboardName.editText?.text.toString()
+            val rows = binding.textInputDashboardRows.editText?.text.toString()
+            val columns = binding.textInputDashboardColumns.editText?.text.toString()
+
+            if (name.isEmpty() || rows.isEmpty() || columns.isEmpty()) {
+                showError()
+            } else {
+                val dash = DashboardWithCells(
+                    id = Math.random().toInt(),
+                    name = name,
+                    rows = rows.toInt(),
+                    columns = columns.toInt(),
+                    cells = viewModel.generateCells(0, rows.toInt(), columns.toInt()),
+                )
+                viewModel.onEditButtonClicked(dash)
+            }
+        }
+    }
+
+    private fun showError() {
+        Toast.makeText(context, getString(R.string.new_dashboard_error), Toast.LENGTH_SHORT).show()
     }
 
     private fun checkSearchResponse() {
