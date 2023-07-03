@@ -16,8 +16,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboard_cells_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@id/button_new_dashboard_detail_delete"
         app:layout_constraintEnd_toEndOf="parent"

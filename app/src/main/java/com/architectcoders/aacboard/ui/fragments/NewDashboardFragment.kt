@@ -28,6 +28,7 @@ class NewDashboardFragment : Fragment() {
     private val viewModel: NewDashBoardViewModel by viewModel()
 
     private lateinit var newDashBoardState: NewDashBoardState
+    private var dashBoardId: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +44,7 @@ class NewDashboardFragment : Fragment() {
 
     private fun initView() {
         setOnClickListeners()
+        dashBoardId = viewModel.dashBoardId
         lifecycleScope.launch {
             viewModel.state.collectLatest { uiState ->
                 binding.progressCircular.isVisible = uiState.isLoading
@@ -67,13 +69,12 @@ class NewDashboardFragment : Fragment() {
             val name = binding.textInputDashboardName.editText?.text.toString()
             val rows = binding.textInputDashboardRows.editText?.text.toString()
             val columns = binding.textInputDashboardColumns.editText?.text.toString()
-            val id = (0..Integer.MAX_VALUE).random()
 
             if (name.isEmpty() || rows.isEmpty() || columns.isEmpty()) {
                 showError()
             } else {
                 val newDashBoard = DashboardWithCells(
-                    id = id,
+                    id = dashBoardId,
                     name = name,
                     rows = rows.toInt(),
                     columns = columns.toInt(),
@@ -82,7 +83,7 @@ class NewDashboardFragment : Fragment() {
                 viewModel.onEditButtonClicked(newDashBoard)
                 findNavController().navigate(
                     NewDashboardFragmentDirections.actionNewDashboardToEditDashboard(
-                        dashBoardId = id,
+                        dashBoardId = dashBoardId,
                     ),
                 )
             }

@@ -59,11 +59,11 @@ class EditDashboardFragment : Fragment() {
         with(binding) {
             buttonNewDashboardDetailDelete.setOnClickListener {
                 viewModel.onDeleteButtonClicked()
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_edit_dashboard_dest_to_list_dashboards_dest)
             }
 
             buttonNewDashboardDetailAccept.setOnClickListener {
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.action_edit_dashboard_dest_to_list_dashboards_dest)
             }
         }
     }

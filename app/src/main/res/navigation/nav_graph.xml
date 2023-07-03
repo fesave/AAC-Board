@@ -58,7 +58,6 @@
     <fragment
         android:id="@+id/edit_dashboard_dest"
         android:name="com.architectcoders.aacboard.ui.fragments.EditDashboardFragment"
-        android:label="EditDashboardFragment"
         tools:layout="@layout/fragment_edit_dashboard">
         <action
             android:id="@+id/action_editDashboard_to_editBoardCell"
@@ -71,6 +70,11 @@
             android:name="dashBoardId"
             android:defaultValue="-1"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_edit_dashboard_dest_to_list_dashboards_dest"
+            app:destination="@id/list_dashboards_dest"
+            app:popUpTo="@id/list_dashboards_dest"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/edit_board_cell_dest"
