@@ -91,7 +91,6 @@ class MainDashboardFragment : Fragment() {
         viewModel.state.let { uiStateFlow ->
             diff(uiStateFlow, { it.loading }, ::onLoadingChanged)
             diff(uiStateFlow, { it.dashboard }, ::onSelectedDashboardChanged)
-            diff(uiStateFlow, { it.error }, { error -> error?.let(::showError) })
             diff(uiStateFlow, { it.selectedCellPictograms }, ::updateSelectedPictograms)
         }
     }
@@ -127,17 +126,9 @@ class MainDashboardFragment : Fragment() {
         with(binding) { showView(noDashboardSelectedContainer) }
     }
 
-    private fun showError(error: String) {
-        Log.d(TAG, "showError: $error")
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         mainState.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        private val TAG: String = MainDashboardFragment::class.java.name
     }
 }

@@ -48,7 +48,6 @@ class MainDashboardViewModel(
     data class MainDashboardUiState(
         val dashboard: DashboardWithCells? = null,
         val loading: Boolean = true,
-        val error: String? = null,
         val selectedCellPictograms: List<CellPictogram> = emptyList(),
     )
 }
