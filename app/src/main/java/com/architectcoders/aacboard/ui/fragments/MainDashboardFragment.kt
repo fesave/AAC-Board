@@ -1,19 +1,19 @@
 package com.architectcoders.aacboard.ui.fragments
 
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentMainDashboardBinding
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 import com.architectcoders.aacboard.ui.fragments.adapter.DashboardCellsAdapter
+import com.architectcoders.aacboard.ui.fragments.stateholder.MainDashboardState
+import com.architectcoders.aacboard.ui.fragments.stateholder.buildMainDashboardState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.MainDashboardViewModel
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.showView
@@ -27,11 +27,11 @@ class MainDashboardFragment : Fragment() {
     private var _binding: FragmentMainDashboardBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var mainState: MainDashboardState
+
     private val viewModel: MainDashboardViewModel by viewModel()
 
     private val dashboardCellsAdapter = DashboardCellsAdapter { viewModel.onPictogramClicked(it) }
-
-    private lateinit var textToSpeech: TextToSpeech
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,9 +44,11 @@ class MainDashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mainState = buildMainDashboardState()
+
         setupMenu()
         initViews()
-        initTextToSpeech()
         collectState()
     }
 
@@ -58,7 +60,7 @@ class MainDashboardFragment : Fragment() {
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    navigateToDashboardList()
+                    mainState.onDashboardListIconClicked()
                     return true
                 }
             },
@@ -71,7 +73,7 @@ class MainDashboardFragment : Fragment() {
         binding.apply {
             dashboardCellsList.adapter = dashboardCellsAdapter
             dashboardListIcon.setOnClickListener {
-                navigateToDashboardList()
+                mainState.onDashboardListIconClicked()
             }
             pictogramSelection.setOnClearLastSelectionClickListener {
                 viewModel.onClearLastSelectionClicked()
@@ -80,16 +82,9 @@ class MainDashboardFragment : Fragment() {
                 viewModel.onClearSelectionClicked()
             }
             pictogramSelection.setOnSpeakClickListener { selection ->
-                launchSpeechForSelection(selection)
+                mainState.onTextToSpeechRequired(selection)
             }
         }
-    }
-
-    private fun initTextToSpeech() {
-        textToSpeech = TextToSpeech(context) { textToSpeech.language = Locale.getDefault() }
-    }
-    private fun launchSpeechForSelection(selection: List<String>) {
-        textToSpeech.speak(selection.toString(), TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     private fun collectState() {
@@ -105,10 +100,10 @@ class MainDashboardFragment : Fragment() {
         binding.pictogramSelection.onNewSelection(selectedCellPictograms)
     }
 
-    private fun onLoadingChanged(visible: Boolean) {
+    private fun onLoadingChanged(loading: Boolean) {
         with(binding) {
-            progressBarContainer.toggleVisibility(visible)
-            viewAnimator.toggleVisibility(!visible)
+            progressBarContainer.toggleVisibility(loading)
+            viewAnimator.toggleVisibility(!loading)
         }
     }
 
@@ -136,14 +131,10 @@ class MainDashboardFragment : Fragment() {
         Log.d(TAG, "showError: $error")
     }
 
-    private fun navigateToDashboardList() {
-        findNavController().navigate(R.id.action_mainDashboard_to_listDashboards)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
+        mainState.onDestroyView()
         _binding = null
-        textToSpeech.stop()
     }
 
     companion object {
