@@ -16,6 +16,8 @@ class NewDashBoardViewModel(
     private val saveDashboardUseCase: SaveDashboardUseCase,
 ) : ViewModel() {
 
+    val dashBoardId = (0..Integer.MAX_VALUE).random()
+
     private val _state = MutableStateFlow(NewDashBoardUiState())
     val state get() = _state.asStateFlow()
 

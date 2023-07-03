@@ -50,10 +50,10 @@
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            app:popExitAnim="@anim/to_right"/>
         <action
             android:id="@+id/action_new_dashboard_dest_to_searchPictogramsFragment"
-            app:destination="@id/searchPictogramsFragment" />
+            app:destination="@id/search_pictograms_fragment" />
     </fragment>
     <fragment
         android:id="@+id/edit_dashboard_dest"
@@ -67,6 +67,10 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <argument
+            android:name="dashBoardId"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/edit_board_cell_dest"
@@ -84,7 +88,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_editBoardCell_to_searchPictograms"
-            app:destination="@id/searchPictogramsFragment" />
+            app:destination="@id/search_pictograms_fragment" />
         <argument
             android:name="dashboardId"
             android:defaultValue="1"
@@ -104,7 +108,7 @@
         android:label="NewPictogramFragment"
         tools:layout="@layout/fragment_new_pictogram" />
     <fragment
-        android:id="@+id/searchPictogramsFragment"
+        android:id="@+id/search_pictograms_fragment"
         android:name="com.architectcoders.aacboard.ui.fragments.SearchPictogramsFragment"
         android:label="@string/search_arasaac"
         tools:layout="@layout/fragment_search_pictograms" />

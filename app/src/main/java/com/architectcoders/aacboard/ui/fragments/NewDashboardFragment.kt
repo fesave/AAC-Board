@@ -67,18 +67,24 @@ class NewDashboardFragment : Fragment() {
             val name = binding.textInputDashboardName.editText?.text.toString()
             val rows = binding.textInputDashboardRows.editText?.text.toString()
             val columns = binding.textInputDashboardColumns.editText?.text.toString()
+            val id = (0..Integer.MAX_VALUE).random()
 
             if (name.isEmpty() || rows.isEmpty() || columns.isEmpty()) {
                 showError()
             } else {
-                val dash = DashboardWithCells(
-                    id = Math.random().toInt(),
+                val newDashBoard = DashboardWithCells(
+                    id = id,
                     name = name,
                     rows = rows.toInt(),
                     columns = columns.toInt(),
                     cells = viewModel.generateCells(0, rows.toInt(), columns.toInt()),
                 )
-                viewModel.onEditButtonClicked(dash)
+                viewModel.onEditButtonClicked(newDashBoard)
+                findNavController().navigate(
+                    NewDashboardFragmentDirections.actionNewDashboardToEditDashboard(
+                        dashBoardId = id,
+                    ),
+                )
             }
         }
     }
