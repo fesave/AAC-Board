@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.ViewAnimator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.architectcoders.aacboard.databinding.FragmentListDashboardsBinding
 import com.architectcoders.aacboard.databinding.FragmentMainDashboardBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -58,6 +59,10 @@ fun View.toggleVisibility(visible: Boolean) {
 }
 
 fun FragmentMainDashboardBinding.showView(view: View) {
+    viewAnimator.show(view)
+}
+
+fun FragmentListDashboardsBinding.showView(view: View) {
     viewAnimator.show(view)
 }
 
