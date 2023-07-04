@@ -62,9 +62,6 @@ fun FragmentMainDashboardBinding.showView(view: View) {
     viewAnimator.show(view)
 }
 
-
-
-
 fun FragmentListDashboardsBinding.showView(view: View) {
     viewAnimator.show(view)
 }
