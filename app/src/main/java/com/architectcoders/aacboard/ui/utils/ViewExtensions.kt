@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.architectcoders.aacboard.databinding.FragmentListDashboardsBinding
 import com.architectcoders.aacboard.databinding.FragmentMainDashboardBinding
+import com.architectcoders.aacboard.databinding.FragmentSearchPictogramsBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlin.properties.Delegates
@@ -63,6 +64,10 @@ fun FragmentMainDashboardBinding.showView(view: View) {
 }
 
 fun FragmentListDashboardsBinding.showView(view: View) {
+    viewAnimator.show(view)
+}
+
+fun FragmentSearchPictogramsBinding.showView(view: View) {
     viewAnimator.show(view)
 }
 

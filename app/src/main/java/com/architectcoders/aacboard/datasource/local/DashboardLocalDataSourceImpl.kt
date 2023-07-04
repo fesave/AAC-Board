@@ -2,10 +2,7 @@ package com.architectcoders.aacboard.datasource.local
 
 import com.architectcoders.aacboard.data.datasource.local.DashboardLocalDataSource
 import com.architectcoders.aacboard.database.dao.DashboardDao
-import com.architectcoders.aacboard.database.entity.toCellEntity
-import com.architectcoders.aacboard.database.entity.toDashboard
-import com.architectcoders.aacboard.database.entity.toDashboardEntity
-import com.architectcoders.aacboard.database.entity.toDashboardWithCells
+import com.architectcoders.aacboard.database.entity.*
 import com.architectcoders.aacboard.domain.data.cell.Cell
 import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
@@ -30,19 +27,26 @@ class DashboardLocalDataSourceImpl(private val dashboardDao: DashboardDao) :
         dashboardDao.insertCells(dashboard.cells.map { it.toCellEntity(dashboard.id) })
     }
 
-    override suspend fun deleteDashboard(id: Int) {
+    override suspend fun deleteDashboard(id: Int) =
         dashboardDao.deleteDashboardEntity(id)
-    }
+
+    override suspend fun getDashboardCell(dashboardId: Int, row: Int, column: Int): Cell? =
+        dashboardDao.getCell(dashboardId, row, column)?.toCell()
+
+    override suspend fun saveDashboardCell(dashboardId: Int, cell: Cell) =
+        dashboardDao.insertCell(cell.toCellEntity(dashboardId))
+
+    override suspend fun deleteDashboardCell(dashboardId: Int, cell: Cell) =
+        dashboardDao.deleteCell(cell.toCellEntity(dashboardId))
 
     override suspend fun deleteCells(dashboardId: Int, cells: List<Cell>) {
         dashboardDao.deleteCells(cells.map { it.toCellEntity(dashboardId) })
     }
 
-    override suspend fun deleteCellsContent(dashboardId: Int, cells: List<Cell>) {
+    override suspend fun deleteCellsContent(dashboardId: Int, cells: List<Cell>) =
         dashboardDao.insertCells(
             cells.map {
                 it.toCellEntity(dashboardId).copy(url = null, text = null)
             },
         )
-    }
 }
