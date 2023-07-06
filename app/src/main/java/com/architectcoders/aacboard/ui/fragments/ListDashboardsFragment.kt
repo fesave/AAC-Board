@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentListDashboardsBinding
 import com.architectcoders.aacboard.ui.fragments.adapter.ListDashboardAdapter
 import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel
@@ -47,8 +49,12 @@ class ListDashboardsFragment : Fragment() {
             dashboardList.layoutManager = LinearLayoutManager(requireContext())
             dashboardList.adapter = adapter
             newDashboardButton.setOnClickListener {
-                viewModel.onCreateNewDashboardClicked()
+                navigateToNewDashboard()
             }
         }
+    }
+
+    private fun navigateToNewDashboard() {
+        findNavController().navigate(R.id.action_listDashboards_to_newDashboard)
     }
 }
