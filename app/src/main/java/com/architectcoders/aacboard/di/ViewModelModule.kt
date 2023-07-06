@@ -21,6 +21,6 @@ val viewModelModule = module {
             get(),
         )
     }
-    viewModel { NewDashBoardViewModel(get()) }
+    viewModel { NewDashBoardViewModel(get(), get()) }
     viewModel { params -> EditDashBoardViewModel(dashBoardId = params.get(), get(), get()) }
 }

@@ -23,7 +23,7 @@ class EditDashBoardViewModel(
     init {
         viewModelScope.launch {
             _state.update { _state.value.copy(isLoading = true) }
-            getDashboardUseCase.invoke(dashBoardId).collect() { dashBoarWithCells ->
+            getDashboardUseCase(dashBoardId).collect() { dashBoarWithCells ->
                 _state.update {
                     _state.value.copy(
                         dashboardsWithCells = dashBoarWithCells,

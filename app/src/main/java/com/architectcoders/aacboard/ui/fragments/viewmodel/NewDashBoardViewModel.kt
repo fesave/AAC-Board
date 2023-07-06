@@ -3,8 +3,8 @@ package com.architectcoders.aacboard.ui.fragments.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.architectcoders.aacboard.domain.data.cell.Cell
-import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
+import com.architectcoders.aacboard.domain.use_case.cell.generate.GenerateDashBoardCellsUseCase
 import com.architectcoders.aacboard.domain.use_case.dashboard.save.SaveDashboardUseCase
 import com.architectcoders.aacboard.ui.model.PictogramUI
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 
 class NewDashBoardViewModel(
     private val saveDashboardUseCase: SaveDashboardUseCase,
+    private val generateDashBoardCellsUseCase: GenerateDashBoardCellsUseCase,
 ) : ViewModel() {
 
     val dashBoardId = (0..Integer.MAX_VALUE).random()
@@ -31,35 +32,37 @@ class NewDashBoardViewModel(
         }
     }
 
-    fun onEditButtonClicked(newDashBoard: DashboardWithCells) {
+    private fun saveNewDashBoard(newDashBoard: DashboardWithCells) {
         viewModelScope.launch {
             saveDashboardUseCase.invoke(newDashBoard)
         }
+        _state.update { _state.value.copy(navigateToDetail = true) }
     }
 
-    fun generateCells(startingId: Int, rows: Int, columns: Int): List<Cell> {
-        val cells = mutableListOf<Cell>()
-        var id = startingId
-        (0 until rows).forEachIndexed { rowIndex, _ ->
-            (0 until columns).forEachIndexed { columnIndex, _ ->
-                cells.add(
-                    Cell(
-                        rowIndex,
-                        columnIndex,
-                        CellPictogram(
-                            "",
-                            "",
-                        ),
-                    ),
-                )
-                id++
-            }
+    fun onSaveButtonClicked(name: String, columns: String, rows: String) {
+        if (name.isEmpty() || rows.isEmpty() || columns.isEmpty()) {
+            _state.update { _state.value.copy(showError = true) }
+        } else {
+            val newDashBoard = DashboardWithCells(
+                id = dashBoardId,
+                name = name,
+                rows = rows.toInt(),
+                columns = columns.toInt(),
+                cells = generateCells(0, rows.toInt(), columns.toInt()),
+            )
+            saveNewDashBoard(newDashBoard)
         }
-        return cells.toList()
+        _state.update { _state.value.copy(showError = false) }
+    }
+
+    private fun generateCells(startingId: Int, rows: Int, columns: Int): List<Cell> {
+        return generateDashBoardCellsUseCase(startingId, rows, columns)
     }
 
     data class NewDashBoardUiState(
         val pictogram: PictogramUI? = null,
         val isLoading: Boolean = false,
+        val showError: Boolean = false,
+        val navigateToDetail: Boolean = false,
     )
 }
