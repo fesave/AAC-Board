@@ -1,4 +1,4 @@
-package com.architectcoders.aacboard.testrules
+package com.architectcoders.aacboard.apptestshare
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

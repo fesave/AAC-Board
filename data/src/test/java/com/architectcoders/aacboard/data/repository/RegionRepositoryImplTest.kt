@@ -4,7 +4,7 @@ import com.architectcoders.aacboard.data.datasource.local.AppPermissionChecker
 import com.architectcoders.aacboard.data.datasource.local.AppPermissionChecker.*
 import com.architectcoders.aacboard.data.datasource.local.LocationDataSource
 import com.architectcoders.aacboard.data.repository.RegionRepositoryImpl.Companion.DEFAULT_LANGUAGE
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,61 +17,65 @@ import org.mockito.kotlin.mock
 class RegionRepositoryImplTest {
 
     @Test
-    fun `Returns default value when permission not granted`(): Unit = runBlocking {
-        val regionRepository = buildRegionRepository(
-            permissionChecker = mock {
-                on { check(Permission.COARSE_LOCATION) } doReturn false
-            })
-        val language = regionRepository.getUserLanguage()
+    fun `Given location permission not granted, then getUserLanguage  returns default language`(): Unit =
+        runTest {
+            val regionRepository = buildRegionRepository(
+                permissionChecker = mock {
+                    on { check(Permission.COARSE_LOCATION) } doReturn false
+                })
+            val language = regionRepository.getUserLanguage()
 
-        assertEquals(DEFAULT_LANGUAGE.value, language)
-    }
-
-
-    @Test
-    fun `Returns default value when location language is null`(): Unit = runBlocking {
-        val regionRepository = buildRegionRepository(
-            locationDataSource = mock {
-                onBlocking { getUserLanguage() } doReturn null
-            },
-            permissionChecker = mock {
-                on { check(Permission.COARSE_LOCATION) } doReturn true
-            })
-        val language = regionRepository.getUserLanguage()
-
-        assertEquals(DEFAULT_LANGUAGE.value, language)
-    }
+            assertEquals(DEFAULT_LANGUAGE.value, language)
+        }
 
 
     @Test
-    fun `Returns default value when location language not in supported list`(): Unit = runBlocking {
-        val unsupportedLenguage = "ast"
-        val regionRepository = buildRegionRepository(
-            locationDataSource = mock {
-                onBlocking { getUserLanguage() } doReturn unsupportedLenguage
-            },
-            permissionChecker = mock {
-                on { check(Permission.COARSE_LOCATION) } doReturn true
-            })
-        val language = regionRepository.getUserLanguage()
+    fun `Given location data source returns null language, then getUserLanguage returns default language`(): Unit =
+        runTest {
+            val regionRepository = buildRegionRepository(
+                locationDataSource = mock {
+                    onBlocking { getUserLanguage() } doReturn null
+                },
+                permissionChecker = mock {
+                    on { check(Permission.COARSE_LOCATION) } doReturn true
+                })
+            val language = regionRepository.getUserLanguage()
 
-        assertEquals(DEFAULT_LANGUAGE.value, language)
-    }
+            assertEquals(DEFAULT_LANGUAGE.value, language)
+        }
+
 
     @Test
-    fun `Returns location language when value in supported list`(): Unit = runBlocking {
-        val supportedLanguage = "es"
-        val regionRepository = buildRegionRepository(
-            locationDataSource = mock {
-                onBlocking { getUserLanguage() } doReturn supportedLanguage
-            },
-            permissionChecker = mock {
-                on { check(Permission.COARSE_LOCATION) } doReturn true
-            })
-        val language = regionRepository.getUserLanguage()
+    fun `When location data src returns an unsupported language, then getUserLanguage returns default`(): Unit =
+        runTest {
+            val unsupportedLenguage = "ast"
+            val regionRepository = buildRegionRepository(
+                locationDataSource = mock {
+                    onBlocking { getUserLanguage() } doReturn unsupportedLenguage
+                },
+                permissionChecker = mock {
+                    on { check(Permission.COARSE_LOCATION) } doReturn true
+                })
+            val language = regionRepository.getUserLanguage()
 
-        assertEquals(supportedLanguage, language)
-    }
+            assertEquals(DEFAULT_LANGUAGE.value, language)
+        }
+
+    @Test
+    fun `When location data source returns a supported language, then getUserLanguage returns this language`(): Unit =
+        runTest {
+            val supportedLanguage = "es"
+            val regionRepository = buildRegionRepository(
+                locationDataSource = mock {
+                    onBlocking { getUserLanguage() } doReturn supportedLanguage
+                },
+                permissionChecker = mock {
+                    on { check(Permission.COARSE_LOCATION) } doReturn true
+                })
+            val language = regionRepository.getUserLanguage()
+
+            assertEquals(supportedLanguage, language)
+        }
 
 
     private fun buildRegionRepository(

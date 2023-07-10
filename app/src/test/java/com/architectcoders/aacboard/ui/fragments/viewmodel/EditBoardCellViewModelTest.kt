@@ -2,11 +2,11 @@ package com.architectcoders.aacboard.ui.fragments.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import com.architectcoders.aacboard.apptestshare.CoroutinesTestRule
 import com.architectcoders.aacboard.domain.data.cell.Cell
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.domain.use_case.cell.get.GetCellUseCase
 import com.architectcoders.aacboard.domain.use_case.cell.save.SaveCellUseCase
-import com.architectcoders.aacboard.testrules.CoroutinesTestRule
 import com.architectcoders.aacboard.ui.fragments.viewmodel.EditBoardCellViewModel.EditBoardCellUiState
 import com.architectcoders.aacboard.ui.model.PictogramUI
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -43,87 +43,103 @@ class EditBoardCellViewModelTest {
 
 
     @Test
-    fun `return null cell pictogram if cell not found in local storage`() = runTest {
-        getCellUseCase.stub {
-            onBlocking { getCellUseCase(1, 2, 3) }.doReturn(null)
-        }
+    fun `When cell is not stored locally, then a null value is defined in the UiState`() =
+        runTest {
+            getCellUseCase.stub {
+                onBlocking { getCellUseCase(1, 2, 3) }.doReturn(null)
+            }
 
-        viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
 
-        viewModel.state.test {
-            assertEquals(EditBoardCellUiState(), awaitItem())
-            assertEquals(
-                EditBoardCellUiState().copy(row = 2, column = 3),
-                awaitItem()
-            )
-            cancel()
+            viewModel.state.test {
+                assertEquals(EditBoardCellUiState(), awaitItem())
+                assertEquals(
+                    EditBoardCellUiState().copy(row = 2, column = 3),
+                    awaitItem()
+                )
+                cancel()
+            }
         }
-    }
 
     @Test
-    fun `return right cell pictogram if cell  found in local storage`() = runTest {
-        getCellUseCase.stub {
-            onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
-        }
+    fun `When cell is stored locally, then the local content is included in the UiState`() =
+        runTest {
+            getCellUseCase.stub {
+                onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
+            }
 
-        viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
 
-        viewModel.state.test {
-            assertEquals(EditBoardCellUiState(), awaitItem())
-            assertEquals(
-                EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("test", "httptest")),
-                awaitItem()
-            )
-            cancel()
+            viewModel.state.test {
+                assertEquals(EditBoardCellUiState(), awaitItem())
+                assertEquals(
+                    EditBoardCellUiState().copy(
+                        row = 2,
+                        column = 3,
+                        PictogramUI("test", "httptest")
+                    ),
+                    awaitItem()
+                )
+                cancel()
+            }
         }
-    }
 
     @Test
-    fun `update pictogram data with new data`() = runTest {
-        getCellUseCase.stub {
-            onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
-        }
+    fun `When the cell pictogram is updated, then the pictogram is also updated in the UiState`() =
+        runTest {
+            getCellUseCase.stub {
+                onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
+            }
 
-        viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
 
-        viewModel.state.test {
-            assertEquals(EditBoardCellUiState(), awaitItem())
-            assertEquals(
-                EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("test", "httptest")),
-                awaitItem()
-            )
-            viewModel.onUpdatePictogram(PictogramUI("new", "httpnew"))
-            assertEquals(
-                EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("new", "httpnew")),
-                awaitItem()
-            )
-            cancel()
+            viewModel.state.test {
+                assertEquals(EditBoardCellUiState(), awaitItem())
+                assertEquals(
+                    EditBoardCellUiState().copy(
+                        row = 2,
+                        column = 3,
+                        PictogramUI("test", "httptest")
+                    ),
+                    awaitItem()
+                )
+                viewModel.onUpdatePictogram(PictogramUI("new", "httpnew"))
+                assertEquals(
+                    EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("new", "httpnew")),
+                    awaitItem()
+                )
+                cancel()
+            }
         }
-    }
 
     @Test
-    fun `save cell data in local storage onSave`() = runTest {
-        getCellUseCase.stub {
-            onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
-        }
+    fun `When cell is stored locally and  its pictogram is updated, then saveCellUseCase is invoked`() =
+        runTest {
+            getCellUseCase.stub {
+                onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
+            }
 
-        viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
 
-        viewModel.state.test {
-            assertEquals(EditBoardCellUiState(), awaitItem())
-            assertEquals(
-                EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("test", "httptest")),
-                awaitItem()
-            )
-            viewModel.onUpdatePictogram(PictogramUI("new", "httpnew"))
-            assertEquals(
-                EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("new", "httpnew")),
-                awaitItem()
-            )
-            viewModel.onSaveClicked("final")
-            assertTrue(awaitItem().exit)
-            verify(saveCellUseCase).invoke(1, Cell(2, 3, CellPictogram("final", "httpnew")))
-            cancel()
+            viewModel.state.test {
+                assertEquals(EditBoardCellUiState(), awaitItem())
+                assertEquals(
+                    EditBoardCellUiState().copy(
+                        row = 2,
+                        column = 3,
+                        PictogramUI("test", "httptest")
+                    ),
+                    awaitItem()
+                )
+                viewModel.onUpdatePictogram(PictogramUI("new", "httpnew"))
+                assertEquals(
+                    EditBoardCellUiState().copy(row = 2, column = 3, PictogramUI("new", "httpnew")),
+                    awaitItem()
+                )
+                viewModel.onSaveClicked("final")
+                assertTrue(awaitItem().exit)
+                verify(saveCellUseCase).invoke(1, Cell(2, 3, CellPictogram("final", "httpnew")))
+                cancel()
+            }
         }
-    }
 }

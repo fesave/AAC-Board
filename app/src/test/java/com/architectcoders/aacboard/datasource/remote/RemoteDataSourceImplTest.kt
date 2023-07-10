@@ -1,5 +1,6 @@
 package com.architectcoders.aacboard.datasource.remote
 
+import com.architectcoders.aacboard.apptestshare.CoroutinesTestRule
 import com.architectcoders.aacboard.data.datasource.remote.RemoteDataSource
 import com.architectcoders.aacboard.domain.data.Error
 import com.architectcoders.aacboard.domain.data.Error.NoMatchFound
@@ -7,7 +8,6 @@ import com.architectcoders.aacboard.domain.data.Response
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.network.ArasaacNetworkInstance
 import com.architectcoders.aacboard.network.service.ArasaacService
-import com.architectcoders.aacboard.testrules.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
@@ -47,52 +47,55 @@ class RemoteDataSourceImplTest {
 
 
     @Test
-    fun `no pictogram found, http error 404, NoMathFound error returned`(): Unit = runTest {
-        val expectedResponse = MockResponse()
-            .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
-        server.enqueue(expectedResponse)
+    fun `When remote data source returns an http error 404, then searchPictos returns a NoMatchFoundError`(): Unit =
+        runTest {
+            val expectedResponse = MockResponse()
+                .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
+            server.enqueue(expectedResponse)
 
-        val response = remoteDataSource.searchPictos("es", "dfagfwteejbbjadgdjg")
+            val response = remoteDataSource.searchPictos("es", "dfagfwteejbbjadgdjg")
 
-        assertTrue(response is Response.Failure)
-        assertTrue((response as Response.Failure).error is NoMatchFound)
-    }
-
-    @Test
-    fun `unsupported language code, http error 400, Server error returned`(): Unit = runTest {
-        val expectedResponse = MockResponse()
-            .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
-        server.enqueue(expectedResponse)
-
-        val response = remoteDataSource.searchPictos("GJM", "casa")
-
-        assertTrue(response is Response.Failure)
-        assertTrue((response as Response.Failure).error is Error.Server)
-        val errorCode = (response.error as Error.Server).code
-        assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, errorCode)
-    }
+            assertTrue(response is Response.Failure)
+            assertTrue((response as Response.Failure).error is NoMatchFound)
+        }
 
     @Test
-    fun `successful search`(): Unit = runTest {
-        val remoteDataSource = RemoteDataSourceImpl(arasaacService)
-        // https://stackoverflow.com/a/61538784
-        // https://medium.com/@yair.kukielka/andrgetClass().classLoader.oid-unit-tests-explained-part-2-a0f1e1413569
-        val json =
-            RemoteDataSourceImplTest::class.java.classLoader!!.getResourceAsStream("arasaac_response.json")
-                .bufferedReader().use { it.readText() }
+    fun `When requested language is not supported, http error 400, then searchPictos returns Server error`(): Unit =
+        runTest {
+            val expectedResponse = MockResponse()
+                .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
+            server.enqueue(expectedResponse)
+
+            val response = remoteDataSource.searchPictos("GJM", "casa")
+
+            assertTrue(response is Response.Failure)
+            assertTrue((response as Response.Failure).error is Error.Server)
+            val errorCode = (response.error as Error.Server).code
+            assertEquals(HttpURLConnection.HTTP_BAD_REQUEST, errorCode)
+        }
+
+    @Test
+    fun `When remote data src returns a pictogram list, then searchPictos returns a Success response`(): Unit =
+        runTest {
+            val remoteDataSource = RemoteDataSourceImpl(arasaacService)
+            // https://stackoverflow.com/a/61538784
+            // https://medium.com/@yair.kukielka/andrgetClass().classLoader.oid-unit-tests-explained-part-2-a0f1e1413569
+            val json =
+                RemoteDataSourceImplTest::class.java.classLoader!!.getResourceAsStream("arasaac_response.json")
+                    .bufferedReader().use { it.readText() }
 
 
-        //File("src\\test\\assets\\arasaac_response.json").bufferedReader().use { it.readText() }
-        val expectedResponse = MockResponse().setBody(json)
-        server.enqueue(expectedResponse)
+            //File("src\\test\\assets\\arasaac_response.json").bufferedReader().use { it.readText() }
+            val expectedResponse = MockResponse().setBody(json)
+            server.enqueue(expectedResponse)
 
-        val response = remoteDataSource.searchPictos("en", "house")
+            val response = remoteDataSource.searchPictos("en", "house")
 
-        assertTrue(response is Response.Success<List<CellPictogram>>)
-        val result = (response as Response.Success<List<CellPictogram>>).result
-        assertEquals(result.get(1).keyword, "house")
-        assertTrue(result.get(1).url.contains("2317"))
-        assertEquals(result.size, 19)
-    }
+            assertTrue(response is Response.Success<List<CellPictogram>>)
+            val result = (response as Response.Success<List<CellPictogram>>).result
+            assertEquals(result.get(1).keyword, "house")
+            assertTrue(result.get(1).url.contains("2317"))
+            assertEquals(result.size, 19)
+        }
 
 }
