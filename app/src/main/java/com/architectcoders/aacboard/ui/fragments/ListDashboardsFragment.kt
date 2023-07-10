@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.architectcoders.aacboard.databinding.FragmentListDashboardsBinding
 import com.architectcoders.aacboard.ui.fragments.adapter.ListDashboardAdapter
+import com.architectcoders.aacboard.ui.fragments.stateholder.ListDashboardsState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel
-import com.architectcoders.aacboard.ui.utils.launchAndCollect
+import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel.DashboardUiItem
+import com.architectcoders.aacboard.ui.utils.diff
+import com.architectcoders.aacboard.ui.utils.showView
+import com.architectcoders.aacboard.ui.utils.toggleVisibility
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListDashboardsFragment : Fragment() {
@@ -19,10 +24,12 @@ class ListDashboardsFragment : Fragment() {
 
     private val viewModel: ListDashboardsViewModel by viewModel()
 
+    private lateinit var listDashboardsState: ListDashboardsState
+
     private val adapter: ListDashboardAdapter =
         ListDashboardAdapter(
             onPreferredSelected = { selectedId -> viewModel.onPreferredDashboardClicked(selectedId) },
-            onNavigateToDashboard = { id -> viewModel.onDeleteDashboard(id) },
+            onDashboardNavigateClicked = { id -> listDashboardsState.onDashboardNavigateClicked(id) },
         )
 
     override fun onCreateView(
@@ -31,15 +38,16 @@ class ListDashboardsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentListDashboardsBinding.inflate(inflater, container, false)
-        initViews()
-        collectState()
         return binding.root
     }
 
-    private fun collectState() {
-        launchAndCollect(viewModel.state) { newState ->
-            adapter.update(newState.dashboards)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        listDashboardsState = ListDashboardsState(findNavController())
+
+        initViews()
+        collectState()
     }
 
     private fun initViews() {
@@ -47,8 +55,51 @@ class ListDashboardsFragment : Fragment() {
             dashboardList.layoutManager = LinearLayoutManager(requireContext())
             dashboardList.adapter = adapter
             newDashboardButton.setOnClickListener {
-                viewModel.onCreateNewDashboardClicked()
+                listDashboardsState.onNewDashboardClicked()
+            }
+            dashboardCreateIcon.setOnClickListener {
+                listDashboardsState.onNewDashboardClicked()
             }
         }
+    }
+
+    private fun collectState() {
+        viewModel.state.let { uiState ->
+            diff(uiState, { it.loading }, ::onLoadingChanged)
+            diff(uiState, { it.dashboards }, ::onDashBoardListChanged)
+        }
+    }
+
+    private fun onLoadingChanged(loading: Boolean) {
+        with(binding) {
+            progressBarContainer.toggleVisibility(loading)
+            viewAnimator.toggleVisibility(!loading)
+        }
+    }
+
+    private fun onDashBoardListChanged(dashboards: List<DashboardUiItem>) {
+        if (dashboards.isNotEmpty()) {
+            showDashboardsList(dashboards)
+        } else {
+            showEmptyDashboardList()
+        }
+    }
+
+    private fun showDashboardsList(dashboards: List<DashboardUiItem>) {
+        adapter.update(dashboards)
+        with(binding) {
+            showView(binding.dashboardListContainer)
+        }
+    }
+
+    private fun showEmptyDashboardList() {
+        with(binding) {
+            showView(binding.dashboardEmptyListContainer)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
