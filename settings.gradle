@@ -16,3 +16,4 @@ rootProject.name = "AAC-Board"
 include ':app'
 include ':domain'
 include ':data'
+include ':appTestShare'

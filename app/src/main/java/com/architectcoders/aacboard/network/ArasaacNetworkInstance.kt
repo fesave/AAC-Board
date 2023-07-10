@@ -13,9 +13,9 @@ object ArasaacNetworkInstance {
         OkHttpClient.Builder().addInterceptor(this).build()
     }
 
-    fun createArasaacNetworkInstance(): ArasaacService {
+    fun createArasaacNetworkInstance(baseUrl: String = ARASAAC_BASE_URL): ArasaacService {
         return Retrofit.Builder()
-            .baseUrl(ARASAAC_BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

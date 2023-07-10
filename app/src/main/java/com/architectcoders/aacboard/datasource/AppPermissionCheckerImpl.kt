@@ -9,7 +9,7 @@ import com.architectcoders.aacboard.data.datasource.local.AppPermissionChecker
 class AppPermissionCheckerImpl(
     private val application: Application,
 ) : AppPermissionChecker {
-    override suspend fun check(permission: AppPermissionChecker.Permission): Boolean =
+    override fun check(permission: AppPermissionChecker.Permission): Boolean =
         ContextCompat.checkSelfPermission(
             application,
             permission.toAndroidId(),
