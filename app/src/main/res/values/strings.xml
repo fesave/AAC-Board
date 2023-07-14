@@ -18,4 +18,14 @@
     <string name="row_label">Row: %d\</string>
     <string name="editCell">Edit Cell</string>
     <string name="search_arasaac">Search Arasaac</string>
+    <string name="new_dashboard_toolbar">New Dashboard</string>
+    <string name="new_dashboard_name">Name</string>
+    <string name="new_dashboard_number_of_columns">Columns</string>
+    <string name="new_dashboard_number_of_rows">Rows</string>
+    <string name="new_dashboard_save">Edit</string>
+    <string name="new_dashboard_error">Some fields are empty, please fill in all fields</string>
+    <string name="new_dashboard_detail_accept">Accept</string>
+    <string name="new_dashboard_detail_delete">Delete</string>
+    <string name="new_dashboard_detail_toolbar_title">Edit %1$s board</string>
+
 </resources>
