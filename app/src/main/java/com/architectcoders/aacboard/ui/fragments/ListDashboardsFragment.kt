@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentListDashboardsBinding
 import com.architectcoders.aacboard.ui.fragments.adapter.ListDashboardAdapter
 import com.architectcoders.aacboard.ui.fragments.stateholder.ListDashboardsState
