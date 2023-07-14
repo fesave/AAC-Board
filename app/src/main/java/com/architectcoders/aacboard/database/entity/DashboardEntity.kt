@@ -6,7 +6,7 @@ import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 
 @Entity
-data class DashboardEntity(
+data class DashboardEntity  (
     @PrimaryKey
     val id: Int,
     val name: String,

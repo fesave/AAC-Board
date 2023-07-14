@@ -9,17 +9,21 @@ class RegionRepositoryImpl(
     private val appPermissionChecker: AppPermissionChecker
 ) : RegionRepository {
 
+    companion object {
+        val DEFAULT_LANGUAGE = ArasaacAvailableLanguages.EN
+    }
+
     override suspend fun getUserLanguage(): String {
         return if (appPermissionChecker.check(AppPermissionChecker.Permission.COARSE_LOCATION)) {
             val languageByLocation = locationDataSource.getUserLanguage()?.lowercase()
-                ?: ArasaacAvailableLanguages.EN.value
+                ?: DEFAULT_LANGUAGE.value
 
-            ArasaacAvailableLanguages.values().first { arasaacLanguage ->
+            (ArasaacAvailableLanguages.values().firstOrNull() { arasaacLanguage ->
                 arasaacLanguage.value == languageByLocation
-            }.value
+            } ?: DEFAULT_LANGUAGE).value
 
         } else {
-            ArasaacAvailableLanguages.EN.value
+            DEFAULT_LANGUAGE.value
         }
     }
 

@@ -27,29 +27,33 @@ class EditBoardCellViewModel(
     )
     val state: StateFlow<EditBoardCellUiState> get() = _state.asStateFlow()
     private val dashboardId: Int
-    private val row: Int
-    private val column: Int
 
     init {
         EditBoardCellFragmentArgs.fromSavedStateHandle(savedStateHandle).apply {
             this@EditBoardCellViewModel.dashboardId = dashboardId
-            this@EditBoardCellViewModel.row = row
-            this@EditBoardCellViewModel.column = column
-        }
-        viewModelScope.launch {
-            val cell: Cell = getCellUseCase(dashboardId, row, column) ?: Cell(row, column, null)
-            updateUiState(_state.value.copy(pictogram = cell.cellPictogram?.toUIPictogram()))
+            viewModelScope.launch {
+                val cell: Cell = getCellUseCase(dashboardId, row, column) ?: Cell(row, column, null)
+                updateUiState(
+                    _state.value.copy(
+                        row = row,
+                        column = column,
+                        pictogram = cell.cellPictogram?.toUIPictogram()
+                    )
+                )
+            }
         }
     }
 
     fun onSaveClicked(keyword: String) {
-        _state.value.pictogram?.let {
-            viewModelScope.launch {
-                saveCellUseCase(
-                    dashboardId,
-                    Cell(row, column, CellPictogram(keyword, it.url)),
-                )
-                updateUiState(_state.value.copy(exit = true))
+        _state.value.apply {
+            pictogram?.let {
+                viewModelScope.launch {
+                    saveCellUseCase(
+                        dashboardId,
+                        Cell(row, column, CellPictogram(keyword, it.url))
+                    )
+                    updateUiState(_state.value.copy(exit = true))
+                }
             }
         }
     }
