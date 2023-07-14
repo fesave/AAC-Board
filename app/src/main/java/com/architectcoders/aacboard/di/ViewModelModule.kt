@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { ListDashboardsViewModel(get(), get(), get(), get()) }
+    viewModel { ListDashboardsViewModel(get(), get(), get()) }
     viewModel { MainDashboardViewModel(get()) }
     viewModel { SearchPictogramsViewModel(get(), get()) }
     viewModel { (handle: SavedStateHandle) ->

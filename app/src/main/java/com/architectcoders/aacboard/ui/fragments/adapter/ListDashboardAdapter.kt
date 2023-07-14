@@ -11,7 +11,7 @@ import com.architectcoders.aacboard.ui.utils.basicDiffUtil
 
 class ListDashboardAdapter(
     private val onPreferredSelected: (Int) -> Unit,
-    private val onNavigateToDashboard: (Int) -> Unit,
+    private val onDashboardNavigateClicked: (Int) -> Unit,
 ) : RecyclerView.Adapter<ListDashboardAdapter.ViewHolder>() {
 
     private var dashboards: List<ListDashboardsViewModel.DashboardUiItem> by basicDiffUtil(
@@ -51,7 +51,7 @@ class ListDashboardAdapter(
                     onPreferredSelected(dashboard.id)
                 }
                 navigateToDetailIcon.setOnClickListener {
-                    onNavigateToDashboard(dashboard.id)
+                    onDashboardNavigateClicked(dashboard.id)
                 }
             }
         }

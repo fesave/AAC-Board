@@ -17,7 +17,6 @@ class ListDashboardsViewModel(
     private val getAllDashboardsUseCase: GetAllDashboardsUseCase,
     private val setPreferredDashboardIdUseCase: SetPreferredDashboardIdUseCase,
     private val getPreferredDashboardIdUseCase: GetPreferredDashboardIdUseCase,
-    private val deleteDashboardUseCase: DeleteDashboardUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ListDashboardsUiState())
@@ -58,20 +57,10 @@ class ListDashboardsViewModel(
         }
     }
 
-    fun onDeleteDashboard(id: Int) {
-        viewModelScope.launch {
-            if (_state.value.preferredDashboardId == id) {
-                setPreferredDashboardIdUseCase(-1)
-            }
-            deleteDashboardUseCase(id)
-        }
-    }
-
     data class ListDashboardsUiState(
         val loading: Boolean = true,
         val dashboards: List<DashboardUiItem> = emptyList(),
-        val preferredDashboardId: Int = -1,
-        val error: String? = null,
+        val preferredDashboardId: Int = -1
     )
 
     data class DashboardUiItem(
