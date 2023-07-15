@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentEditDashboardBinding
 import com.architectcoders.aacboard.ui.fragments.adapter.DashboardCellsAdapter
+import com.architectcoders.aacboard.ui.fragments.stateholder.EditDashboardState
+import com.architectcoders.aacboard.ui.fragments.stateholder.buildEditDashboardState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.EditDashBoardViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,10 +29,16 @@ class EditDashboardFragment : Fragment() {
 
     private val args by navArgs<EditDashboardFragmentArgs>()
 
+    private val state: EditDashboardState by lazy {
+        buildEditDashboardState()
+    }
+
     private val viewModel: EditDashBoardViewModel by viewModel {
         parametersOf(args.dashBoardId)
     }
-    private val dashboardCellsAdapter = DashboardCellsAdapter { }
+    private val dashboardCellsAdapter = DashboardCellsAdapter { cell ->
+        state.onCellClicked(args.dashBoardId, cell.column, cell.row)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

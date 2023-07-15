@@ -12,7 +12,7 @@ import com.architectcoders.aacboard.ui.utils.getScreenSize
 import com.architectcoders.aacboard.ui.utils.loadUrl
 
 class DashboardCellsAdapter(
-    private val onPictogramClicked: (CellPictogram?) -> Unit,
+    private val onPictogramClicked: (Cell) -> Unit,
 ) : RecyclerView.Adapter<DashboardCellsAdapter.ViewHolder>() {
 
     companion object {
@@ -65,7 +65,7 @@ class DashboardCellsAdapter(
             with(binding) {
                 item.cellPictogram?.url?.let { url -> cellPictogram.loadUrl(url) }
                 item.cellPictogram?.keyword?.let { cellPictogramKeyword.text = it }
-                root.setOnClickListener { onPictogramClicked(item.cellPictogram) }
+                root.setOnClickListener { onPictogramClicked(item) }
             }
             binding.cellPictogram.layoutParams.width = minOf(finalWidth, finalHeight)
             binding.cellPictogram.layoutParams.height = minOf(finalWidth, finalHeight)

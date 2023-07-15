@@ -31,7 +31,7 @@ class MainDashboardFragment : Fragment() {
 
     private val viewModel: MainDashboardViewModel by viewModel()
 
-    private val dashboardCellsAdapter = DashboardCellsAdapter { viewModel.onPictogramClicked(it) }
+    private val dashboardCellsAdapter = DashboardCellsAdapter { viewModel.onPictogramClicked(it.cellPictogram) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
