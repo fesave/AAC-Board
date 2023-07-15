@@ -28,8 +28,6 @@ class EditBoardCellViewModelTest {
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule()
 
-    val stateHandle: SavedStateHandle =
-        SavedStateHandle(mapOf("dashboardId" to 1, "row" to 2, "column" to 3))
 
     @Mock
     lateinit var saveCellUseCase: SaveCellUseCase
@@ -49,7 +47,7 @@ class EditBoardCellViewModelTest {
                 onBlocking { getCellUseCase(1, 2, 3) }.doReturn(null)
             }
 
-            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(1, 2, 3, saveCellUseCase, getCellUseCase)
 
             viewModel.state.test {
                 assertEquals(EditBoardCellUiState(), awaitItem())
@@ -68,7 +66,7 @@ class EditBoardCellViewModelTest {
                 onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
             }
 
-            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(1, 2, 3, saveCellUseCase, getCellUseCase)
 
             viewModel.state.test {
                 assertEquals(EditBoardCellUiState(), awaitItem())
@@ -91,7 +89,7 @@ class EditBoardCellViewModelTest {
                 onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
             }
 
-            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(1, 2, 3, saveCellUseCase, getCellUseCase)
 
             viewModel.state.test {
                 assertEquals(EditBoardCellUiState(), awaitItem())
@@ -119,7 +117,7 @@ class EditBoardCellViewModelTest {
                 onBlocking { getCellUseCase(1, 2, 3) }.doReturn(Cell(2, 3, sampleCellPictogram))
             }
 
-            viewModel = EditBoardCellViewModel(stateHandle, saveCellUseCase, getCellUseCase)
+            viewModel = EditBoardCellViewModel(1, 2, 3, saveCellUseCase, getCellUseCase)
 
             viewModel.state.test {
                 assertEquals(EditBoardCellUiState(), awaitItem())
