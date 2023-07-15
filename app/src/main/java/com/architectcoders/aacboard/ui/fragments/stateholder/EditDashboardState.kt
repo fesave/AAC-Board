@@ -11,7 +11,7 @@ class EditDashboardState(
     private val navController: NavController,
 ) {
 
-    fun onCellClicked(dashBoardId: Int, column: Int, row: Int) {
+    fun onCellClicked(dashBoardId: Int, row: Int, column: Int) {
         val action = EditDashboardFragmentDirections.actionEditDashboardToEditBoardCell(
             dashBoardId,
             row,
