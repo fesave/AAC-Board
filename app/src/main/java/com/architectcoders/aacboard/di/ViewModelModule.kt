@@ -1,6 +1,7 @@
 package com.architectcoders.aacboard.di
 
 import androidx.lifecycle.SavedStateHandle
+import com.architectcoders.aacboard.ui.fragments.EditBoardCellFragmentArgs
 import com.architectcoders.aacboard.ui.fragments.viewmodel.EditBoardCellViewModel
 import com.architectcoders.aacboard.ui.fragments.viewmodel.EditDashBoardViewModel
 import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel
@@ -14,9 +15,11 @@ val viewModelModule = module {
     viewModel { ListDashboardsViewModel(get(), get(), get()) }
     viewModel { MainDashboardViewModel(get()) }
     viewModel { SearchPictogramsViewModel(get(), get()) }
-    viewModel { (handle: SavedStateHandle) ->
+    viewModel { params->
         EditBoardCellViewModel(
-            handle,
+            dashBoardId = params.component1(),
+            row = params.component2(),
+            column = params.component3(),
             get(),
             get(),
         )

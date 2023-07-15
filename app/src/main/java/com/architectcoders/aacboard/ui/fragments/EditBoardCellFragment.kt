@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentEditBoardCellBinding
 import com.architectcoders.aacboard.ui.fragments.stateholder.EditBoardCellState
@@ -14,12 +15,17 @@ import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.loadUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class EditBoardCellFragment : Fragment(R.layout.fragment_edit_board_cell) {
     private var _binding: FragmentEditBoardCellBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: EditBoardCellViewModel by viewModel()
+    private val args by navArgs<EditBoardCellFragmentArgs>()
+
+    private val viewModel: EditBoardCellViewModel by viewModel() {
+        parametersOf(args.dashboardId, args.row, args.column)
+    }
 
     private lateinit var editBoardCellState: EditBoardCellState
 
@@ -50,29 +56,32 @@ class EditBoardCellFragment : Fragment(R.layout.fragment_edit_board_cell) {
                 editBoardCellState.onCancel()
             }
         }
+
+        onColumnChanged()
+        onRowChanged()
     }
 
     private fun collectState() {
         viewModel.state.let { uiStateFlow ->
-            diff(uiStateFlow, { it.column }, ::onColumnChanged)
-            diff(uiStateFlow, { it.row }, ::onRowChanged)
             diff(uiStateFlow, { it.pictogram }, ::onPictogramChanged)
             diff(uiStateFlow, { it.exit }, ::onExitChanged)
         }
     }
 
-    private fun onColumnChanged(column: Int) {
-        binding.columnLabel.text = getString(R.string.column_label, column)
+    private fun onColumnChanged() {
+        binding.columnLabel.text = getString(R.string.column_label, viewModel.getColumn())
     }
 
-    private fun onRowChanged(row: Int) {
-        binding.rowLabel.text = getString(R.string.row_label, row)
+    private fun onRowChanged() {
+        binding.rowLabel.text = getString(R.string.row_label, viewModel.getRow())
     }
 
     private fun onPictogramChanged(pictogram: PictogramUI?) {
         pictogram?.let {
-            binding.pictogram.loadUrl(it.url)
-            binding.keyword.setText(it.keyword)
+            if(!it.url.isNullOrEmpty()){
+                binding.pictogram.loadUrl(it.url)
+                binding.keyword.setText(it.keyword)
+            }
         }
     }
 
