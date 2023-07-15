@@ -30,7 +30,14 @@ class EditDashboardFragment : Fragment() {
     private val viewModel: EditDashBoardViewModel by viewModel {
         parametersOf(args.dashBoardId)
     }
-    private val dashboardCellsAdapter = DashboardCellsAdapter { }
+    private val dashboardCellsAdapter = DashboardCellsAdapter { cell ->
+        val action = EditDashboardFragmentDirections.actionEditDashboardToEditBoardCell(
+            args.dashBoardId,
+            cell.row,
+            cell.column
+        )
+        findNavController().navigate(action)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
