@@ -11,6 +11,8 @@ import com.architectcoders.aacboard.databinding.FragmentNewDashboardBinding
 import com.architectcoders.aacboard.ui.fragments.stateholder.NewDashBoardState
 import com.architectcoders.aacboard.ui.fragments.stateholder.buildNewDashBoardCellState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel
+import com.architectcoders.aacboard.ui.model.PictogramUI
+import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.loadUrl
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,7 +26,6 @@ class NewDashboardFragment : Fragment() {
     private val viewModel: NewDashBoardViewModel by viewModel()
 
     private lateinit var newDashBoardState: NewDashBoardState
-    private var dashBoardId: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,23 +41,22 @@ class NewDashboardFragment : Fragment() {
 
     private fun initView() {
         setOnClickListeners()
-        dashBoardId = viewModel.dashBoardId
-        lifecycleScope.launch {
-            viewModel.state.collectLatest { uiState ->
-                binding.progressCircular.isVisible = uiState.isLoading
-                binding.buttonNewDashboardSave.isEnabled = !uiState.isLoading
-                uiState.pictogram?.let {
-                    binding.ivNewDashboardImage.loadUrl(it.url)
-                }
-                if (uiState.showError) {
-                    newDashBoardState.showError()
-                }
-
-                if (uiState.navigateToDetail) {
-                    newDashBoardState.onDashboardSaved(viewModel.dashBoardId)
-                }
-            }
+        viewModel.state.let { uiState ->
+            diff(uiState, { it.isLoading }, { binding.progressCircular.isVisible = it })
+            diff(uiState, { it.pictogram }, ::onPictogramChanged)
+            diff(uiState, { it.showError }, { show -> if (show) newDashBoardState.showError() })
+            diff(uiState, { it.navigateToDashboardId }, ::onNavigateToDashboardChanged)
         }
+    }
+
+    private fun onNavigateToDashboardChanged(dashboardId: Int?) {
+        dashboardId?.let { id ->
+            newDashBoardState.onDashboardCreated(id) { viewModel.clearNavigation() }
+        }
+    }
+
+    private fun onPictogramChanged(pictogramUI: PictogramUI?) {
+        pictogramUI?.url?.let { url -> binding.ivNewDashboardImage.loadUrl(url) }
     }
 
     private fun setOnClickListeners() {

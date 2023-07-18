@@ -17,8 +17,6 @@ class NewDashBoardViewModel(
     private val generateDashBoardCellsUseCase: GenerateDashBoardCellsUseCase,
 ) : ViewModel() {
 
-    val dashBoardId = (0..Integer.MAX_VALUE).random()
-
     private val _state = MutableStateFlow(NewDashBoardUiState())
     val state get() = _state.asStateFlow()
 
@@ -34,9 +32,14 @@ class NewDashBoardViewModel(
 
     private fun saveNewDashBoard(newDashBoard: DashboardWithCells) {
         viewModelScope.launch {
-            saveDashboardUseCase.invoke(newDashBoard)
+            val newDashboardId = saveDashboardUseCase(newDashBoard)
+            _state.update {
+                _state.value.copy(
+                    dashboardId = newDashboardId,
+                    navigateToDashboardId = newDashboardId
+                )
+            }
         }
-        _state.update { _state.value.copy(navigateToDetail = true) }
     }
 
     fun onSaveButtonClicked(name: String, columns: String, rows: String) {
@@ -44,25 +47,34 @@ class NewDashBoardViewModel(
             _state.update { _state.value.copy(showError = true) }
         } else {
             val newDashBoard = DashboardWithCells(
-                id = dashBoardId,
+                id = _state.value.dashboardId,
                 name = name,
                 rows = rows.toInt(),
                 columns = columns.toInt(),
-                cells = generateCells(0, rows.toInt(), columns.toInt()),
+                image = _state.value.pictogram?.url ?: "",
+                cells = generateCells(rows.toInt(), columns.toInt()),
             )
             saveNewDashBoard(newDashBoard)
         }
         _state.update { _state.value.copy(showError = false) }
     }
 
-    private fun generateCells(startingId: Int, rows: Int, columns: Int): List<Cell> {
-        return generateDashBoardCellsUseCase(startingId, rows, columns)
+    private fun generateCells(rows: Int, columns: Int): List<Cell> {
+        return generateDashBoardCellsUseCase(rows, columns)
+    }
+
+    fun clearNavigation() {
+        _state.update { _state.value.copy(navigateToDashboardId = null) }
     }
 
     data class NewDashBoardUiState(
+        val dashboardId: Int = 0,
+        val name: String = "",
+        val rows: Int = 0,
+        val columns: Int = 0,
         val pictogram: PictogramUI? = null,
         val isLoading: Boolean = false,
         val showError: Boolean = false,
-        val navigateToDetail: Boolean = false,
+        val navigateToDashboardId: Int? = null,
     )
 }

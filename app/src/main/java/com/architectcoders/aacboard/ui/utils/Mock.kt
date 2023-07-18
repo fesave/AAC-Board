@@ -25,6 +25,7 @@ private fun generateDashboard(
         name = name,
         rows = rows,
         columns = columns,
+        image = "",
         cells = generateCells(startingId, rows, columns),
     )
 }

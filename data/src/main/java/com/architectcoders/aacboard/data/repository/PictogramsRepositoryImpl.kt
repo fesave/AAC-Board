@@ -33,9 +33,8 @@ class PictogramsRepositoryImpl(
                 localDataSource.getDashBoardWithCells(it)
             }
 
-    override suspend fun saveDashboard(dashboard: DashboardWithCells) {
+    override suspend fun saveDashboard(dashboard: DashboardWithCells): Int =
         localDataSource.saveDashboard(dashboard)
-    }
 
     override suspend fun deleteDashboard(id: Int) {
         localDataSource.deleteDashboard(id)

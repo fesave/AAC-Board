@@ -4,22 +4,24 @@ import com.architectcoders.aacboard.database.entity.CellEntity
 import com.architectcoders.aacboard.database.entity.DashboardEntity
 
 fun buildDashboard(
-    id: Int = 1,
+    id: Long = 1L,
     name: String = "dummmy",
     rows: Int = 2,
-    columns: Int = 3
+    columns: Int = 3,
+    image: String = ""
 ) =
-    DashboardEntity(id, name, rows, columns)
+    DashboardEntity(id, name, rows, columns, image)
 
-
+@SuppressWarnings("LongParameterList")
 suspend fun buildAndPopulateDashboard(
     dashboardDao: DashboardDao,
     id: Int = 1,
     name: String = "dummmy",
     rows: Int = 2,
-    columns: Int = 3
+    columns: Int = 3,
+    image: String = ""
 ) {
-    dashboardDao.insertDashboard(buildDashboard(id, name, rows, columns))
+    dashboardDao.insertDashboard(buildDashboard(id.toLong(), name, rows, columns, image))
     val cellList = mutableListOf<CellEntity>()
     for (i in 0 until rows) {
         for (j in 0 until columns) {
@@ -37,7 +39,7 @@ fun buildCell(
     url: String? = null
 ) =
     CellEntity(
-        dashboardId,
+        dashboardId.toLong(),
         row,
         column,
         keyword ?: "keyword $dashboardId ($row , $column)",

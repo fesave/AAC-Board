@@ -8,7 +8,8 @@ fun buildDashboardWithCells(
     id: Int = 1,
     name: String = "dummmy",
     rows: Int = 2,
-    columns: Int = 3
+    columns: Int = 3,
+    image: String = ""
 ): DashboardWithCells {
     val cellList = mutableListOf<Cell>()
     for (i in 0 until rows) {
@@ -18,7 +19,7 @@ fun buildDashboardWithCells(
             )
         }
     }
-    return DashboardWithCells(id, name, rows, columns, cellList)
+    return DashboardWithCells(id, name, rows, columns, image, cellList)
 }
 
 fun buildCell(
