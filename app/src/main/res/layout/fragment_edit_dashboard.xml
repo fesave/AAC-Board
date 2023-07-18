@@ -24,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_new_dashboard_detail_delete"
         style="?attr/materialButtonOutlinedStyle"
@@ -44,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="16dp"
-        android:text="@string/new_dashboard_detail_accept"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_new_dashboard_detail_delete" />
