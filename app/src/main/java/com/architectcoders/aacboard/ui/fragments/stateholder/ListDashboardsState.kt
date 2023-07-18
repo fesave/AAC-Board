@@ -7,9 +7,8 @@ import com.architectcoders.aacboard.ui.fragments.ListDashboardsFragmentDirection
 class ListDashboardsState(
     private val navController: NavController
 ) {
-    @SuppressWarnings("UnusedPrivateMember")
     fun onDashboardNavigateClicked(dashboardId: Int) {
-        val action = ListDashboardsFragmentDirections.actionListDashboardsToEditDashboard()
+        val action = ListDashboardsFragmentDirections.actionListDashboardsToEditDashboard(dashboardId)
         navController.navigate(action)
     }
 
