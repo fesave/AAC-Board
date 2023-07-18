@@ -23,7 +23,7 @@ class EditBoardCellFragment : Fragment(R.layout.fragment_edit_board_cell) {
 
     private val args by navArgs<EditBoardCellFragmentArgs>()
 
-    private val viewModel: EditBoardCellViewModel by viewModel() {
+    private val viewModel: EditBoardCellViewModel by viewModel {
         parametersOf(args.dashboardId, args.row, args.column)
     }
 
@@ -56,29 +56,28 @@ class EditBoardCellFragment : Fragment(R.layout.fragment_edit_board_cell) {
                 editBoardCellState.onCancel()
             }
         }
-
-        onColumnChanged()
-        onRowChanged()
     }
 
     private fun collectState() {
         viewModel.state.let { uiStateFlow ->
             diff(uiStateFlow, { it.pictogram }, ::onPictogramChanged)
             diff(uiStateFlow, { it.exit }, ::onExitChanged)
+            diff(uiStateFlow, {it.column}, ::onColumnChanged)
+            diff(uiStateFlow, {it.row}, ::onRowChanged)
         }
     }
 
-    private fun onColumnChanged() {
-        binding.columnLabel.text = getString(R.string.column_label, viewModel.getColumn())
+    private fun onColumnChanged(column: Int) {
+        binding.columnLabel.text = getString(R.string.column_label, column)
     }
 
-    private fun onRowChanged() {
-        binding.rowLabel.text = getString(R.string.row_label, viewModel.getRow())
+    private fun onRowChanged(row: Int) {
+        binding.rowLabel.text = getString(R.string.row_label, row)
     }
 
     private fun onPictogramChanged(pictogram: PictogramUI?) {
         pictogram?.let {
-            if(!it.url.isNullOrEmpty()){
+            if(it.url.isNotEmpty()){
                 binding.pictogram.loadUrl(it.url)
                 binding.keyword.setText(it.keyword)
             }
