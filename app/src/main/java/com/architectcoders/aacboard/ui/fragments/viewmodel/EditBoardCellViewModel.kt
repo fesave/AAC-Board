@@ -40,9 +40,6 @@ class EditBoardCellViewModel(
         }
     }
 
-    fun getColumn() = column
-    fun getRow() = row
-
     fun onSaveClicked(keyword: String) {
         _state.value.apply {
             pictogram?.let {
@@ -68,8 +65,8 @@ class EditBoardCellViewModel(
     }
 
     data class EditBoardCellUiState(
-        val row: Int = 1,
-        val column: Int = 1,
+        val row: Int = 0,
+        val column: Int = 0,
         val pictogram: PictogramUI? = null,
         val exit: Boolean = false,
     )

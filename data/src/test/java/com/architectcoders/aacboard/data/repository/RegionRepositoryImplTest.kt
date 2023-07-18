@@ -28,7 +28,6 @@ class RegionRepositoryImplTest {
             assertEquals(DEFAULT_LANGUAGE.value, language)
         }
 
-
     @Test
     fun `Given location data source returns null language, then getUserLanguage returns default language`(): Unit =
         runTest {
@@ -43,7 +42,6 @@ class RegionRepositoryImplTest {
 
             assertEquals(DEFAULT_LANGUAGE.value, language)
         }
-
 
     @Test
     fun `When location data src returns an unsupported language, then getUserLanguage returns default`(): Unit =
@@ -76,7 +74,6 @@ class RegionRepositoryImplTest {
 
             assertEquals(supportedLanguage, language)
         }
-
 
     private fun buildRegionRepository(
         locationDataSource: LocationDataSource = mock(),
