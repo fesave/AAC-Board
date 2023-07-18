@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/main_dashboard_dest"
         android:name="com.architectcoders.aacboard.ui.fragments.MainDashboardFragment"
-        android:label="MainDashboardFragment"
+        android:label="@string/main_dashboard"
         tools:layout="@layout/fragment_main_dashboard">
         <action
             android:id="@+id/action_mainDashboard_to_listDashboards"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/list_dashboards_dest"
         android:name="com.architectcoders.aacboard.ui.fragments.ListDashboardsFragment"
-        android:label="ListDashboardsFragment"
+        android:label="@string/action_dashboards"
         tools:layout="@layout/fragment_list_dashboards">
         <action
             android:id="@+id/action_listDashboards_to_newDashboard"
