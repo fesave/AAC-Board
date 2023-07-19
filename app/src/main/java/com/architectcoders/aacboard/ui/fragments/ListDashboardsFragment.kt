@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.FragmentListDashboardsBinding
 import com.architectcoders.aacboard.ui.fragments.adapter.ListDashboardAdapter
 import com.architectcoders.aacboard.ui.fragments.stateholder.ListDashboardsState
@@ -15,7 +15,6 @@ import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewMod
 import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel.DashboardUiItem
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.showView
-import com.architectcoders.aacboard.ui.utils.toggleVisibility
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListDashboardsFragment : Fragment() {
@@ -73,8 +72,8 @@ class ListDashboardsFragment : Fragment() {
 
     private fun onLoadingChanged(loading: Boolean) {
         with(binding) {
-            progressBarContainer.toggleVisibility(loading)
-            viewAnimator.toggleVisibility(!loading)
+            progressBarContainer.isVisible = loading
+            viewAnimator.isVisible = !loading
         }
     }
 

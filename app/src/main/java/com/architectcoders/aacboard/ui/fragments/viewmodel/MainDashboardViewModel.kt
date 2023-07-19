@@ -32,6 +32,14 @@ class MainDashboardViewModel(
         }
     }
 
+    fun onStartSpeaking() {
+        updateUiState(_state.value.copy(isSpeaking = true))
+    }
+
+    fun onFinishedSpeaking() {
+        updateUiState(_state.value.copy(isSpeaking = false))
+    }
+
     fun onClearSelectionClicked() {
         updateUiState(_state.value.copy(selectedCellPictograms = emptyList()))
     }
@@ -49,5 +57,6 @@ class MainDashboardViewModel(
         val dashboard: DashboardWithCells? = null,
         val loading: Boolean = true,
         val selectedCellPictograms: List<CellPictogram> = emptyList(),
+        val isSpeaking: Boolean = false
     )
 }

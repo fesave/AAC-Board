@@ -1,9 +1,9 @@
 package com.architectcoders.aacboard.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +17,6 @@ import com.architectcoders.aacboard.ui.fragments.stateholder.buildMainDashboardS
 import com.architectcoders.aacboard.ui.fragments.viewmodel.MainDashboardViewModel
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.showView
-import com.architectcoders.aacboard.ui.utils.toggleVisibility
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -31,7 +30,8 @@ class MainDashboardFragment : Fragment() {
 
     private val viewModel: MainDashboardViewModel by viewModel()
 
-    private val dashboardCellsAdapter = DashboardCellsAdapter { viewModel.onPictogramClicked(it.cellPictogram) }
+    private val dashboardCellsAdapter =
+        DashboardCellsAdapter { viewModel.onPictogramClicked(it.cellPictogram) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +82,14 @@ class MainDashboardFragment : Fragment() {
                 viewModel.onClearSelectionClicked()
             }
             pictogramSelection.setOnSpeakClickListener { selection ->
-                mainState.onTextToSpeechRequired(selection)
+                mainState.onTextToSpeechRequired(
+                    selection = selection,
+                    onStart = {
+                        viewModel.onStartSpeaking()
+                    },
+                    onDone = {
+                        viewModel.onFinishedSpeaking()
+                    })
             }
         }
     }
@@ -92,17 +99,14 @@ class MainDashboardFragment : Fragment() {
             diff(uiStateFlow, { it.loading }, ::onLoadingChanged)
             diff(uiStateFlow, { it.dashboard }, ::onSelectedDashboardChanged)
             diff(uiStateFlow, { it.selectedCellPictograms }, ::updateSelectedPictograms)
+            diff(uiStateFlow, { it.isSpeaking }, ::onIsSpeakingChanged)
         }
-    }
-
-    private fun updateSelectedPictograms(selectedCellPictograms: List<CellPictogram>) {
-        binding.pictogramSelection.onNewSelection(selectedCellPictograms)
     }
 
     private fun onLoadingChanged(loading: Boolean) {
         with(binding) {
-            progressBarContainer.toggleVisibility(loading)
-            viewAnimator.toggleVisibility(!loading)
+            progressBarContainer.isVisible = loading
+            viewAnimator.isVisible = !loading
         }
     }
 
@@ -124,6 +128,14 @@ class MainDashboardFragment : Fragment() {
 
     private fun showNoDashboardSelected() {
         with(binding) { showView(noDashboardSelectedContainer) }
+    }
+
+    private fun updateSelectedPictograms(selectedCellPictograms: List<CellPictogram>) {
+        binding.pictogramSelection.onNewSelection(selectedCellPictograms)
+    }
+
+    private fun onIsSpeakingChanged(isSpeaking: Boolean) {
+        binding.pictogramSelection.updateSpeakerIcon(isSpeaking)
     }
 
     override fun onDestroyView() {
