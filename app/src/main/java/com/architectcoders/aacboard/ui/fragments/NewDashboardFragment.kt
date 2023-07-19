@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.architectcoders.aacboard.databinding.FragmentNewDashboardBinding
 import com.architectcoders.aacboard.ui.fragments.stateholder.NewDashBoardState
 import com.architectcoders.aacboard.ui.fragments.stateholder.buildNewDashBoardCellState
@@ -14,8 +13,6 @@ import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel
 import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.loadUrl
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewDashboardFragment : Fragment() {
@@ -45,14 +42,12 @@ class NewDashboardFragment : Fragment() {
             diff(uiState, { it.isLoading }, { binding.progressCircular.isVisible = it })
             diff(uiState, { it.pictogram }, ::onPictogramChanged)
             diff(uiState, { it.showError }, { show -> if (show) newDashBoardState.showError() })
-            diff(uiState, { it.navigateToDashboardId }, ::onNavigateToDashboardChanged)
+            diff(uiState, { it.navigateToDashboardId }, { id -> id?.let(::navigateToDashboard) })
         }
     }
 
-    private fun onNavigateToDashboardChanged(dashboardId: Int?) {
-        dashboardId?.let { id ->
-            newDashBoardState.onDashboardCreated(id) { viewModel.clearNavigation() }
-        }
+    private fun navigateToDashboard(id: Int) {
+        newDashBoardState.onDashboardCreated(id) { viewModel.clearNavigation() }
     }
 
     private fun onPictogramChanged(pictogramUI: PictogramUI?) {
