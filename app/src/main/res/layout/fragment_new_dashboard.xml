@@ -86,7 +86,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_input_dashboard_name"
-        app:srcCompat="@drawable/ic_no_image" />
+        app:srcCompat="@drawable/ic_image_search" />
 
     <ProgressBar
         android:id="@+id/progress_circular"

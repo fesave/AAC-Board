@@ -1,8 +1,10 @@
 package com.architectcoders.aacboard.ui.fragments.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.ItemDashboardCellBinding
 import com.architectcoders.aacboard.domain.data.cell.Cell
-import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.utils.basicDiffUtil
 import com.architectcoders.aacboard.ui.utils.getScreenSize
 import com.architectcoders.aacboard.ui.utils.loadUrl
@@ -76,10 +77,12 @@ class DashboardCellsAdapter(
     }
 
     private fun ItemDashboardCellBinding.renderCell(item: Cell) {
-        if (editionEnabled) {
-            cellAddPictogram.isVisible = item.cellPictogram?.url == null
-        }
+        if (editionEnabled) cellPictogram.setDrawableResource(root.context, R.drawable.ic_image_add)
         item.cellPictogram?.url?.let { url -> cellPictogram.loadUrl(url) }
         item.cellPictogram?.keyword?.let { cellPictogramKeyword.text = it }
     }
+}
+
+private fun ImageView.setDrawableResource(context: Context, @DrawableRes id: Int) {
+    setImageDrawable(ResourcesCompat.getDrawable(context.resources, id, null))
 }
