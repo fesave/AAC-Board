@@ -13,16 +13,16 @@ interface DashboardDao {
     fun getDashboards(): Flow<List<DashboardEntity>>
 
     @Query("SELECT * FROM DashboardEntity where id = :id")
-    fun getDashboard(id: Int): Flow<DashboardEntityWithCellEntities?>
+    fun getDashboard(id: Long): Flow<DashboardEntityWithCellEntities?>
 
     @Query(
         "SELECT * FROM CellEntity where " +
             "dashboardId = :dashboardId AND row = :row AND column = :column LIMIT 1",
     )
-    suspend fun getCell(dashboardId: Int, row: Int, column: Int): CellEntity?
+    suspend fun getCell(dashboardId: Long, row: Int, column: Int): CellEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDashboard(dashboard: DashboardEntity)
+    suspend fun insertDashboard(dashboard: DashboardEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCell(cell: CellEntity)
@@ -31,7 +31,7 @@ interface DashboardDao {
     suspend fun insertCells(cells: List<CellEntity>)
 
     @Query("DELETE FROM DashboardEntity WHERE id = :id")
-    suspend fun deleteDashboardEntity(id: Int)
+    suspend fun deleteDashboardEntity(id: Long)
 
     @Delete
     suspend fun deleteCell(cell: CellEntity)

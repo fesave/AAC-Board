@@ -6,20 +6,22 @@ import com.architectcoders.aacboard.domain.data.dashboard.Dashboard
 import com.architectcoders.aacboard.domain.data.dashboard.DashboardWithCells
 
 @Entity
-data class DashboardEntity  (
-    @PrimaryKey
-    val id: Int,
+data class DashboardEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
     val name: String,
     val rows: Int,
     val columns: Int,
+    val image: String,
 )
 
 fun DashboardEntity.toDashboard() = Dashboard(
-    id = id,
+    id = id.toInt(),
     name = name,
     rows = rows,
     columns = columns,
+    image = image
 )
 
 fun DashboardWithCells.toDashboardEntity(): DashboardEntity =
-    DashboardEntity(id, name, rows, columns)
+    DashboardEntity(id.toLong(), name, rows, columns, image)

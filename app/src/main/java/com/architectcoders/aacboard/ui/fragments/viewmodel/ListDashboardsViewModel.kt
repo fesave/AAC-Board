@@ -49,6 +49,11 @@ class ListDashboardsViewModel(
                 },
             )
         }
+        if (dashboards.size == 1) {
+            viewModelScope.launch {
+                setPreferredDashboardIdUseCase(dashboards.first().id)
+            }
+        }
     }
 
     fun onPreferredDashboardClicked(id: Int) {
@@ -66,6 +71,7 @@ class ListDashboardsViewModel(
     data class DashboardUiItem(
         val id: Int,
         val name: String,
+        val image: String,
         val isPreferred: Boolean,
     )
 }
@@ -74,4 +80,4 @@ fun List<ListDashboardsViewModel.DashboardUiItem>.updatePreferred(preferredId: I
     map { it.copy(isPreferred = it.id == preferredId) }
 
 fun Dashboard.toDashBoardUiItem(preferredId: Int) =
-    ListDashboardsViewModel.DashboardUiItem(id, name, id == preferredId)
+    ListDashboardsViewModel.DashboardUiItem(id, name, image, id == preferredId)

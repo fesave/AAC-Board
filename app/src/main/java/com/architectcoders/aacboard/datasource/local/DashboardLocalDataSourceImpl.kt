@@ -20,18 +20,19 @@ class DashboardLocalDataSourceImpl(private val dashboardDao: DashboardDao) :
         }
 
     override fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?> =
-        dashboardDao.getDashboard(id).map { it?.toDashboardWithCells() }
+        dashboardDao.getDashboard(id.toLong()).map { it?.toDashboardWithCells() }
 
-    override suspend fun saveDashboard(dashboard: DashboardWithCells) {
-        dashboardDao.insertDashboard(dashboard.toDashboardEntity())
-        dashboardDao.insertCells(dashboard.cells.map { it.toCellEntity(dashboard.id) })
+    override suspend fun saveDashboard(dashboard: DashboardWithCells): Int {
+        val dashboardId = dashboardDao.insertDashboard(dashboard.toDashboardEntity()).toInt()
+        dashboardDao.insertCells(dashboard.cells.map { it.toCellEntity(dashboardId) })
+        return dashboardId
     }
 
     override suspend fun deleteDashboard(id: Int) =
-        dashboardDao.deleteDashboardEntity(id)
+        dashboardDao.deleteDashboardEntity(id.toLong())
 
     override suspend fun getDashboardCell(dashboardId: Int, row: Int, column: Int): Cell? =
-        dashboardDao.getCell(dashboardId, row, column)?.toCell()
+        dashboardDao.getCell(dashboardId.toLong(), row, column)?.toCell()
 
     override suspend fun saveDashboardCell(dashboardId: Int, cell: Cell) =
         dashboardDao.insertCell(cell.toCellEntity(dashboardId))

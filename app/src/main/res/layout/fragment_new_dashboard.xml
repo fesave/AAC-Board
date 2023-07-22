@@ -86,7 +86,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_input_dashboard_name"
-        app:srcCompat="@drawable/ic_no_image" />
+        app:srcCompat="@drawable/ic_image_search" />
 
     <ProgressBar
         android:id="@+id/progress_circular"
@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="16dp"
-        android:text="@string/new_dashboard_save"
+        android:text="@string/new_dashboard_create"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_new_dashboard_cancel" />

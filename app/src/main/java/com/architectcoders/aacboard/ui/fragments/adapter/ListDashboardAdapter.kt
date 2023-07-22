@@ -8,6 +8,7 @@ import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.ItemDashboardBinding
 import com.architectcoders.aacboard.ui.fragments.viewmodel.ListDashboardsViewModel
 import com.architectcoders.aacboard.ui.utils.basicDiffUtil
+import com.architectcoders.aacboard.ui.utils.loadUrl
 
 class ListDashboardAdapter(
     private val onPreferredSelected: (Int) -> Unit,
@@ -47,6 +48,7 @@ class ListDashboardAdapter(
                     ),
                 )
                 name.text = dashboard.name
+                if (dashboard.image.isNotEmpty()) dashboardIcon.loadUrl(dashboard.image)
                 preferredIcon.setOnClickListener {
                     onPreferredSelected(dashboard.id)
                 }

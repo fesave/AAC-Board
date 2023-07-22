@@ -27,5 +27,6 @@
     <string name="new_dashboard_detail_accept">Accept</string>
     <string name="new_dashboard_detail_delete">Delete</string>
     <string name="new_dashboard_detail_toolbar_title">Edit %1$s board</string>
+    <string name="new_dashboard_create">Create</string>
 
 </resources>

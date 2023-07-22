@@ -26,7 +26,6 @@ class DashboardDaoTest {
 
     val dashboardDao: DashboardDao by inject(DashboardDao::class.java)
 
-
     @Test
     fun givenNoDashboardInDbThenGetDashboardsFlowReturnsNull() = runTest {
         dashboardDao.getDashboards().test {
@@ -149,6 +148,4 @@ class DashboardDaoTest {
             cancel()
         }
     }
-
-
 }

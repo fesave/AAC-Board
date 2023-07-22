@@ -27,7 +27,7 @@
         android:layout_height="100dp"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/ic_no_image"
+        app:srcCompat="@drawable/ic_image_search"
         android:layout_gravity="center_horizontal"/>
     <TextView
         android:id="@+id/keywordLabel"

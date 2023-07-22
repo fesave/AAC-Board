@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.architectcoders.aacboard.R
 import com.architectcoders.aacboard.databinding.ViewPictogramsSelectionBinding
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.fragments.adapter.PictogramsSelectionAdapter
@@ -61,5 +62,12 @@ class PictogramsSelectionView @JvmOverloads constructor(
 
     fun setOnClearLastSelectionClickListener(action: () -> Unit) {
         binding.clearLastSelection.setOnClickListener { action() }
+    }
+
+    fun updateSpeakerIcon(speaking: Boolean) {
+        if (selection.isNotEmpty()) {
+            val color = if (speaking) R.color.purple_500 else R.color.black
+            binding.speakSelection.setColorFilter(context.getColor(color))
+        }
     }
 }

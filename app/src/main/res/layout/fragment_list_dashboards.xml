@@ -75,6 +75,7 @@
         android:contentDescription="@string/new_dashboard"
         android:src="@drawable/ic_new_dashboard"
         android:tint="@color/white"
+        android:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

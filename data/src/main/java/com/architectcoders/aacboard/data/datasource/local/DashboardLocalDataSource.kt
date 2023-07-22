@@ -11,7 +11,7 @@ interface DashboardLocalDataSource {
 
     fun getDashBoardWithCells(id: Int): Flow<DashboardWithCells?>
 
-    suspend fun saveDashboard(dashboard: DashboardWithCells)
+    suspend fun saveDashboard(dashboard: DashboardWithCells): Int
 
     suspend fun deleteDashboard(id: Int)
 

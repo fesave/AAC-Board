@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -13,13 +13,35 @@
         android:id="@+id/cell_pictogram"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        app:srcCompat="@drawable/ic_no_image" />
+        app:layout_constraintBottom_toTopOf="@id/cell_pictogram_keyword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_no_image"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cell_add_pictogram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_add"
+        android:tint="@color/purple_500"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/cell_pictogram_keyword"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_below="@+id/cell_pictogram"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cell_pictogram"
         tools:text="Dog" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

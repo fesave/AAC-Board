@@ -36,12 +36,13 @@ class NewDashBoardState(
         ).show()
     }
 
-    fun onDashboardSaved(dashBoardId: Int) {
+    fun onDashboardCreated(dashBoardId: Int, onNavigationCompleted: () -> Unit) {
         navController.navigate(
             NewDashboardFragmentDirections.actionNewDashboardToEditDashboard(
                 dashBoardId = dashBoardId,
             ),
         )
+        onNavigationCompleted()
     }
 }
 

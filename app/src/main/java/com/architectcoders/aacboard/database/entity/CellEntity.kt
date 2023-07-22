@@ -17,7 +17,7 @@ import com.architectcoders.aacboard.domain.data.cell.CellPictogram
     ],
 )
 data class CellEntity(
-    val dashboardId: Int,
+    val dashboardId: Long,
     val row: Int,
     val column: Int,
     val url: String?,
@@ -31,4 +31,4 @@ fun CellEntity.toCell() = Cell(
 )
 
 fun Cell.toCellEntity(dashboardId: Int): CellEntity =
-    CellEntity(dashboardId, row, column, cellPictogram?.url, cellPictogram?.keyword)
+    CellEntity(dashboardId.toLong(), row, column, cellPictogram?.url, cellPictogram?.keyword)

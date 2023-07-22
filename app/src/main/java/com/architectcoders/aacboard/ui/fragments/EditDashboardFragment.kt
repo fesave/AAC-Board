@@ -36,8 +36,8 @@ class EditDashboardFragment : Fragment() {
     private val viewModel: EditDashBoardViewModel by viewModel {
         parametersOf(args.dashBoardId)
     }
-    private val dashboardCellsAdapter = DashboardCellsAdapter { cell ->
-        state.onCellClicked(args.dashBoardId, cell.column, cell.row)
+    private val dashboardCellsAdapter = DashboardCellsAdapter(editionEnabled = true) { cell ->
+        state.onCellClicked(dashBoardId = args.dashBoardId, row = cell.row, column = cell.column)
     }
 
     override fun onCreateView(

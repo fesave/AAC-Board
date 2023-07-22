@@ -16,10 +16,11 @@ data class DashboardEntityWithCellEntities(
 
 fun DashboardEntityWithCellEntities.toDashboardWithCells(): DashboardWithCells {
     return DashboardWithCells(
-        id = dashboard.id,
+        id = dashboard.id.toInt(),
         name = dashboard.name,
         rows = dashboard.rows,
         columns = dashboard.columns,
+        image = dashboard.image,
         cells = cells.map { it.toCell() },
     )
 }
