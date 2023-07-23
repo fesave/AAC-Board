@@ -28,4 +28,7 @@
     <string name="new_dashboard_detail_delete">Delete</string>
     <string name="new_dashboard_detail_toolbar_title">Edit %1$s board</string>
     <string name="new_dashboard_create">Create</string>
+    <string name="dashboard_input_name_error">Missing dashboard name</string>
+    <string name="dashboard_input_columns_error">Missing valid number of columns</string>
+    <string name="dashboard_input_rows_error">Missing valid number of rows</string>
 </resources>
