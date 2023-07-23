@@ -6,7 +6,7 @@
     <string name="select_dashboard">Selecciona tu tablero preferido de la lista</string>
     <string name="create_dashboard">Crea tu primer tablero de pictogramas</string>
     <string name="new_dashboard">Nuevo tablero</string>
-    <string name="query_string">Texto de consulta:</string>
+    <string name="query_string">Texto de consulta</string>
     <string name="save">Guardar</string>
     <string name="search">Buscar</string>
     <string name="cancel">Cancelar</string>
@@ -14,10 +14,11 @@
     <string name="connectivityError">Error de conectividad</string>
     <string name="unknownError">Error desconocido</string>
     <string name="noMatchFoundError">No se encontró ningún pictograma para la búsqueda solicitada</string>
-    <string name="text">Texto:</string>
-    <string name="column_label">Columna: %d</string>
-    <string name="row_label">Fila: %d</string>
+    <string name="text">Texto</string>
+    <string name="column_label">Columna</string>
+    <string name="row_label">Fila</string>
     <string name="editCell">Editar Celda</string>
+    <string name="picto_description">Picotograma de la celda</string>
     <string name="search_arasaac">Buscar en Arasaac</string>
     <string name="new_dashboard_toolbar">Nuevo Tablero</string>
     <string name="new_dashboard_name">Nombre</string>
