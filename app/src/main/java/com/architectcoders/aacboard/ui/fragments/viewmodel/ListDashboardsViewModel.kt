@@ -32,8 +32,8 @@ class ListDashboardsViewModel(
     }
 
     private fun onPreferredDashboardCollected(id: Int) {
-        _state.update {
-            _state.value.copy(
+        _state.update { state ->
+            state.copy(
                 dashboards = _state.value.dashboards.updatePreferred(id),
                 preferredDashboardId = id,
             )
@@ -41,11 +41,11 @@ class ListDashboardsViewModel(
     }
 
     private fun onAllDashboardsCollected(dashboards: List<Dashboard>) {
-        _state.update {
-            _state.value.copy(
+        _state.update { state ->
+            state.copy(
                 loading = false,
                 dashboards = dashboards.map { dashboard ->
-                    dashboard.toDashBoardUiItem(it.preferredDashboardId)
+                    dashboard.toDashBoardUiItem(state.preferredDashboardId)
                 },
             )
         }
