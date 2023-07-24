@@ -57,6 +57,60 @@ En el siguiente video se puede ver cómo es el funcionamiento de la App, siguien
 
 3. **Uso del tablero:** Al ser el primer tablero que creamos, si volvemos al listado, veremos que se ha marcado con una estrella, indicando que es el seleccionado por defecto y el que aparecerá la próxima vez que iniciemos la aplicación. Si seleccionamos las diferentes casillas, veremos cómo se va rellenando la barra superior, donde podremos rectificar en caso de confundirnos o eliminar todo. Pero si clicamos en el icono de hablar, la aplicación **pronunciará** los textos de cada casilla para que el usuario pueda comunicarse.
 
+# English Version :uk: / :us:
+
+## What is AAC-Board?
+
+AAC-Board is an Android application created by Javier Montaner ([@jmgjmg](https://github.com/jmgjmg)), Fernando Sanz ([@fesave](https://github.com/fesave)), and Carlos Jiménez ([@cjimenezsanchez](https://github.com/cjimenezsanchez)) during the development of the training program [Architect Coders](https://architectcoders.com) taught by instructor Antonio Leiva ([@antoniolg](https://github.com/antoniolg)).
+
+The objective of the AAC-Board application, which we have jointly developed, is to provide a tool for those people, whether they are children, young people, adults, or the elderly, who, for any reason, have not acquired or have lost a sufficient level of speech to communicate effectively. This tool allows them to use an AAC (Augmentative and Alternative Communication) system.
+
+For this purpose, we have used the API provided by the Aragonese Center for Augmentative and Alternative Communication (ARASAAC) to obtain various pictograms, facilitating the use of the AAC system.
+
+## How did we develop the project?
+
+For the development of the project, we opted for an **MVVM** architecture, as recommended by the Android development team at Google. In this case, we have created the following submodules:
+
+### App:
+
+In this module, we have included everything related to:
+
+1. **Database:** In our case, we have used **ROOM**, so we have included the *DAO* and *Entities* classes.
+2. **Datasources:** Implementation of the *remote* and *local* interfaces used to obtain the pictograms from the **ARASAAC** API, get the user's location-based language, and save the boards in the database.
+3. **Dependency Injection:** In this case, we have used **KOIN**.
+4. **API Responses:** Classes that model the API response.
+5. **API Connection:** Using **Retrofit**.
+6. **UI/UX:** Everything related to App design and usability, using a **SingleActivity** and leveraging the *Navigation Component* to handle other *Fragments* and their *ViewModels*.
+
+### Data:
+
+In this module, we have included everything related to data:
+
+1. **Datasources:** Definition of the *remote* and *local* interfaces.
+2. **Repository:** Implementation of the repository interfaces.
+
+### Domain:
+
+In this module, we have included everything related to the business logic:
+
+1. **Data:** Business classes corresponding to cells and boards.
+2. **Errors:** Definition of errors that may occur in the application.
+3. **Repository:** Definition of repositories.
+4. **Use Cases:** Definition of use cases to be implemented in the *ViewModels*.
+
+### AppTestShare:
+
+This is an additional module to assist us in testing the application.
+
+## App Functionality:
+
+In the following video, you can see how the App works, following these steps:
+
+1. **Board Creation:** When the application starts for the first time, there is no default selected board, and the list of boards is empty. Therefore, it is necessary to create a new board. To do this, click on the *Toolbar* to access the empty list, then click the add button to create a new board. You will need to assign a name, the number of rows and columns, and finally, a distinctive icon for the list.
+
+2. **Board Editing:** Once the board is created, you will enter the **editing mode**, where you can assign a value to the different cells to use it later. By clicking on each cell, you can edit its text and its pictograph (essential for the application). From here, you can also delete the board.
+
+3. **Board Usage:** Since this is the first board we created, if we go back to the list, we will see that it has been marked with a star, indicating that it is the default selection and will appear the next time we start the application. If you select different cells, you will see how the top bar is filled, where you can make corrections if you make a mistake or clear everything. By clicking on the speak icon, the application will **pronounce** the text in each cell, allowing the user to communicate.
 
 
 ## License
