@@ -42,6 +42,17 @@ En este módulo hemos incluido todo lo referente a la lógica de negocio:
 ### AppTestShare:
 Es un modulo añadido para ayudarnos a la hora de hacer tests en la aplicación.
 
+## Funcionamiento de la App:
+
+En el siguiente video se puede ver como es el funcionamiento de la App, siguiendo los siguientes pasos:
+
+1. **Creación de tablero**: Al iniciar la aplicación por primera vez, no hay un tablero seleccionado por defecto y el listado de tableros está vacío, por ello es necesario crear uno nuevo, para ello clickando en la *Toolbar* accederemos al listado vacío, por lo tanto, clicamos en el botón de añadir para crear un nuevo tablero al cual le asignaremos un nombre, un número de filas y columnas, y por último, un icono distintivo para el listado.
+
+2. **Edición del tablero:** Una vez creado el tablero, entraremos al modo **edición** donde nos tocará asignar un valor a las diferentes casillas del mismo para poder utilizarlo más tarde. Haciendo click en cada casilla podremos editar su texto y su pictografía (fundamental para la aplicación). Desde aquí también podemos eliminar el tablero.
+
+3. **Uso del tablero**: Al ser el primer tablero que creamos, si volvemos al listado veremos que se ha marcado con una estrella, indicando que es el seleccionado por defecto y el que aparecerá la próxima vez que iniciemos la aplicación. Si seleccionamos las diferentes casillas, veremos como se va rellenando la barra superior, donde podremos rectificar en caso de confundirnos o eliminar todo, pero si clicamos al icono de hablar, la aplicación **pronunciará** los textos de cada casilla para que el usuario pueda comunicarse.
+
+
 
 
 ## License
