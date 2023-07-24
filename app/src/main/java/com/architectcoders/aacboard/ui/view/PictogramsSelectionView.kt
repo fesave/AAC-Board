@@ -10,6 +10,7 @@ import com.architectcoders.aacboard.databinding.ViewPictogramsSelectionBinding
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.ui.fragments.adapter.PictogramsSelectionAdapter
 import com.architectcoders.aacboard.ui.utils.setViewEnabled
+import com.architectcoders.aacboard.ui.utils.tint
 
 class PictogramsSelectionView @JvmOverloads constructor(
     context: Context,
@@ -67,7 +68,7 @@ class PictogramsSelectionView @JvmOverloads constructor(
     fun updateSpeakerIcon(speaking: Boolean) {
         if (selection.isNotEmpty()) {
             val color = if (speaking) R.color.purple_500 else R.color.black
-            binding.speakSelection.setColorFilter(context.getColor(color))
+            binding.speakSelection.tint(context, color)
         }
     }
 }

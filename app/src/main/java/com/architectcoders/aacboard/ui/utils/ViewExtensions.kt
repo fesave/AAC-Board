@@ -43,6 +43,10 @@ fun ImageView.loadUrl(url: String) {
         .into(this)
 }
 
+fun ImageView.tint(context: Context?, colorId: Int) {
+    context?.let { ctx -> setColorFilter(ctx.getColor(colorId)) }
+}
+
 const val ALPHA_0_PERCENT = 1.0F
 const val ALPHA_50_PERCENT = 0.5F
 

@@ -30,4 +30,7 @@
     <string name="new_dashboard_detail_delete">Eliminar</string>
     <string name="new_dashboard_detail_toolbar_title">Editar tablero %1$s</string>
     <string name="new_dashboard_create">Crear</string>
+    <string name="dashboard_input_name_error">Introduce el nombre del tablero</string>
+    <string name="dashboard_input_columns_error">Introduce un número válido de columnas</string>
+    <string name="dashboard_input_rows_error">Introduce un número válido de filas</string>
 </resources>
