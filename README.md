@@ -11,6 +11,38 @@ El objetivo de la aplicación AAC-Board que hemos desarrollado conjuntamente es 
 
 Para esta finalidad, nos hemos ayudado de la API que dispone el Centro Aragonés para la Comunicación Aumentativa y Alternativa (ARASAAC) para obtener los diversos pictogramas para facilitar el uso del SAAC.
 
+## ¿Cómo hemos desarrollado el proyecto?
+
+Para el desarrollo del proyecto hemos optado por una arquitectura **MVVM** tal y como recomiendan desde el equipo de desarrollo Android de Google, en este caso creando los siguiente submodulos:
+
+### App:
+En este módulo hemos incluido todo lo referente a:
+
+1. **Base de datos:** En nuestro caso hemos utilizado **ROOM**, por ello hemos incluido las clases *DAO* y *Entities*.
+2. **Datasources**: Implementación de las interfaces *remotas* y *locales* que se han utilizado para obtener los pictogramas de la API de **ARASAAC**, obtener el idioma de hacer la consulta a la API en función de la ubicación del usuario y guardar los tableros en la base de datos.
+3. **Inyección de dependencias:** En este caso hemos usado **KOIN.**
+4. **Respuestas de API**: Clases que modelan la respuesta de la API.
+5. **Conexión con la API**: Usando **Retrofit.**
+6. **UI/UX:** Todo lo referente a diseño y usabilidad de la App, usando una **SingleActivity** ayudándonos del *Navigation Component* al resto de *Fragments* y sus *ViewModels*.
+
+### Data:
+En este módulo hemos incluido todo lo referente a los datos:
+
+1. **Datasources**: Definición de las de las interfaces *remotas* y *locales*.
+2. **Repositorio**: Implementación de las interfaces de los *repositorios*.
+
+### Domain:
+En este módulo hemos incluido todo lo referente a la lógica de negocio:
+
+1. **Data:** Clases de de negocio correspondientes a las celdas y los tableros.
+2. **Errores**: Definición de los Errores que puede haber en la aplicación.
+3. **Repositorio:** Definición de los repositorios.
+4. **Casos de Uso**: Definición de los casos de uso que se implementarán en los *ViewModels*
+
+### AppTestShare:
+Es un modulo añadido para ayudarnos a la hora de hacer tests en la aplicación.
+
+
 
 ## License
 
