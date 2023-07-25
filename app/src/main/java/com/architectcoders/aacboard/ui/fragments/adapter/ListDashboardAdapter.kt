@@ -41,16 +41,16 @@ class ListDashboardAdapter(
 
         fun bind(dashboard: ListDashboardsViewModel.DashboardUiItem) {
             binding.apply {
+                if (dashboard.image.isNotEmpty()) dashboardIcon.loadUrl(dashboard.image)
+                name.text = dashboard.name
                 preferredIcon.setImageDrawable(
                     AppCompatResources.getDrawable(
                         itemView.context,
                         if (dashboard.isPreferred) R.drawable.ic_filled_star else R.drawable.ic_outline_star,
                     ),
                 )
-                name.text = dashboard.name
-                if (dashboard.image.isNotEmpty()) dashboardIcon.loadUrl(dashboard.image)
-                preferredIcon.setOnClickListener {
-                    onPreferredSelected(dashboard.id)
+                listOf(preferredIcon, name).forEach { view ->
+                    view.setOnClickListener { onPreferredSelected(dashboard.id) }
                 }
                 navigateToDetailIcon.setOnClickListener {
                     onDashboardNavigateClicked(dashboard.id)
