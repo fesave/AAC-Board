@@ -57,9 +57,7 @@ En el siguiente video se puede ver cómo es el funcionamiento de la App, siguien
 
 3. **Uso del tablero:** Al ser el primer tablero que creamos, si volvemos al listado, veremos que se ha marcado con una estrella, indicando que es el seleccionado por defecto y el que aparecerá la próxima vez que iniciemos la aplicación. Si seleccionamos las diferentes casillas, veremos cómo se va rellenando la barra superior, donde podremos rectificar en caso de confundirnos o eliminar todo. Pero si clicamos en el icono de hablar, la aplicación **pronunciará** los textos de cada casilla para que el usuario pueda comunicarse.
 
-<p align="center">
 <img src="https://github.com/fesave/AAC-Board/blob/feature/docu/readme/media/example_aac.gif" width="250" />
-</p>
 
 # English Version :uk: / :us:
 
@@ -116,9 +114,7 @@ In the following video, you can see how the App works, following these steps:
 
 3. **Board Usage:** Since this is the first board we created, if we go back to the list, we will see that it has been marked with a star, indicating that it is the default selection and will appear the next time we start the application. If you select different cells, you will see how the top bar is filled, where you can make corrections if you make a mistake or clear everything. By clicking on the speak icon, the application will **pronounce** the text in each cell, allowing the user to communicate.
 
-<p align="center">
 <img src="https://github.com/fesave/AAC-Board/blob/feature/docu/readme/media/example_aac.gif" width="250" />
-</p>
 
 ## License
 
