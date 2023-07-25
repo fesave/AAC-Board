@@ -1,6 +1,7 @@
 package com.architectcoders.aacboard.ui.utils
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -36,9 +37,10 @@ inline fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.basicDiffU
         }).dispatchUpdatesTo(this@basicDiffUtil)
     }
 
-fun ImageView.loadUrl(url: String) {
+fun ImageView.loadUrl(url: String, placeHolder: Drawable? = null) {
     Glide.with(context)
         .load(url)
+        .placeholder(placeHolder)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
 }
