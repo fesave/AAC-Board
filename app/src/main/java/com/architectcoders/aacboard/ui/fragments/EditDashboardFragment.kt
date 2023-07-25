@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.architectcoders.aacboard.R
@@ -67,11 +66,10 @@ class EditDashboardFragment : Fragment() {
         with(binding) {
             buttonNewDashboardDetailDelete.setOnClickListener {
                 viewModel.onDeleteButtonClicked()
-                findNavController().navigate(R.id.action_edit_dashboard_dest_to_list_dashboards_dest)
+                state.exit()
             }
-
             buttonNewDashboardDetailAccept.setOnClickListener {
-                findNavController().navigate(R.id.action_edit_dashboard_dest_to_list_dashboards_dest)
+                state.exit()
             }
         }
     }

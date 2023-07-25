@@ -1,6 +1,5 @@
 package com.architectcoders.aacboard.ui.fragments.stateholder
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -19,8 +18,10 @@ class EditDashboardState(
         )
         navController.navigate(action)
     }
+
+    fun exit() {
+        navController.navigate(R.id.action_edit_dashboard_dest_to_list_dashboards_dest)
+    }
 }
 
-fun Fragment.buildEditDashboardState(
-    navController: NavController = findNavController(),
-) = EditDashboardState(navController)
+fun Fragment.buildEditDashboardState() = EditDashboardState(navController = findNavController())
