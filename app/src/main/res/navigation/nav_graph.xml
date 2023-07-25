@@ -50,7 +50,8 @@
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"/>
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/list_dashboards_dest"/>
         <action
             android:id="@+id/action_new_dashboard_dest_to_searchPictogramsFragment"
             app:destination="@id/search_pictograms_fragment" />
@@ -106,11 +107,6 @@
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/new_pictogram_dest"
-        android:name="com.architectcoders.aacboard.ui.fragments.NewPictogramFragment"
-        android:label="NewPictogramFragment"
-        tools:layout="@layout/fragment_new_pictogram" />
     <fragment
         android:id="@+id/search_pictograms_fragment"
         android:name="com.architectcoders.aacboard.ui.fragments.SearchPictogramsFragment"
