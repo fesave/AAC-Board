@@ -18,6 +18,7 @@ import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.showView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("TooManyFunctions")
 class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
 
     companion object {
@@ -40,11 +41,16 @@ class SearchPictogramsFragment : Fragment(R.layout.fragment_search_pictograms) {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSearchPictogramsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         searchPictogramsState = buildSearchPictogramsState()
         initViews()
         collectState()
-        return binding.root
     }
+
 
     private fun initViews() {
         binding.apply {

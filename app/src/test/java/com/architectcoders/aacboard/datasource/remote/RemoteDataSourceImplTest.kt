@@ -7,6 +7,7 @@ import com.architectcoders.aacboard.domain.data.Error.NoMatchFound
 import com.architectcoders.aacboard.domain.data.Response
 import com.architectcoders.aacboard.domain.data.cell.CellPictogram
 import com.architectcoders.aacboard.network.ArasaacNetworkInstance
+import com.architectcoders.aacboard.network.ArasaacNetworkInstance.getOkHttpClient
 import com.architectcoders.aacboard.network.service.ArasaacService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -34,7 +35,10 @@ class RemoteDataSourceImplTest {
     @Before
     fun setup() {
         arasaacService =
-            ArasaacNetworkInstance.createArasaacNetworkInstance("http://localhost:8080")
+            ArasaacNetworkInstance.createArasaacNetworkInstance(
+                "http://localhost:8080",
+                getOkHttpClient()
+            )
         remoteDataSource = RemoteDataSourceImpl(arasaacService)
         server = MockWebServer()
         server.start(8080)

@@ -13,10 +13,7 @@ import com.architectcoders.aacboard.ui.fragments.stateholder.NewDashBoardState
 import com.architectcoders.aacboard.ui.fragments.stateholder.buildNewDashBoardCellState
 import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel
 import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel.NewDashBoardUiState.Field
-import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel.NewDashBoardUiState.Field.COLUMNS
-import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel.NewDashBoardUiState.Field.NAME
-import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel.NewDashBoardUiState.Field.PICTOGRAM
-import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel.NewDashBoardUiState.Field.ROWS
+import com.architectcoders.aacboard.ui.fragments.viewmodel.NewDashBoardViewModel.NewDashBoardUiState.Field.*
 import com.architectcoders.aacboard.ui.model.PictogramUI
 import com.architectcoders.aacboard.ui.utils.diff
 import com.architectcoders.aacboard.ui.utils.loadUrl
@@ -38,10 +35,14 @@ class NewDashboardFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentNewDashboardBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         newDashBoardState = buildNewDashBoardCellState()
         initView()
         checkSearchResponse()
-        return binding.root
     }
 
     private fun initView() {

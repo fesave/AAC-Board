@@ -38,5 +38,5 @@ class SearchPictogramsState(
 
 fun Fragment.buildSearchPictogramsState(
     context: Context = requireContext(),
-    navController: NavController = findNavController(),
+    navController: NavController = findNavController()
 ) = SearchPictogramsState(context, navController)

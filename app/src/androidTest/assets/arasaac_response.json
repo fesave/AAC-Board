@@ -1,0 +1,848 @@
+[
+  {
+    "_id": 6964,
+    "created": "2009-01-12T10:39:22.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "home",
+      "core vocabulary",
+      "document"
+    ],
+    "synsets": [
+      "03549540-n",
+      "08094856-n",
+      "08576692-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2021-09-07T18:20:36.902Z",
+    "schematic": true,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "f. Building or part of it to live.",
+        "keyword": "house",
+        "plural": "houses",
+        "hasLocution": true
+      },
+      {
+        "keyword": "household",
+        "type": 2,
+        "plural": "households",
+        "hasLocution": false
+      },
+      {
+        "keyword": "home",
+        "type": 2,
+        "plural": "homes",
+        "hasLocution": true
+      }
+    ],
+    "categories": [
+      "residential building",
+      "core vocabulary-place",
+      "document"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": true,
+    "aacColor": true
+  },
+  {
+    "_id": 2317,
+    "created": "2007-12-13T09:54:31.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "home"
+    ],
+    "synsets": [
+      "03549540-n",
+      "08094856-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-11-19T17:52:30.472Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "f. Building or part of it to live.",
+        "keyword": "house",
+        "hasLocution": true,
+        "plural": "houses"
+      }
+    ],
+    "categories": [
+      "residential building"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false
+  },
+  {
+    "_id": 5957,
+    "created": "2008-10-27T12:57:44.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "home"
+    ],
+    "synsets": [
+      "03185531-n",
+      "03006420-n",
+      "03549540-n",
+      "08576692-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-11-19T17:47:23.815Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "m. Dwelling unit, one or more floors, with garden.",
+        "keyword": "detached house",
+        "hasLocution": true,
+        "plural": "detached houses"
+      },
+      {
+        "keyword": "chalet",
+        "hasLocution": false,
+        "type": 2,
+        "plural": "chalets"
+      },
+      {
+        "keyword": "house",
+        "hasLocution": true,
+        "type": 2,
+        "plural": "houses"
+      }
+    ],
+    "categories": [
+      "residential building"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false
+  },
+  {
+    "_id": 31386,
+    "created": "2017-05-12T12:54:52.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "monument",
+      "building",
+      "culture"
+    ],
+    "synsets": [
+      "08852287-n",
+      "02761139-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-06-02T18:43:09.966Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 1,
+        "keyword": "Sydney Opera House",
+        "hasLocution": false
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "monument",
+      "cultural building"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 6.666666666666666
+  },
+  {
+    "_id": 2835,
+    "created": "2008-01-14T17:54:53.000Z",
+    "downloads": 0,
+    "tags": [
+      "work",
+      "professional",
+      "secondary sector",
+      "construction"
+    ],
+    "synsets": [
+      "10413608-n",
+      "10208798-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-11-30T09:20:44.180Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "Person who is professionally engaged in painting doors, walls, windows, etc..: Hired some painters to paint their house.",
+        "keyword": "painter",
+        "hasLocution": true,
+        "plural": "painters"
+      },
+      {
+        "keyword": "house painter",
+        "hasLocution": false,
+        "plural": "house painters",
+        "type": 2
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "professional",
+      "construction"
+    ],
+    "violence": false,
+    "hair": true,
+    "skin": true,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 24947,
+    "created": "2011-07-20T21:50:56.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "home"
+    ],
+    "synsets": [
+      "03327515-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-11-19T17:53:07.547Z",
+    "schematic": true,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "farming house",
+        "hasLocution": false,
+        "plural": "farming houses"
+      },
+      {
+        "keyword": "farm building",
+        "hasLocution": false,
+        "plural": "farm buildings",
+        "type": 2
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "residential building"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 28363,
+    "created": "2013-03-27T11:29:22.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "home",
+      "work",
+      "tertiary sector",
+      "hospitality industry",
+      "communication",
+      "signaling system"
+    ],
+    "synsets": [
+      "02860757-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-11-21T16:07:39.694Z",
+    "schematic": true,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "Home or small-time setting where guests are received in exchange for an agreed price: sleep in any pension you can find.",
+        "keyword": "boarding house",
+        "hasLocution": true,
+        "plural": "boarding houses"
+      },
+      {
+        "keyword": "boardinghouse",
+        "type": 2,
+        "plural": "boardinghouses",
+        "hasLocution": false
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "residential building",
+      "hospitality industry",
+      "signaling system"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 11341,
+    "created": "2009-12-24T20:16:54.000Z",
+    "downloads": 0,
+    "tags": [
+      "work",
+      "professional",
+      "secondary sector",
+      "construction"
+    ],
+    "synsets": [
+      "10413608-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-11-30T09:19:58.991Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "Person who is professionally engaged in painting doors, walls, windows.",
+        "keyword": "painter",
+        "hasLocution": true,
+        "plural": "painters"
+      },
+      {
+        "keyword": "house painter",
+        "plural": "house painters",
+        "type": 2,
+        "hasLocution": false
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "professional",
+      "construction"
+    ],
+    "violence": false,
+    "hair": true,
+    "skin": true,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 32164,
+    "created": "2017-12-05T21:48:33.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "catering establishment",
+      "hospitality industry",
+      "work",
+      "tertiary sector"
+    ],
+    "synsets": [
+      "03033797-n",
+      "07937695-n",
+      "02800154-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-06-04T17:17:10.738Z",
+    "schematic": true,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "cider house",
+        "hasLocution": false,
+        "plural": "cider houses"
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "catering establishment",
+      "hospitality industry"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": true,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 26736,
+    "created": "2012-06-09T12:36:39.000Z",
+    "downloads": 0,
+    "tags": [
+      "animal",
+      "animal housing"
+    ],
+    "synsets": [
+      "03615737-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-06-25T10:08:39.053Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "kennel",
+        "hasLocution": false,
+        "plural": "kennels"
+      },
+      {
+        "type": 2,
+        "keyword": "dog house",
+        "hasLocution": false,
+        "plural": "dog houses"
+      },
+      {
+        "keyword": "doghouse",
+        "hasLocution": false,
+        "type": 2,
+        "plural": "doghouses"
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "animal housing"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 26867,
+    "created": "2012-07-23T00:25:09.000Z",
+    "downloads": 0,
+    "tags": [
+      "animal",
+      "animal housing"
+    ],
+    "synsets": [
+      "03020043-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-06-25T10:07:38.993Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "henhouse",
+        "hasLocution": false,
+        "plural": "henhouses"
+      },
+      {
+        "type": 2,
+        "keyword": "hen house",
+        "hasLocution": false,
+        "plural": "hen houses"
+      },
+      {
+        "keyword": "hencoop",
+        "hasLocution": false,
+        "plural": "hencoops",
+        "type": 2
+      },
+      {
+        "keyword": "chicken coop",
+        "plural": "chicken coops",
+        "type": 2,
+        "hasLocution": false
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "animal housing"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 39001,
+    "schematic": false,
+    "sex": false,
+    "violence": false,
+    "aac": false,
+    "aacColor": false,
+    "skin": false,
+    "hair": false,
+    "downloads": 0,
+    "categories": [
+      "residential building"
+    ],
+    "synsets": [
+      "03327515-n"
+    ],
+    "tags": [
+      "place",
+      "building",
+      "home"
+    ],
+    "keywords": [
+      {
+        "keyword": "masia",
+        "hasLocution": false,
+        "plural": "masia",
+        "type": 2
+      },
+      {
+        "keyword": "farming house",
+        "hasLocution": false,
+        "plural": "farming houses",
+        "type": 2
+      },
+      {
+        "keyword": "farm building",
+        "plural": "farm buildings",
+        "type": 2,
+        "hasLocution": false
+      }
+    ],
+    "created": "2023-06-16T07:45:25.897Z",
+    "lastUpdated": "2023-06-16T07:49:20.280Z",
+    "score": 7.5
+  },
+  {
+    "_id": 25542,
+    "created": "2011-08-16T19:57:33.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "culture",
+      "public administration"
+    ],
+    "synsets": [
+      "03094209-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-12-06T19:14:39.871Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "Conference Hall",
+        "hasLocution": false,
+        "plural": "Conference Halls"
+      },
+      {
+        "keyword": "conference house",
+        "hasLocution": false,
+        "plural": "conference houses",
+        "type": 2
+      },
+      {
+        "keyword": "conference center",
+        "hasLocution": false,
+        "plural": "conference centers",
+        "type": 2
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "cultural building",
+      "public building"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": true,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 38237,
+    "schematic": true,
+    "sex": false,
+    "violence": false,
+    "aac": false,
+    "aacColor": false,
+    "skin": false,
+    "hair": false,
+    "downloads": 0,
+    "categories": [
+      "professional",
+      "building facility",
+      "furniture"
+    ],
+    "synsets": [
+      "10230249-n",
+      "06164956-n",
+      "10230422-n",
+      "00609469-n"
+    ],
+    "tags": [
+      "work",
+      "professional",
+      "place",
+      "building",
+      "building facility",
+      "object",
+      "furniture"
+    ],
+    "keywords": [
+      {
+        "keyword": "interior designer",
+        "hasLocution": false,
+        "type": 2,
+        "plural": "interior designers"
+      },
+      {
+        "keyword": "interior design",
+        "hasLocution": false,
+        "type": 2
+      },
+      {
+        "keyword": "interior decorator",
+        "hasLocution": false,
+        "type": 2,
+        "plural": "interior decorators"
+      },
+      {
+        "keyword": "interior decoration",
+        "type": 2,
+        "hasLocution": false
+      },
+      {
+        "keyword": "house decorator",
+        "hasLocution": false,
+        "plural": "house decorators",
+        "type": 2
+      }
+    ],
+    "created": "2022-03-14T11:28:01.130Z",
+    "lastUpdated": "2022-04-06T16:41:59.606Z",
+    "score": 7.5
+  },
+  {
+    "_id": 37563,
+    "schematic": true,
+    "sex": false,
+    "violence": false,
+    "aac": false,
+    "aacColor": false,
+    "skin": true,
+    "hair": false,
+    "downloads": 0,
+    "categories": [
+      "leader",
+      "political representation"
+    ],
+    "synsets": [
+      "08178376-n",
+      "08335621-n",
+      "08336128-n",
+      "10488547-n"
+    ],
+    "tags": [
+      "person",
+      "leader",
+      "work",
+      "tertiary sector",
+      "political representation"
+    ],
+    "keywords": [
+      {
+        "keyword": "President of the Senate",
+        "hasLocution": false,
+        "type": 2
+      },
+      {
+        "keyword": "President of Parliament",
+        "type": 2,
+        "hasLocution": false
+      },
+      {
+        "keyword": "Speaker of the House",
+        "hasLocution": false,
+        "type": 2
+      }
+    ],
+    "created": "2021-05-20T16:50:27.017Z",
+    "lastUpdated": "2021-06-14T07:55:50.341Z",
+    "score": 6.25
+  },
+  {
+    "_id": 38650,
+    "schematic": false,
+    "sex": false,
+    "violence": false,
+    "aac": false,
+    "aacColor": false,
+    "skin": false,
+    "hair": false,
+    "downloads": 0,
+    "categories": [
+      "residential building",
+      "ancient history"
+    ],
+    "synsets": [
+      "03549540-n"
+    ],
+    "tags": [
+      "place",
+      "building",
+      "home",
+      "history",
+      "ancient history"
+    ],
+    "keywords": [
+      {
+        "keyword": "arab house",
+        "hasLocution": false,
+        "plural": "arab houses",
+        "type": 2
+      },
+      {
+        "keyword": "arabic house",
+        "hasLocution": false,
+        "plural": "arabic houses",
+        "type": 2
+      },
+      {
+        "keyword": "almohad house",
+        "hasLocution": false,
+        "plural": "almohad houses",
+        "type": 2
+      }
+    ],
+    "created": "2022-11-22T12:28:29.524Z",
+    "lastUpdated": "2022-12-06T12:50:44.980Z",
+    "score": 22.5
+  },
+  {
+    "_id": 32798,
+    "created": "2018-04-08T12:19:36.000Z",
+    "downloads": 0,
+    "tags": [
+      "leisure",
+      "sport",
+      "toy"
+    ],
+    "synsets": [
+      "03224065-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-06-02T10:06:31.393Z",
+    "schematic": true,
+    "keywords": [
+      {
+        "type": 2,
+        "meaning": "It is a miniature playhouse. In the last century, dollhouses have been primarily aimed at children, although its clothing collection and has also fascinated a large number of adults.",
+        "keyword": "doll house",
+        "hasLocution": true,
+        "plural": "doll houses"
+      },
+      {
+        "type": 2,
+        "keyword": "dollhouse",
+        "hasLocution": false,
+        "plural": "dollhouses"
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "toy"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 29847,
+    "created": "2013-11-26T14:05:48.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "building",
+      "culture"
+    ],
+    "synsets": [],
+    "sex": false,
+    "lastUpdated": "2020-06-02T18:08:07.437Z",
+    "schematic": true,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "youth house",
+        "hasLocution": false,
+        "plural": "youth houses"
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "cultural building"
+    ],
+    "violence": false,
+    "hair": true,
+    "skin": true,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  },
+  {
+    "_id": 28946,
+    "created": "2013-06-23T16:36:21.000Z",
+    "downloads": 0,
+    "tags": [
+      "place",
+      "rural area",
+      "work",
+      "primary sector",
+      "agriculture"
+    ],
+    "synsets": [
+      "03033797-n",
+      "07937695-n",
+      "03550330-n",
+      "03327044-n"
+    ],
+    "sex": false,
+    "lastUpdated": "2020-12-10T17:40:34.720Z",
+    "schematic": false,
+    "keywords": [
+      {
+        "type": 2,
+        "keyword": "cider house",
+        "hasLocution": false,
+        "plural": "cider houses"
+      }
+    ],
+    "desc": "",
+    "categories": [
+      "rural area",
+      "agriculture"
+    ],
+    "violence": false,
+    "hair": false,
+    "skin": false,
+    "aac": false,
+    "aacColor": false,
+    "score": 7.5
+  }
+]
