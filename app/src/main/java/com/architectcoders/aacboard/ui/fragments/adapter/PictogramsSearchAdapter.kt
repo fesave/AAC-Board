@@ -43,8 +43,13 @@ class PictogramsSearchAdapter(
         fun bind(item: PictogramUI) {
             with(binding) {
                 val placeHolder =
-                    ResourcesCompat.getDrawable(root.resources, R.drawable.ic_image_placeholder, null)
+                    ResourcesCompat.getDrawable(
+                        root.resources,
+                        R.drawable.ic_image_placeholder,
+                        null
+                    )
                 item.url.let { url -> cellPictogram.loadUrl(url, placeHolder) }
+                cellPictogram.contentDescription = item.keyword
                 root.setOnClickListener { onPictogramClicked(item) }
             }
             binding.cellPictogram.requestLayout()

@@ -43,6 +43,7 @@ fun ImageView.loadUrl(url: String, placeHolder: Drawable? = null) {
         .placeholder(placeHolder)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
+    this.tag = url
 }
 
 fun ImageView.tint(context: Context?, colorId: Int) {
@@ -97,5 +98,3 @@ fun View.getScreenSize(): Pair<Int, Int> {
 
     return Pair(screenWidth, screenHeight)
 }
-
-fun View.getScreenWidth(): Int = getScreenSize().first

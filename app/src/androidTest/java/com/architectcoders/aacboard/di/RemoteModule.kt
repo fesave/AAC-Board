@@ -8,6 +8,6 @@ import org.koin.dsl.module
 
 val remoteModule = module {
     single { getOkHttpClient() }
-    single { createArasaacNetworkInstance(okHttpClient = get()) }
+    single { createArasaacNetworkInstance("http://localhost:8080", get()) }
     factory<RemoteDataSource> { RemoteDataSourceImpl(get()) }
 }
